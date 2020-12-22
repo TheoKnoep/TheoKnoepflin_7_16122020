@@ -2,7 +2,7 @@
 
 **Objectif** : créer un réseau social d'entreprise 
 
-## How to start the projet 
+## How to run the projet 
 
 Run the commands : 
 
