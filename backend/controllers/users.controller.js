@@ -27,8 +27,7 @@ exports.create = (req, res, next) => {
 				else res.status(201).send(data); 
 			}); 
 		})
-		.catch(error => res.status(502).json({ error })); 
-	next(); 
+		.catch(error => res.status(502).json({ error }));  
 }; 
 
 exports.login = (req, res, next) => {
