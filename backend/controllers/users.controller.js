@@ -16,7 +16,8 @@ exports.create = (req, res, next) => {
 				name: req.body.name, 
 				email: req.body.email, 
 				password: hash, 
-				position: req.body.position
+				position: req.body.position,
+				profile_picture: req.body.profile_picture
 			}); 
 			User.create(user, (err, data) => {
 				if (err)
@@ -53,5 +54,22 @@ exports.login = (req, res, next) => {
 				})
 				.catch(error => res.status(500).json({ error })); 
 		}
+	}); 
+}; 
+
+exports.findOne = (req, res, next) => {
+	User.findById(req.params.id, (err, data) => {
+		if (err) {
+			if (err.kind === "not_found") {
+				res.status(404).send({
+					message: `Not found Customer with id ${req.params.id}.`
+				});
+			} else {
+				res.status(500).send({
+					message: "Error retrieving Customer with id " + req.params.customerId
+				});
+			}
+		      } else res.status(200).send(data);
+
 	}); 
 }; 

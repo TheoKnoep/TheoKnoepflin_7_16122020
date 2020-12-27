@@ -1,6 +1,9 @@
 module.exports = app => {
 	const users = require("../controllers/users.controller.js"); 
+	const multer = require("../middlewares/multer-config"); 
+	const auth = require("../middlewares/auth"); 
 
-	app.post("/users/signup", users.create); 
+	app.post("/users/signup", multer, users.create); 
 	app.post("/users/login", users.login); 
+	app.get("/users/:id", /* auth, */ users.findOne); 
 }; 

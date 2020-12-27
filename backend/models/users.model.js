@@ -6,6 +6,7 @@ const User = function(user) {
 	this.email = user.email; 
 	this.password = user.password;
 	this.position = user.position;
+	this.profile_picture = user.profile_picture;
 }; 
 
 User.create = (newUser, result) => {
@@ -36,7 +37,25 @@ User.findOne = (userEmail, result) => {
 		}
 
 		result({ kind: "not_found" }, null); 
-	})
+	});
+}
+
+User.findById = (userId, result) => {
+	sql.query(`SELECT * FROM users WHERE id = ${userId}`, (err, res) => {
+		if (err) {
+			console.log("error: ", err); 
+			result(err, null); 
+			return; 
+		}
+
+		if (res.length) {
+			console.log("Found user : ", res[0]); 
+			result(null, res[0]); 
+			return; 
+		}
+
+		result({ kind: "not_found" }, null); 
+	});
 }
 
 module.exports = User; 
