@@ -1,6 +1,8 @@
 const express = require("express"); 
 const bodyParser = require("body-parser"); 
 
+const path = require('path'); 
+
 const app = express(); 
 
 app.use((req, res, next) => { //Déclaration des headers CORS 
@@ -16,6 +18,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
 	res.json("Bienvenue sur l'API REST du réseau social de Groupomania"); 
 }); 
+
+app.use('/images', express.static(path.join(__dirname, 'images' ))); 
 
 require("./routes/users.routes.js")(app); 
 

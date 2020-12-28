@@ -8,7 +8,7 @@ exports.create = (req, res, next) => {
 			message: "Le contenu ne peut pas être vide"
 		}); 
 	}
-
+	console.log(req.body); 
 	//hashage du mot de passe + enregistrement utilisadeur dans la DB : 
 	bcrypt.hash(req.body.password, 10)
 		.then(hash => {
@@ -17,7 +17,7 @@ exports.create = (req, res, next) => {
 				email: req.body.email, 
 				password: hash, 
 				position: req.body.position,
-				profile_picture: req.body.profile_picture
+				profile_picture: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
 			}); 
 			User.create(user, (err, data) => {
 				if (err)

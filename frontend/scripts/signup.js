@@ -26,7 +26,8 @@ formContent.addEventListener('submit', function(e) {
 	fetch("http://localhost:3000/users/signup", options) 
 		.then(response => response.json())
 			.then(response => {
-				console.log(`Le client n° ${response.id} a été créé`); 
+				console.log(response); 
+				console.log(`Le client a été créé`); 
 				localStorage.setItem('userId', JSON.stringify(response.id)); 
 				/* windows.location.replace = "./account.html"; */
 			})
