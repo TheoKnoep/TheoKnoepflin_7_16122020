@@ -1,7 +1,15 @@
-let userId = 2; //comment récupérer l'id de l'utilisateur connecté ? via LocalStorage ?
+let userIdStorage = localStorage.getItem("userId"); 
+let token = localStorage.getItem("token"); 
 let accountInfo = document.getElementById("account-data"); 
 
-fetch("http://localhost:3000/users/" + userId)
+let options = {
+	method: 'GET',
+	headers: {
+		"Authorization": "Bearer " + token
+	}
+}
+
+fetch("http://localhost:3000/users/" + userIdStorage, options)
 	.then(response => response.json())
 		.then(result => {
 			console.log(result.name); 

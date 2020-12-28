@@ -37,7 +37,7 @@ exports.login = (req, res, next) => {
 			console.log("L'utilisateur n'existe pas");
 			res.status(404).json({ message: "L'utilisateur n'existe pas" }); 
 		} else {
-			console.log(`Le mot de passe : ${data.password} / id = ${data.id}`); 
+			console.log(`Le mot de passe : ${data.password} / id utilisateur = ${data.id}`); 
 			bcrypt.compare(req.body.password, data.password)
 				.then(valid => {
 					if (!valid) {
