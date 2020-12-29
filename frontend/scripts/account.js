@@ -5,7 +5,7 @@ let accountInfo = document.getElementById("account-data");
 let options = {
 	method: 'GET',
 	headers: {
-		"Authorization": "Bearer " + token
+		"Authorization": "Bearer " + token + " " + userIdStorage
 	}
 }
 

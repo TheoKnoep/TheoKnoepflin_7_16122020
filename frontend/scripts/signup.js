@@ -17,10 +17,10 @@ formContent.addEventListener('submit', function(e) {
 
 	const options = {
 		method: 'POST', 
-		body: newUser,
-		headers: {
+		body: newUser
+		/* headers: {
 			'Content-Type': 'multipart/form-data'
-		}
+		} */
 	}
 
 	fetch("http://localhost:3000/users/signup", options) 
@@ -29,7 +29,7 @@ formContent.addEventListener('submit', function(e) {
 				console.log(response); 
 				console.log(`Le client a été créé`); 
 				localStorage.setItem('userId', JSON.stringify(response.id)); 
-				/* windows.location.replace = "./account.html"; */
+				/* setTimeOut((2000) => { windows.location.replace = "./account.html"; }); */
 			})
 		.catch(error => console.log(error)); 	
 }); 

@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser"); 
 
 const path = require('path'); 
+const { nextTick } = require("process");
 
 const app = express(); 
 
@@ -15,13 +16,17 @@ app.use((req, res, next) => { //Déclaration des headers CORS
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({ extended: true })); 
 
+/*
 app.get("/", (req, res) => {
 	res.json("Bienvenue sur l'API REST du réseau social de Groupomania"); 
-}); 
+}); */
 
 app.use('/images', express.static(path.join(__dirname, 'images' ))); 
 
+
+
 require("./routes/users.routes.js")(app); 
+
 
 //set port, listen for requests
 app.listen(3000, () => {

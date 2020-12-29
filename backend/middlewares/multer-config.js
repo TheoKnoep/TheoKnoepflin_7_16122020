@@ -11,9 +11,9 @@ const storage = multer.diskStorage({ //objet de configuration pour Multer, avec 
 		callback(null, 'images') //on indique que les images doivent être stockées dans le dossier 'images'
 	}, 
 	filename: (req, file, callback) => {
-		const name = file.originalname.split(' ').join('_'); 
-		const extension = MIME_TYPES[file.mimetype]; 
-		callback(null, name + Date.now() + '.' + extension); 
+		const name = file.originalname/*.split(' ').join('_'); 
+		const extension = MIME_TYPES[file.mimetype]; */
+		callback(null, name); 
 	}
 }); 
 

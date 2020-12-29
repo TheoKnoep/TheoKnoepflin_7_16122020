@@ -3,13 +3,15 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken"); 
 
 exports.create = (req, res, next) => {
+	console.log(req.body); 
+	console.log(req.file); 
 	if (!req.body) {
 		res.status(400).send({
 			message: "Le contenu ne peut pas être vide"
 		}); 
-	}
-	console.log(req.body); 
+	} 
 	//hashage du mot de passe + enregistrement utilisadeur dans la DB : 
+	/*
 	bcrypt.hash(req.body.password, 10)
 		.then(hash => {
 			const user = new User({
@@ -29,6 +31,7 @@ exports.create = (req, res, next) => {
 			}); 
 		})
 		.catch(error => res.status(502).json({ error }));  
+	*/ res.status(200).json({ message: "ok" }); 
 }; 
 
 exports.login = (req, res, next) => {
