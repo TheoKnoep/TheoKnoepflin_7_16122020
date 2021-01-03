@@ -11,14 +11,13 @@ exports.create = (req, res, next) => {
 		}); 
 	} 
 	//hashage du mot de passe + enregistrement utilisadeur dans la DB : 
-	/*
 	bcrypt.hash(req.body.password, 10)
 		.then(hash => {
 			const user = new User({
 				name: req.body.name, 
 				email: req.body.email, 
 				password: hash, 
-				position: req.body.position,
+				position: req.body.position ? req.body.position : "",
 				profile_picture: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
 			}); 
 			User.create(user, (err, data) => {
@@ -31,7 +30,6 @@ exports.create = (req, res, next) => {
 			}); 
 		})
 		.catch(error => res.status(502).json({ error }));  
-	*/ res.status(200).json({ message: "ok" }); 
 }; 
 
 exports.login = (req, res, next) => {
