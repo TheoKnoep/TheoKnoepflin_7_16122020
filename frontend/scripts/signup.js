@@ -13,7 +13,6 @@ formContent.addEventListener('submit', function(e) {
 		.then(response => response.json())
 			.then(response => {
 				console.log(response); 
-				console.log(`Le client a été créé`); 
 				displayFeedback(response.name); 
 				localStorage.setItem('userId', JSON.stringify(response.id)); 
 				setTimeout(redirectPage, 3000); 
