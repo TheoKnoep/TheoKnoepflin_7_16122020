@@ -1,7 +1,6 @@
 const User = require("../models/users.model.js"); 
 const bcrypt = require("bcrypt"); 
 const jwt = require("jsonwebtoken"); 
-//const { update } = require("../models/users.model.js"); //à quoi sert cette ligne ?
 const fs = require("fs"); 
 
 exports.create = (req, res, next) => {

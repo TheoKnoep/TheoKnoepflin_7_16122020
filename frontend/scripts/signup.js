@@ -2,25 +2,11 @@ let formContent = document.getElementById("form-signup");
 
 formContent.addEventListener('submit', function(e) {
 	e.preventDefault(); 
-	/*
-	const newUser = {
-		"name": formContent[0].value,
-		"email": formContent[1].value,
-		"password": formContent[2].value,
-		"position": formContent[3].value,
-		"profile_picture": formContent[4].files[0]
-	}
-	*/
 	let newUser = new FormData(formContent); 
-
 	console.log(newUser); 
-
 	const options = {
 		method: 'POST', 
 		body: newUser
-		/* headers: {
-			'Content-Type': 'multipart/form-data'
-		} */
 	}
 
 	fetch("http://localhost:3000/users/signup", options) 
@@ -28,8 +14,20 @@ formContent.addEventListener('submit', function(e) {
 			.then(response => {
 				console.log(response); 
 				console.log(`Le client a été créé`); 
+				displayFeedback(response.name); 
 				localStorage.setItem('userId', JSON.stringify(response.id)); 
-				/* setTimeOut((2000) => { windows.location.replace = "./account.html"; }); */
+				setTimeout(redirectPage, 3000); 
 			})
-		.catch(error => console.log(error)); 	
+		.catch(error => console.log(error));
+	
 }); 
+
+function displayFeedback(nameUser) {
+	let feedbackDiv = document.createElement("div");
+	feedbackDiv.innerHTML = `<p class="feeback-form">Félicitations ${nameUser} ! Votre compte a été créé avec succès</p>`; 
+	formContent.appendChild(feedbackDiv); 
+}; 
+
+function redirectPage() {
+	window.location.replace("./account.html");
+}; 
