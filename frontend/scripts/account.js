@@ -26,10 +26,10 @@ function displayInfos(data) {
 		profilePictureUrl = data.profile_picture; 
 	}
 	let positionDescription = "<em>pas d'information renseignée</em>"; 
-	if (data.position != null) {
+	if (data.position != "" && null) {
 		positionDescription = data.position; 
 	}
-	accountInfo.innerHTML = `<img src="${profilePictureUrl}" alt="Photo de profil de ${data.name}" />
+	accountInfo.innerHTML = `<img src="${profilePictureUrl}" alt="Photo de profil de ${data.name}" width="180"/>
 				<ul>	
 					<li>Nom : ${data.name}</li>
 					<li>Email : ${data.email}</li>

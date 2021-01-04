@@ -58,4 +58,17 @@ User.findById = (userId, result) => {
 	});
 }
 
+User.update = (userId, updatedUser, result) => {
+	sql.query(`UPDATE users SET ? WHERE users.id = ${userId};`, updatedUser, (err, res) => {
+		if (err) {
+			console.log("error: ", err); 
+			result(err, null); 
+			return; 
+		} 
+
+		console.log(res); 
+		result(null, {...updatedUser});
+	}); 
+}; 
+
 module.exports = User; 
