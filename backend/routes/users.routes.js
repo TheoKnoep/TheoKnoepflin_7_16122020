@@ -5,6 +5,6 @@ module.exports = app => {
 
 	app.post("/users/signup", multer, users.create); 
 	app.post("/users/login", users.login); 
-	app.get("/users/:id", /* auth, */ users.findOne); 
+	app.get("/users/:id", auth, users.findOne); 
 	app.put("/users/:id", multer, users.updateOne); 
 }; 

@@ -1,6 +1,5 @@
 let userIdStorage = localStorage.getItem("userId"); 
 let token = localStorage.getItem("token"); 
-let accountInfo = document.getElementById("account-data"); 
 
 let options = {
 	method: 'GET',

@@ -2,17 +2,15 @@ const jwt = require("jsonwebtoken");
 
 module.exports = (req, res, next) => {
 	try{
-		const reqHeadersAuthorization = req.headers.authorization; 
-		console.log(reqHeadersAuthorization); 
+		console.log(req.headers.authorization); 
 		const token = req.headers.authorization.split(' ')[1]; 
 		const clearId = req.headers.authorization.split(' ')[2]; 
 		const decodedToken = jwt.verify(token, 'TOKEN_RANDOM_KEY'); 
-
-		console.log('decodedToken = ' + decodedToken.userId);
-		console.log('clearId = ' + clearId);
-
+		console.log(decodedToken); 
 		const userId = decodedToken.userId; 
-		if (clearId !== userId) {
+		console.log(userId); 
+		console.log(clearId); 
+		if (userId && clearId != userId) {
 			throw 'User ID non valable'; 
 		} else {
 			next(); 
