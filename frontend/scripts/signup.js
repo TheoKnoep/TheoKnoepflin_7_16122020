@@ -14,11 +14,11 @@ formContent.addEventListener('submit', function(e) {
 			.then(response => {
 				console.log(response); 
 				displayFeedback(response.name); 
-				localStorage.setItem('userId', response.id); 
+				localStorage.setItem('userId', response.userId); 
 				localStorage.setItem('token', response.token); 
 				setTimeout(redirectPage, 3000); 
 			})
-		.catch(error => console.log(error));
+		.catch(error => console.log(error)); 
 	
 }); 
 

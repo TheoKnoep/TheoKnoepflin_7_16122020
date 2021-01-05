@@ -22,7 +22,7 @@ formContent.addEventListener('submit', function(e) {
 	fetch("http://localhost:3000/users/login", options) 
 		.then(response => response.json())
 			.then(response => {
-				console.log(response.userId); 
+				console.log(response); 
 				localStorage.setItem('userId', response.userId); 
 				localStorage.setItem('token', response.token); 
 				window.location.replace("./account.html");

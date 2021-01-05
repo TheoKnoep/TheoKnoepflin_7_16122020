@@ -18,7 +18,7 @@ fetch("http://localhost:3000/users/" + userIdStorage, options)
 
 function displayInfos(data) {
 	let profilePictureUrl = './media/profil.jpg'; 
-	if (data.profile_picture != null) {
+	if (data.profile_picture != null && data.profile_picture != "") {
 		profilePictureUrl = data.profile_picture; 
 	}
 	let positionDescription = "<em>pas d'information renseignée</em>"; 

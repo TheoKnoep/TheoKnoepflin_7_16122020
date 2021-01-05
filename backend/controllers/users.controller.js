@@ -33,10 +33,18 @@ exports.create = (req, res, next) => {
 					message: 
 					err.message || "Some error occured while creating the user"
 				}); 
-				else res.status(201).send(data); 
+				else res.status(201).json({
+					...data, 
+					userId: data.id, 
+					token: jwt.sign(
+						{ userId: data.id }, 
+						'TOKEN_RANDOM_KEY', 
+						{expiresIn: '24h'}
+					
+				)})
 			}); 
 		})
-		.catch(error => res.status(502).json({ "error kakolac": error }));  
+		.catch(error => res.status(502).json({ "error : ": error }));  
 }; 
 
 exports.login = (req, res, next) => {
@@ -141,7 +149,6 @@ exports.updateOne = (req, res, next) => {
 }; 
 
 exports.deleteOne = (req, res, next) => {
-	//res.json({ message: "ok" }); 
 	User.findById(req.params.id, (err, data) => {
 		if (err) {
 			if (err.kind === "not_found") {
@@ -175,6 +182,4 @@ exports.deleteOne = (req, res, next) => {
 			res.status(200).send(data); 
 		}
 	});
-
-//	res.json({ message : "ok" }); 
 }; 
