@@ -78,7 +78,6 @@ exports.findOne = (req, res, next) => {
 				});
 			}
 		} else res.status(200).send(data);
-
 	}); 
 }; 
 
@@ -139,4 +138,43 @@ exports.updateOne = (req, res, next) => {
 		}); 
 	}); 
 	
+}; 
+
+exports.deleteOne = (req, res, next) => {
+	//res.json({ message: "ok" }); 
+	User.findById(req.params.id, (err, data) => {
+		if (err) {
+			if (err.kind === "not_found") {
+				res.status(404).send({
+					message: `Not found Customer with id ${req.params.id}.`
+				});
+			} else {
+				res.status(500).send({
+					message: "Error retrieving Customer with id " + req.params.customerId
+				});
+			}
+		} else {
+			const imageToDelete = data.profile_picture.split("/images/")[1]; 
+			fs.unlink(`images/${imageToDelete}`, () => {}); 
+		}
+	});
+	
+
+	User.deleteOne(req.params.id, (err, data) => {
+		if (err) {
+			if (err.kind === "not_found") {
+				res.status(404).send({
+					message: `Not found Customer with id ${req.params.id}.`
+				});
+			} else {
+				res.status(500).send({
+					message: "Error retrieving Customer with id " + req.params.customerId
+				});
+			} 
+		} else { 
+			res.status(200).send(data); 
+		}
+	});
+
+//	res.json({ message : "ok" }); 
 }; 
