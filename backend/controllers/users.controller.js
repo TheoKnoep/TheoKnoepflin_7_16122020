@@ -24,7 +24,7 @@ exports.create = (req, res, next) => {
 				name: req.body.name, 
 				email: req.body.email, 
 				password: hash, 
-				position: req.body.position ? req.body.position : "",
+				position: req.body.position ? req.body.position : "", // verif dans le contrler par ex
 				profile_picture: profilePictureUrl
 			}); 
 			User.create(user, (err, data) => {
@@ -90,13 +90,7 @@ exports.findOne = (req, res, next) => {
 }; 
 
 exports.updateOne = (req, res, next) => {
-	const updatedUser = new User({
-		name: "name", 
-		email: "email", 
-		password: "password",
-		position: "position",
-		profile_picture: ""
-	}); 
+	const updatedUser = {};
 	User.findById(req.params.id, (err, data) => {
 		if (err) {
 			if (err.kind === "not_found") {
@@ -109,15 +103,9 @@ exports.updateOne = (req, res, next) => {
 				});
 			}
 		} else {
-			updatedUser.name = data.name; 
-			updatedUser.email = data.email; 
-			updatedUser.password = data.password; 
-			updatedUser.position = data.position; 
-			updatedUser.profile_picture = data.profile_picture; 
+			updatedUser = {...data};
 		}
 
-		console.log("Utilisateur originel : "); 
-		console.log(updatedUser); 
 		if (req.body.name) { updatedUser.name = req.body.name }; 
 		if (req.body.email) { updatedUser.email = req.body.email }; 
 		if (req.body.position) { updatedUser.position = req.body.position } ; 
@@ -125,7 +113,6 @@ exports.updateOne = (req, res, next) => {
 		if (!req.file) {
 			console.log("La requête n'a pas d'image"); 
 		} else {
-			console.log(req.file); 
 			const oldImageUrl = updatedUser.profile_picture; 
 			updatedUser.profile_picture = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`; 
 			
@@ -133,8 +120,6 @@ exports.updateOne = (req, res, next) => {
 			const imageToDelateName = oldImageUrl.split("/images/")[1]; 
 			fs.unlink(`images/${imageToDelateName}`, () => {}); 
 		}
-		console.log("Utilisateur mis à jour : ");
-		console.log(updatedUser); 
 
 		User.update(req.params.id, updatedUser, (err, data) => { 
 			if (err) 
@@ -155,6 +140,7 @@ exports.deleteOne = (req, res, next) => {
 				res.status(404).send({
 					message: `Not found Customer with id ${req.params.id}.`
 				});
+			
 			} else {
 				res.status(500).send({
 					message: "Error retrieving Customer with id " + req.params.customerId
@@ -163,23 +149,25 @@ exports.deleteOne = (req, res, next) => {
 		} else {
 			const imageToDelete = data.profile_picture.split("/images/")[1]; 
 			fs.unlink(`images/${imageToDelete}`, () => {}); 
+
+			User.deleteOne(req.params.id, (err, data) => { 
+				if (err) {
+					if (err.kind === "not_found") {
+						res.status(404).send({
+							message: `Not found Customer with id ${req.params.id}.`
+						});
+					} else {
+						res.status(500).send({
+							message: "Error retrieving Customer with id " + req.params.customerId
+						});
+					} 
+				} else { 
+					res.status(200).send(data); 
+				}
+			});
 		}
 	});
 	
 
-	User.deleteOne(req.params.id, (err, data) => {
-		if (err) {
-			if (err.kind === "not_found") {
-				res.status(404).send({
-					message: `Not found Customer with id ${req.params.id}.`
-				});
-			} else {
-				res.status(500).send({
-					message: "Error retrieving Customer with id " + req.params.customerId
-				});
-			} 
-		} else { 
-			res.status(200).send(data); 
-		}
-	});
+	
 }; 
