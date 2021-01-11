@@ -6,8 +6,10 @@ const Post = function(post) {
 	this.date = post.date; 
 	this.content = post.content; 
 	this.media = post.media; 
-	this.author = post.author; 
+	this.author_id = post.author_id; 
 }; 
+
+
 
 
 
