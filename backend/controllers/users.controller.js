@@ -4,8 +4,6 @@ const jwt = require("jsonwebtoken");
 const fs = require("fs"); 
 
 exports.create = (req, res, next) => {
-	res.json({ body: {...req.body }, file: {...req.file}}); 
-	/* 
 	if (!req.body) {
 		res.status(400).send({
 			message: "Le contenu ne peut pas être vide"
@@ -46,8 +44,6 @@ exports.create = (req, res, next) => {
 			}); 
 		})
 		.catch(error => res.status(502).json({ "error : ": error }));  
-
-		*/
 }; 
 
 exports.login = (req, res, next) => {
