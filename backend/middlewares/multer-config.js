@@ -3,7 +3,8 @@ const multer = require('multer');
 const MIME_TYPES = {
 	'image/jpg': 'jpg', 
 	'image/jpeg': 'jpg', 
-	'image/png': 'png'
+	'image/png': 'png', 
+	'image/gif': 'gif'
 }; 
 
 const storage = multer.diskStorage({ //objet de configuration pour Multer, avec la fonction diskStorage, qui prend 2 arguments : destination + filename 
@@ -18,4 +19,4 @@ const storage = multer.diskStorage({ //objet de configuration pour Multer, avec 
 	}
 }); 
 
-module.exports = multer({ storage }).single('profile_picture'); 
+module.exports = multer({ storage }).single('image'); 

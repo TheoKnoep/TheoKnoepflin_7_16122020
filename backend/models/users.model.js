@@ -16,8 +16,6 @@ User.create = (newUser, result) => {
 			result(err, null); 
 			return; 
 		}
-
-		console.log("Nouvel utilisateur créé : ", {id: res.insertId, ...newUser }); 
 		result(null, { id: res.insertId, ...newUser }); 
 	}); 
 }; 
@@ -65,8 +63,6 @@ User.update = (userId, updatedUser, result) => {
 			result(err, null); 
 			return; 
 		} 
-
-		console.log(res); 
 		result(null, {...updatedUser});
 	}); 
 }; 
@@ -78,7 +74,6 @@ User.deleteOne = (userId, result) => {
 			result(err, null); 
 			return;
 		} 
-		console.log(res); 
 		result(null, res); 
 	}); 
 }; 

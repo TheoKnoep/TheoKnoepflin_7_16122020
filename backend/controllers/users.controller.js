@@ -10,10 +10,7 @@ exports.create = (req, res, next) => {
 		}); 
 	} 
 	let profilePictureUrl = ""; 
-	if (!req.file) {
-		console.log("La requête n'a pas d'image"); 
-	} else {
-		console.log(req.file); 
+	if (req.file) {
 		profilePictureUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`; 
 	}
 	//hashage du mot de passe + enregistrement utilisadeur dans la DB : 
@@ -49,10 +46,8 @@ exports.create = (req, res, next) => {
 exports.login = (req, res, next) => {
 	User.findOne(req.body.email, (err, data) => {
 		if (!data) {
-			console.log("L'utilisateur n'existe pas");
 			res.status(404).json({ message: "L'utilisateur n'existe pas" }); 
 		} else {
-			console.log(`Le mot de passe : ${data.password} / id utilisateur = ${data.id}`); 
 			bcrypt.compare(req.body.password, data.password)
 				.then(valid => {
 					if (!valid) {
@@ -109,13 +104,11 @@ exports.updateOne = (req, res, next) => {
 		if (req.body.email) { updatedUser.email = req.body.email }; 
 		if (req.body.position) { updatedUser.position = req.body.position } ; 
 
-		if (!req.file) {
-			console.log("La requête n'a pas d'image"); 
-		} else {
+		if (req.file) {
 			const oldImageUrl = updatedUser.profile_picture; 
 			updatedUser.profile_picture = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`; 
 			
-			//supprimer l'image existante ici : 
+			//supprimer l'image existante : 
 			const imageToDelateName = oldImageUrl.split("/images/")[1]; 
 			fs.unlink(`images/${imageToDelateName}`, () => {}); 
 		}
@@ -166,7 +159,4 @@ exports.deleteOne = (req, res, next) => {
 			});
 		}
 	});
-	
-
-	
 }; 

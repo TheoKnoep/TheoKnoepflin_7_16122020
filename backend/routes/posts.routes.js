@@ -5,7 +5,7 @@ module.exports = app => {
 
 	app.get("/posts", posts.findAll);
 	app.get("/posts/:id", posts.findOne); 
-	app.post("/posts/", posts.createOne);  
-	app.put("/posts/:id", posts.updateOne); 
+	app.post("/posts/", multer, posts.createOne);  
+	app.put("/posts/:id", multer, posts.updateOne); 
 	app.delete("/posts/:id", posts.deleteOne); 
 }; 
