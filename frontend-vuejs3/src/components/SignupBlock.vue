@@ -33,15 +33,16 @@
 		methods: {
 			signupUser(e) {
 				e.preventDefault(); 
-				//let formContent = document.getElementById("form-signup"); 
-				//let newUser = new FormData(formContent); //ne marche pas
+				let formContent = document.getElementById("form-signup"); 
+				let newUser = new FormData(formContent); //ne marche pas
+				/*
 				let newUser = new FormData(); 
 				console.log(this.name); 
-				newUser.append(this.name);
-				newUser.append(this.email); 
-				newUser.append(this.password);
-				newUser.append(this.position);
-				console.log(newUser); 
+				newUser.append("name", this.name);
+				newUser.append("email", this.email); 
+				newUser.append("password", this.password);
+				newUser.append("position", this.position); */
+				console.log(newUser.get("name")); 
 /*
 				console.log(newUser); 
 				console.log(newUser.length); 

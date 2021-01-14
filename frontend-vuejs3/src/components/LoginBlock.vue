@@ -13,8 +13,7 @@
       </form>
     </div>
     <p>
-      Vous ne disposez pas encore de compte ?<br /><router-link to="/account"
-        >Créer un compte</router-link
+      Vous ne disposez pas encore de compte ?<br /><router-link to="/account">Créer un compte</router-link
       >
     </p>
     <p>
@@ -24,6 +23,7 @@
 </template>
 
 <script>
+import router from '@/router/index.js'
 export default {
   name: "LoginBlock",
   data() {
@@ -56,7 +56,7 @@ export default {
 					console.log(response); 
 					localStorage.setItem('userId', response.userId); 
 					localStorage.setItem('token', response.token); 
-					//window.location.replace("./account.html"); //??-faire une redirection dans VueJS 
+					router.push({ path: 'account' }); 
 				})
 			.catch(error => console.log(error)); 
 		}
