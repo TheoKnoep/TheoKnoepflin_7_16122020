@@ -22,7 +22,7 @@ Post.createPost = (newPost, result) => {
 }; 
 
 Post.getAll = (result) => {
-	sql.query(`SELECT * FROM posts`, (err, res) => {
+	sql.query(`SELECT posts.title, posts.publication_date, posts.content, posts.media, users.name FROM posts INNER JOIN users ON users.id=posts.author_id ORDER BY publication_date DESC`, (err, res) => {
 		if (err) {
 			console.log("error: ", err); 
 			result(err, null); 

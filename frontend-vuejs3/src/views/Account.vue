@@ -1,20 +1,20 @@
 <template>
   <div class="account">
-    <HeaderPart pageTitle="Créer un compte"/>
-    <SignupBlock />
+    <HeaderPart pageTitle="Informations du compte"/>
+    <AccountInformation />
     
   </div>
 </template>
 
 <script>
 import HeaderPart from '@/components/HeaderPart.vue'
-import SignupBlock from '@/components/SignupBlock'
+import AccountInformation from '@/components/AccountInformation.vue'
 
 export default {
   name: "Account", 
   components: {
     HeaderPart, 
-    SignupBlock
+    AccountInformation
   }
 }
 </script>

@@ -13,11 +13,8 @@
       </form>
     </div>
     <p>
-      Vous ne disposez pas encore de compte ?<br /><router-link to="/account">Créer un compte</router-link
+      Vous ne disposez pas encore de compte ?<br /><router-link to="/signup">Créer un compte</router-link
       >
-    </p>
-    <p>
-      Récap du formulaire : {{ email }} et {{ password }}
     </p>
   </section>
 </template>
@@ -35,7 +32,6 @@ export default {
   methods: {
 	loginUser(e) {
 		e.preventDefault(); 
-		alert("Ok, connexion de l'utilisateur"); 
 		
 		const loginRequest = {
 			"email": this.email, 

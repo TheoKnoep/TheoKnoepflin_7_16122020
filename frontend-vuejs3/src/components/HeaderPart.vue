@@ -6,7 +6,8 @@
     <h1>{{ pageTitle }}</h1>
     <div id="nav">
 		<router-link to="/">Accueil</router-link> | 
-		<router-link to="/account">Compte</router-link>
+		<router-link to="/account">Compte</router-link> | 
+    <router-link to="/posts">Publications</router-link>
     </div>
   </header>
 </template>

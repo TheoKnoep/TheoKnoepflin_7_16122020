@@ -10,10 +10,27 @@ const routes = [
   {
     path: '/account',
     name: 'Account',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Account.vue')
+    component: () => import('../views/Account.vue')
+  }, 
+  {
+    path: '/account/edit', 
+    name: 'Modifier les informations du compte', 
+    component: () => import('../views/Editaccount.vue')
+  },
+  {
+    path: '/signup', 
+    name: 'Signup',
+    component: () => import('../views/Signup.vue')
+  }, 
+  {
+    path: '/posts', 
+    name: 'Posts', 
+    component: () => import('../views/Posts.vue')
+  }, 
+  {
+    path: '/posts/new', 
+    name: 'Créer une nouvelle publication', 
+    component: () => import('../views/Createpost.vue')
   }
 ]
 

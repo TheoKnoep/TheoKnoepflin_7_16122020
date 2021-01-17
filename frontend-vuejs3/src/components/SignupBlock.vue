@@ -15,44 +15,47 @@
 			<p>
 				<input type="submit" value="Création du compte" id="confirm-signup"/></p>
 		</form>
-		<p>Nom = {{ name }}</p>
+		<p class="feedback-message">{{ feedbackMessage }}</p>
 	</div>
 </template>
 
 <script>
-	export default {
-		name: "SignupBlock",
-		data() {
-			return {
-				name:'', 
-				email: '', 
-				password: '', 
-				position: ''
+import router from '@/router/index.js'
+
+export default {
+	name: "SignupBlock",
+	data() {
+		return {
+			name:'', 
+			email: '', 
+			password: '', 
+			position: '', 
+			feedbackMessage: ''
+		}
+	},
+	methods: {
+		signupUser(e) {
+			e.preventDefault(); 
+			let formContent = document.getElementById("form-signup"); 
+			let newUser = new FormData(formContent);
+
+			const options = {
+				method: 'POST', 
+				body: newUser
 			}
-		},
-		methods: {
-			signupUser(e) {
-				e.preventDefault(); 
-				let formContent = document.getElementById("form-signup"); 
-				let newUser = new FormData(formContent); //ne marche pas
-				/*
-				let newUser = new FormData(); 
-				console.log(this.name); 
-				newUser.append("name", this.name);
-				newUser.append("email", this.email); 
-				newUser.append("password", this.password);
-				newUser.append("position", this.position); */
-				console.log(newUser.get("name")); 
-/*
-				console.log(newUser); 
-				console.log(newUser.length); 
-				for (let i = 0; i < newUser.length; i++) {
-					console.log(newUser[i]); 
-				}
-				*/
-			}
+
+			fetch("http://localhost:3000/users/signup", options) 
+				.then(response => response.json())
+					.then(response => {
+							localStorage.setItem('userId', response.userId); 
+							localStorage.setItem('token', response.token); 
+							this.feedbackMessage = 'Votre compte est créé !'; 
+							setTimeout(router.push({ path: 'account' }), 3000);
+					})
+				.catch(error => console.log(error)); 
 		}
 	}
+}
 
 </script>
 
