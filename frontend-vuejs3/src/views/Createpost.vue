@@ -1,17 +1,21 @@
 <template>
   <div class="account">
     <HeaderPart pageTitle="Créer une nouvelle publication"/>
-    <p>Coucou la création de post</p>
+	<CreatePostBlock />
   </div>
 </template>
 
 <script>
 import HeaderPart from '@/components/HeaderPart.vue'
+import CreatePostBlock from '@/components/CreatePostBlock'
 
 export default {
   name: "Posts", 
   components: {
-    HeaderPart
+	HeaderPart, 
+	CreatePostBlock
   }
 }
 </script>
+
+    CreatePostBlock

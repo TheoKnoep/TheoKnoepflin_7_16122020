@@ -1,11 +1,11 @@
 <template>
 	<div class="single-post">
-		<pre>{{ postsData }}</pre>
+		<!-- <pre>{{ postsData }}</pre> -->
 
 		<div class="articles-cards">
 			<div class="post-card" v-for="item in postsData" v-bind:key="item.index">
 				<h2>{{ item.title }}</h2>
-				<p class="post-card__data">Publié par {{ item.name}}, le {{ item.publication_local_date }} : </p>
+				<p class="post-card__data">Publié par <strong>{{ item.name}}</strong>, le {{ item.publication_local_date }} : </p>
 				<img v-bind:src="item.media" />
 				<p>{{ item.content }}</p>
 			</div>
@@ -58,7 +58,11 @@ export default {
 		box-shadow: 2px 2px 12px rgba(0,0,0,0.2);
 		&__data {
 			font-style: italic;
-			font-size: small;
+			font-size: 16px;
+			padding: 1em 0; 
+		}
+		img {
+			max-width: 800px; 
 		}
 	}
 
