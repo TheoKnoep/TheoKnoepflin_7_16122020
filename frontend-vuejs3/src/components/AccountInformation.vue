@@ -2,7 +2,8 @@
 	<div class="account-info">
 		<div class="account-data" id="account-data">
 			<div class="profile-picture-container">
-				<img v-bind:src="profile_picture_url" v-bind:alt="alt_text" />
+				<img v-if="has_profile_picture" v-bind:src="profile_picture_url" v-bind:alt="alt_text" />
+				<img v-else src="@/assets/profil.jpg" alt="L'utilisateur n'a pas renseigné de photo de profil" />
 			</div>
 			<ul>
 				<li>Nom : {{ name }}</li>
@@ -27,9 +28,10 @@ export default {
 			userId : '',
 			name: '', 
 			email: '', 
-			position: '', 
+			position: 'Pas de poste renseigné', 
+			has_profile_picture: false,
 			profile_picture_url: '', 
-			alt_text: 'Photo de profil de ' + name
+			alt_text: ''
 		}
 	},
 	mounted() {
@@ -37,10 +39,14 @@ export default {
 		axios
 			.get("http://localhost:3000/users/" + userId)
 			.then(response => {
-				this.name = response.data.name, 
-				this.email = response.data.email, 
-				this.position = response.data.position, 
-				this.profile_picture_url = response.data.profile_picture
+				if (response.data.profile_picture != '') {
+					this.has_profile_picture = true; 
+					this.profile_picture_url = response.data.profile_picture;
+				}
+				if (response.data.position != '' && response.data.position != null) { this.position = response.data.position}
+				this.name = response.data.name;
+				this.email = response.data.email;
+				this.alt_text = 'Photo de profil de ' + response.data.name;
 			})
 	},
 	methods: {

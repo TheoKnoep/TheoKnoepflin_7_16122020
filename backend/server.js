@@ -24,7 +24,8 @@ app.use('/images', express.static(path.join(__dirname, 'images' )));
 
  
 require("./routes/users.routes.js")(app); 
-require("./routes/posts.routes.js")(app);
+require("./routes/posts.routes.js")(app); 
+require("./routes/comments.routes.js")(app); 
 
 
 

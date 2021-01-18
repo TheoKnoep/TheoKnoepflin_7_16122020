@@ -3,7 +3,6 @@ const sql = require("./db.js");
 //constructor 
 const Post = function(post) {
 	this.title = post.title;
-//	this.publication_date = post.publication_date ? post.publication_date : null ; 
 	this.content = post.content; 
 	this.media = post.media; 
 	this.author_id = post.author_id; 
@@ -22,19 +21,28 @@ Post.createPost = (newPost, result) => {
 }; 
 
 Post.getAll = (result) => {
-	sql.query(`SELECT posts.title, posts.publication_date, posts.content, posts.media, users.name FROM posts INNER JOIN users ON users.id=posts.author_id ORDER BY publication_date DESC`, (err, res) => {
-		if (err) {
-			console.log("error: ", err); 
-			result(err, null); 
-			return; 
-		}
+	sql.query(`
+			SELECT 
+				posts.title, posts.publication_date, posts.content, posts.media, users.name 
+			FROM 
+				posts 
+			INNER JOIN 
+				users ON users.id = posts.author_id 
+			ORDER BY 
+				publication_date DESC`, 
+			(err, res) => {
+				if (err) {
+					console.log("error: ", err); 
+					result(err, null); 
+					return; 
+				}
 
-		if (res.length) {
-			result(null, res); 
-			console.log("getAll res = "); 
-			console.log(res); 
-			return; 
-		}
+				if (res.length) {
+					result(null, res); 
+					console.log("getAll res = "); 
+					console.log(res); 
+					return; 
+				}
 
 		result({ kind: "not_found" }, null); 
 	});
@@ -80,13 +88,5 @@ Post.deleteOne = (postId, result) => {
 		result(null, res); 
 	}); 
 }; 
-
-
-
-
-
-
-
-
 
 module.exports = Post; 
