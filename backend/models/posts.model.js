@@ -23,7 +23,7 @@ Post.createPost = (newPost, result) => {
 Post.getAll = (result) => {
 	sql.query(`
 			SELECT 
-				posts.title, posts.publication_date, posts.content, posts.media, users.name 
+				posts.id, posts.title, posts.publication_date, posts.content, posts.media, users.name 
 			FROM 
 				posts 
 			INNER JOIN 

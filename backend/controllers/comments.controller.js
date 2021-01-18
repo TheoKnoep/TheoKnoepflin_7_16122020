@@ -26,7 +26,11 @@ exports.findOne = (req, res, next) => {
 		if (err) {
 			res.status(400).json({ error: err})
 		} else {
-			res.status(200).json({ response: { ...data }}); 
+			const tableOfComments = []; 
+			for (let i = 0; i < data.length ; i++) {
+				tableOfComments.push(data[i]); 
+			}
+			res.status(200).json({ response: tableOfComments }); 
 		}
 	}); 
 };
