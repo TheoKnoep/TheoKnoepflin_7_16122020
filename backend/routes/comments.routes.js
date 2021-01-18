@@ -3,6 +3,6 @@ module.exports = app => {
 	const auth = require("../middlewares/auth"); 
 
 	app.post("/comments", comments.createOne); 
-	app.get("/comments/:id", comments.findOne); 
+	app.get("/comments/:postId", comments.findOne); 
 	app.delete("/comments/:id", comments.deleteOne); 
 }; 

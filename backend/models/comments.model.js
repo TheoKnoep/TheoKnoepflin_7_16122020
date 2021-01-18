@@ -22,12 +22,13 @@ Comment.createComment = (newComment, result) => {
 Comment.findAllCommentsOfOnePost = (commentsPostId, result) => {
 	sql.query(`
 			SELECT 
-				comments.content, comments.comment_date, comments.comment_author_id
+				comments.content, comments.comment_date, users.name
 			FROM 
 				comments
+			INNER JOIN 
+				users ON users.id = comments.comment_author_id
 			WHERE 
 				post_id = ${commentsPostId} 
-
 			ORDER BY 
 				comment_date ASC`, 
 			(err, res) => {

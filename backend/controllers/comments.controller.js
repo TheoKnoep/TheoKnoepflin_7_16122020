@@ -21,16 +21,24 @@ exports.createOne = (req, res, next) => {
 }
 
 exports.findOne = (req, res, next) => {
-	const commentsPostId = req.params.id; 
+	const commentsPostId = req.params.postId; 
 	Comment.findAllCommentsOfOnePost(commentsPostId, (err, data) => {
-		res.status(200).json({ response: { ...data }}); 
+		if (err) {
+			res.status(400).json({ error: err})
+		} else {
+			res.status(200).json({ response: { ...data }}); 
+		}
 	}); 
 };
 
 exports.deleteOne = (req, res, next) => {
 	const commentId = req.params.id; 
 	Comment.deleteOne(commentId, (err, data) => {
-		res.status(200).json({ message: "Comment deleted"}); 
+		if (err) {
+			res.status(400).json({ error: err})
+		} else {
+			res.status(200).json({ message: "Comment deleted"}); 
+		}
 	});
 };
 
