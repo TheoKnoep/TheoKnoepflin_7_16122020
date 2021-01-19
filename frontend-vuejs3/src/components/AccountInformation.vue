@@ -13,13 +13,14 @@
 		</div>
 		<div class="edit-account-button"> <!-- à n'afficher que si le compte consulté est celui de l'utilisateur ou un admin -->
 			<router-link to="/account/edit">Modifier les informations du compte</router-link>
+			<button @click="deleteAccount">Supprimer le compte</button>
 		</div>
 	</div>
 </template>
 
 <script>
 import axios from 'axios' 
-import router from '@/router/index.js'
+import router from '../router/index'
 
 export default {
 	name: "AccountInformation", 
@@ -36,6 +37,7 @@ export default {
 	},
 	mounted() {
 		const userId = localStorage.getItem('userId'); 
+		this.userId = userId; 
 		axios
 			.get("http://localhost:3000/users/" + userId)
 			.then(response => {
@@ -50,12 +52,18 @@ export default {
 			})
 	},
 	methods: {
-		//script pour récupérer l'id utilisateur dans le localStorage : 
-		getUserId() {
-			return localStorage.getItem('userId'); 
-		}, 
-		redirectToEdit() {
-			router.push({ path: 'account' })
+		deleteAccount() {
+			alert("Êtes-vous sûr de vouloir supprimer le compte utilisateur : " + this.name + " // userId = " + this.userId);
+			const options = {
+				method: 'DELETE', 
+			}
+			fetch("http://localhost:3000/users/" + this.userId, options) 
+				.then(response => response.json())
+					.then(response => {
+						console.log(response); 
+						router.push({ path: '/' });
+					})
+				.catch(error => console.log(error)); 
 		}
 	}
 }
