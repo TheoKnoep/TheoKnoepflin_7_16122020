@@ -2,15 +2,15 @@
 
 **Objectif** : créer un réseau social d'entreprise 
 
-## How to run the projet 
-
-Run the commands : 
+## How to run the project 
 
 ```
 clone https://github.com/TheoKnoep/TheoKnoepflin_7_16122020.git 
-cd ./backend/
-npm install
-node server
 ```
 
-The API is now available on http://localhost:3000/
+### 1) Create the database
+
+### 2) Run the server
+
+### 3) Compile the Vue App
+

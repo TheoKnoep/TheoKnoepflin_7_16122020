@@ -1,12 +1,27 @@
 const Post = require("../models/posts.model.js"); 
+const Comment = require("../models/comments.model.js"); 
 const fs = require('fs'); 
 
 exports.findAll = (req, res, next) => {
-	Post.getAll( (err, data) => {
+	Post.getAll( (err, postsData) => {
 		if(err) {
 			res.status(400).json({ "error": err }); 
 		} else {
-			res.status(200).json(data); 
+			Comment.getAllComments((err, commentsData) => {
+				if (err) {
+					res.status(400).json({ "error": err }); 
+				} else {
+					for (let i in postsData) {
+						postsData[i].comments = []; 
+					}
+					for (let i in commentsData) {
+						const linkedPost = commentsData[i].post_id; 
+						const indexOfThePost = postsData.findIndex((element) => element.id === linkedPost);
+						postsData[indexOfThePost].comments.push(commentsData[i]); 
+					}
+					res.status(200).json(postsData); 
+				}
+			});
 		}
 	});
 }; 
@@ -41,7 +56,7 @@ exports.createOne = (req, res, next) => {
 		author_id: req.body.author_id
 	}); 
 
-	post.publication_date = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');      // delete the dot and everything after
+	//post.publication_date = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, ''); // delete the dot and everything after
 
 	Post.createPost(post, (err, data) => {
 		res.status(200).json({ response: { ...data }}); 

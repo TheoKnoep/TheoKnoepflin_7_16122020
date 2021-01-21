@@ -19,10 +19,28 @@ Comment.createComment = (newComment, result) => {
 	}); 
 }; 
 
+Comment.getAllComments = (result) => {
+	sql.query(`SELECT comments.comment_date, comments.content, comments.post_id, comments.comment_author_id, users.name, users.profile_picture
+				FROM comments 
+				INNER JOIN users ON users.id = comments.comment_author_id
+				`, (err, res) => {
+					if (err) {
+						console.log("error: ", err); 
+						result(err, null); 
+						return; 
+					}
+					if (res.length) {
+						result(null, res); 
+						return; 
+					}
+					result({ kind: "not_found" }, null); 
+	})
+}; 
+
 Comment.findAllCommentsOfOnePost = (commentsPostId, result) => {
 	sql.query(`
 			SELECT 
-				comments.content, comments.comment_date, users.name
+				comments.content, comments.comment_date, users.name, users.profile_picture
 			FROM 
 				comments
 			INNER JOIN 

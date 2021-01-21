@@ -23,7 +23,7 @@ Post.createPost = (newPost, result) => {
 Post.getAll = (result) => {
 	sql.query(`
 			SELECT 
-				posts.id, posts.title, posts.publication_date, posts.content, posts.media, users.name 
+				posts.id, posts.title, posts.publication_date, posts.content, posts.media, users.name, users.profile_picture 
 			FROM 
 				posts 
 			INNER JOIN 
@@ -39,8 +39,6 @@ Post.getAll = (result) => {
 
 				if (res.length) {
 					result(null, res); 
-					console.log("getAll res = "); 
-					console.log(res); 
 					return; 
 				}
 

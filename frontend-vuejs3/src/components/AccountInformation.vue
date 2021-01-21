@@ -1,19 +1,24 @@
 <template>
-	<div class="account-info">
-		<div class="account-data" id="account-data">
-			<div class="profile-picture-container">
-				<img v-if="has_profile_picture" v-bind:src="profile_picture_url" v-bind:alt="alt_text" />
-				<img v-else src="@/assets/profil.jpg" alt="L'utilisateur n'a pas renseigné de photo de profil" />
+	<div>
+		<div class="account-info" v-if="userId != '' && name != ''">
+			<div class="account-data" id="account-data" >
+				<div class="profile-picture-container">
+					<img v-if="has_profile_picture" v-bind:src="profile_picture_url" v-bind:alt="alt_text" />
+				</div>
+				<ul>
+					<li>Nom : {{ name }}</li>
+					<li>Adresse email : {{ email }}</li>
+					<li>Poste : {{ position }}</li>
+				</ul>
 			</div>
-			<ul>
-				<li>Nom : {{ name }}</li>
-				<li>Adresse email : {{ email }}</li>
-				<li>Poste : {{ position }}</li>
-			</ul>
+			<div class="edit-account-button"> <!-- à n'afficher que si le compte consulté est celui de l'utilisateur ou un admin -->
+				<router-link to="/account/edit">Modifier les informations du compte</router-link>
+				<button @click="deleteAccount">Supprimer le compte</button>
+			</div>
 		</div>
-		<div class="edit-account-button"> <!-- à n'afficher que si le compte consulté est celui de l'utilisateur ou un admin -->
-			<router-link to="/account/edit">Modifier les informations du compte</router-link>
-			<button @click="deleteAccount">Supprimer le compte</button>
+		<div v-else>
+			<p>Vous devez être connecté pour afficher ce contenu</p>
+			<router-link to="/">Retour à l'accueil</router-link>
 		</div>
 	</div>
 </template>

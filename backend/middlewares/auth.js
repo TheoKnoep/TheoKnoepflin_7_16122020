@@ -13,6 +13,8 @@ module.exports = (req, res, next) => {
 		if (userId && clearId != userId) {
 			throw 'User ID non valable'; 
 		} else {
+			//req.body.userId = userId; 
+			req.body.isAdmin = false; 
 			next(); 
 		}
 	} catch (error) {

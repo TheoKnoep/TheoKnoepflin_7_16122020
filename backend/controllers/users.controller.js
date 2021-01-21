@@ -12,6 +12,8 @@ exports.create = (req, res, next) => {
 	let profilePictureUrl = ""; 
 	if (req.file) {
 		profilePictureUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`; 
+	} else {
+		profilePictureUrl = `${req.protocol}://${req.get('host')}/images/default_profil.jpg`;
 	}
 	//hashage du mot de passe + enregistrement utilisadeur dans la DB : 
 	bcrypt.hash(req.body.password, 10)
