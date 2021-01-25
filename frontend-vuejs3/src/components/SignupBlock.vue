@@ -47,8 +47,8 @@ export default {
 			fetch("http://localhost:3000/users/signup", options) 
 				.then(response => response.json())
 					.then(response => {
-							localStorage.setItem('userId', response.userId); 
 							localStorage.setItem('token', response.token); 
+							this.$store.dispatch('get_user_data', response.userId, response.isAdmin);
 							this.feedbackMessage = 'Votre compte est créé !'; 
 							setTimeout(router.push({ path: 'account' }), 3000);
 					})

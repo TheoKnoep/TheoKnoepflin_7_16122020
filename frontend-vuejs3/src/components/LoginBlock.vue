@@ -37,7 +37,6 @@ export default {
 			"email": this.email, 
 			"password": this.password
 		} 
-		console.log(loginRequest); 
 
 		const options = {
 			method: 'POST', 
@@ -50,8 +49,8 @@ export default {
 			.then(response => response.json())
 				.then(response => {
 					console.log(response); 
-					localStorage.setItem('userId', response.userId); 
 					localStorage.setItem('token', response.token); 
+					this.$store.dispatch('get_user_data', response.userId, response.isAdmin); 
 					router.push({ path: 'account' }); 
 				})
 			.catch(error => console.log(error)); 

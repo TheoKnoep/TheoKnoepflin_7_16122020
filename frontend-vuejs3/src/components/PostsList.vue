@@ -1,33 +1,46 @@
 <template>
 	<div class="posts-list">
-		<!-- <pre>{{ postsData }}</pre> -->
-		<article class="articles-cards">
-			<div class="post-card" v-for="item in postsData" v-bind:key="item.index">
-				<!-- début du single-post -->
-					<h2>{{ item.title }}</h2>
-					<p class="post-card__data">
-						<img class="author-picture" v-bind:src="item.profile_picture" width="40" height="40" />
-						Publié par <strong>{{ item.name}}</strong>, le {{ item.publication_local_date }} : 
-					</p>
-					<img v-bind:src="item.media" />
-					<p>{{ item.content }}</p>
-				<!-- fin du single-post -->
+		<pre>{{ postsData }}</pre>
+		<p>User ID : {{ userId }} </p>
+		<p>Admin ? : {{ isAdmin }}</p>
+		<div class="articles-cards">
 
-					<div class="comments-section" v-if="item.comments.length">
-						<hr />
-						<h3>Commentaires :</h3>
-						<div class="single-comment" v-for="comment in item.comments" v-bind:key="comment.index"> 
-							<img v-bind:src="comment.profile_picture" width="25" height="25" />
-							<p>{{ comment.comment_date }}</p>
-							<p><strong>{{ comment.name }}</strong></p>
-							<p class="single-comment__content">{{ comment.content }}</p>
-						</div> 
-					</div>
-					<div class="add-comment" v-bind:id="item.id"> 
-						<button @click="addComment(item.id)">Ajouter un commentaire</button>
-					</div>
+			<SinglePost v-for="post in postsData" :key="post.id" 
+				title="post.title" /> 
+
+			<div class="post-card" v-for="(item, index) in postsData" v-bind:key="item.id">
+				<pre>Index de la table des posts : {{ index }} </pre>
+				<h2>{{ item.title }}</h2>
+				<p class="post-card__data">
+					<img class="author-picture" v-bind:src="item.profile_picture" width="40" height="40" />
+					Publié par <strong>{{ item.name}}</strong>, le {{ item.publication_local_date }} : 
+				</p>
+				<img v-bind:src="item.media" />
+				<p>{{ item.content }}</p>
+
+				<div class="comments-section" v-if="item.comments.length">
+					<hr />
+					<h3>Commentaires :</h3>
+					<div class="single-comment" v-for="comment in item.comments" v-bind:key="comment.index"> 
+						<img v-bind:src="comment.profile_picture" width="25" height="25" />
+						<p>{{ comment.comment_date }}</p>
+						<p><strong>{{ comment.name }}</strong></p>
+						<p class="single-comment__content">{{ comment.content }}</p>
+					</div> 
+				</div>
+				<div class="add-comment" > 
+					<button >Ajouter un commentaire</button> 
+					<form method="post" @submit="addComment" v-bind:id="index">
+						<input type="hidden" v-model="userId" />
+						<input type="hidden" name="post_id" v-model="item.id" />
+						<label for="content">Ajouter un commentaire : </label>
+							<textarea name="content" v-model="content"></textarea>
+						<input type="submit" value="Envoyer" />
+					</form>
+				</div>	
+				
 			</div>
-		</article>
+		</div>
 		<router-link to="/posts/new" class="add-publication" title="Ajouter une nouvelle publication">
 			<span class="wrapper">
 				<span class="add-publication__ico">✒</span><span class="add-publication__text-line">Ajouter une nouvelle publication</span>
@@ -39,28 +52,25 @@
 
 <script>
 import axios from 'axios'
+import store from '../store'
+import SinglePost from '@/components/SinglePost.vue'
 
 export default {
 	name: 'PostsList', 
 	data () {
 		return {
+			userId : store.state.userId,
+			isAdmin : store.state.isAdmin, 
 			postsData: []
 		}
 	},
+	components: {
+		SinglePost
+	},
 	methods: {
-		addComment(postId) {
-			/*
-			let newCommentForm = document.createElement("form"); 
-			newCommentForm.appendChild("input").setAttribute("type", "text");
-			newCommentForm.appendChild("input").setAttribute("type", "submit");
-			document.getElementById(postId).appendChild(newCommentForm); 
-			*/
-			let commentForm = document.getElementById(postId); 
-			commentForm.innerHTML = `<form id=${postId} method="post">
-										<label for="comment">Votre commentaire</label> : <input type="text" name="comment" v-model="comment"/>
-										<input type="submit" />
-									</form>`; 
-			alert(`Fonctionnalité à venir : commentaire pour le post # ${postId}`); 
+		addComment(e) {
+			e.preventDefault(); 
+			console.log("User id du state = " + this.userId);
 		}
 	},
 	mounted() {
@@ -69,6 +79,7 @@ export default {
 			.then(response => {
 				this.postsData = response.data; 
 				for (let i in response.data) {
+					this.postsData[i].add_comment_section = false; 
 					let datePost = new Date(response.data[i].publication_date); 
 					this.postsData[i].publication_local_date = datePost.toLocaleString(); 
 					for (let y in response.data[i].comments) {

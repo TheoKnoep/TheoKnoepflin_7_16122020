@@ -7,6 +7,7 @@ const User = function(user) {
 	this.password = user.password;
 	this.position = user.position;
 	this.profile_picture = user.profile_picture;
+	this.is_admin = user.is_admin; 
 }; 
 
 User.create = (newUser, result) => {
@@ -29,7 +30,6 @@ User.findOne = (userEmail, result) => {
 		}
 
 		if (res.length) {
-			console.log("Found user : ", res[0]); 
 			result(null, res[0]); 
 			return; 
 		}
@@ -47,7 +47,6 @@ User.findById = (userId, result) => {
 		}
 
 		if (res.length) {
-			console.log("Found user : ", res[0]); 
 			result(null, res[0]); 
 			return; 
 		}

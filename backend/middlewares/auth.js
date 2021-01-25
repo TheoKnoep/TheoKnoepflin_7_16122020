@@ -8,16 +8,17 @@ module.exports = (req, res, next) => {
 		const decodedToken = jwt.verify(token, 'TOKEN_RANDOM_KEY'); 
 		console.log(decodedToken); 
 		const userId = decodedToken.userId; 
+		const isAdmin = decodedToken.isAdmin; 
 		console.log(userId); 
-		console.log(clearId); 
+		console.log(isAdmin); 
 		if (userId && clearId != userId) {
 			throw 'User ID non valable'; 
 		} else {
 			//req.body.userId = userId; 
-			req.body.isAdmin = false; 
+			req.body.isAdmin = isAdmin === 1 ? true : false; 
 			next(); 
-		}
+		} 
 	} catch (error) {
-		res.status(401).json({ error: error + 'bibou' | 'Requête non authentifiée' })
+		res.status(401).json({ error: error | 'Requête non authentifiée' })
 	}
 }; 

@@ -18,6 +18,8 @@
 		</div>
 		<div v-else>
 			<p>Vous devez être connecté pour afficher ce contenu</p>
+			<p> UserId = {{ $store.state.userId }}</p>
+			<p> Ou userId = {{ userId }}</p>
 			<router-link to="/">Retour à l'accueil</router-link>
 		</div>
 	</div>
@@ -26,12 +28,13 @@
 <script>
 import axios from 'axios' 
 import router from '../router/index'
+import store from '../store'
 
 export default {
 	name: "AccountInformation", 
 	data ()  {
 		return{
-			userId : '',
+			userId : store.state.userId,
 			name: '', 
 			email: '', 
 			position: 'Pas de poste renseigné', 
@@ -41,10 +44,8 @@ export default {
 		}
 	},
 	mounted() {
-		const userId = localStorage.getItem('userId'); 
-		this.userId = userId; 
 		axios
-			.get("http://localhost:3000/users/" + userId)
+			.get("http://localhost:3000/users/" + this.userId)
 			.then(response => {
 				if (response.data.profile_picture != '') {
 					this.has_profile_picture = true; 
@@ -59,8 +60,13 @@ export default {
 	methods: {
 		deleteAccount() {
 			alert("Êtes-vous sûr de vouloir supprimer le compte utilisateur : " + this.name + " // userId = " + this.userId);
+			const userToken = localStorage.getItem('token'); 
 			const options = {
-				method: 'DELETE', 
+				"method": 'DELETE', 
+				"headers": {
+					"Content-Type": "multipart/form-data",
+					"Authorization": `Bearer ${userToken}`
+				}
 			}
 			fetch("http://localhost:3000/users/" + this.userId, options) 
 				.then(response => response.json())

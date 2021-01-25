@@ -22,8 +22,9 @@ exports.create = (req, res, next) => {
 				name: req.body.name, 
 				email: req.body.email, 
 				password: hash, 
-				position: req.body.position ? req.body.position : "", // verif dans le contrler par ex
-				profile_picture: profilePictureUrl
+				position: req.body.position ? req.body.position : "", 
+				profile_picture: profilePictureUrl, 
+				is_admin: req.body.is_admin ? req.body.is_admin : 0
 			}); 
 			User.create(user, (err, data) => {
 				if (err)
@@ -35,7 +36,7 @@ exports.create = (req, res, next) => {
 					...data, 
 					userId: data.id, 
 					token: jwt.sign(
-						{ userId: data.id }, 
+						{ userId: data.id, isAdmin: data.is_admin }, 
 						'TOKEN_RANDOM_KEY', 
 						{expiresIn: '24h'}
 					
@@ -58,7 +59,7 @@ exports.login = (req, res, next) => {
 					res.status(200).json({
 						userId: data.id, 
 						token: jwt.sign(
-							{ userId: data.id }, 
+							{ userId: data.id, isAdmin: data.is_admin }, 
 							'TOKEN_RANDOM_KEY', 
 							{expiresIn: '24h'}
 						)
