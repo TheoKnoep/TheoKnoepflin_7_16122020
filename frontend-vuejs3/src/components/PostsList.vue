@@ -70,7 +70,8 @@ export default {
 	methods: {
 		addComment(e) {
 			e.preventDefault(); 
-			console.log("User id du state = " + this.userId);
+			let commentFormContent = document.querySelectorAll('form'); 
+			console.log(commentFormContent);
 		}
 	},
 	mounted() {
