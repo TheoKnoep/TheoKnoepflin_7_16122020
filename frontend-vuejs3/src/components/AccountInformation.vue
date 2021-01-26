@@ -9,6 +9,7 @@
 					<li>Nom : {{ name }}</li>
 					<li>Adresse email : {{ email }}</li>
 					<li>Poste : {{ position }}</li>
+					<li v-if="isAdmin">ADMINISTRATEUR</li>
 				</ul>
 			</div>
 			<div class="edit-account-button"> <!-- à n'afficher que si le compte consulté est celui de l'utilisateur ou un admin -->
@@ -35,6 +36,7 @@ export default {
 	data ()  {
 		return{
 			userId : store.state.userId,
+			isAdmin : store.state.isAdmin,
 			name: '', 
 			email: '', 
 			position: 'Pas de poste renseigné', 

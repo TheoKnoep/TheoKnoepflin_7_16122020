@@ -10,13 +10,19 @@ export default createStore({
       state.userId = payload ; 
     }, 
     GET_USER_ROLE(state, payload) {
-      state.userRole = payload === 1 ? true : false ; 
+      if (payload) {
+        state.isAdmin = true
+      } else {
+        state.isAdmin = false
+      }
     }
   },
   actions: {
-    get_user_data(context, userId, userRole) {
+    get_user_id(context, userId) {
       context.commit('GET_USER_ID', userId); 
-      context.commit('GET_USER_ROLE', userRole); 
+    }, 
+    get_user_role(context, userRole) {
+      context.commit('GET_USER_ROLE', userRole)
     }
   },
   modules: {

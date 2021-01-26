@@ -2,7 +2,7 @@
 	<div class="posts-list">
 		<pre>{{ postsData }}</pre>
 		<p>User ID : {{ userId }} </p>
-		<p>Admin ? : {{ isAdmin }}</p>
+		<p>isAdmin : {{ isAdmin }}</p>
 		<div class="articles-cards">
 
 			<SinglePost v-for="post in postsData" :key="post.id" 

@@ -35,8 +35,9 @@ exports.create = (req, res, next) => {
 				else res.status(201).json({
 					...data, 
 					userId: data.id, 
+					isAdmin: data.is_admin, 
 					token: jwt.sign(
-						{ userId: data.id, isAdmin: data.is_admin }, 
+						{ userId: data.id }, 
 						'TOKEN_RANDOM_KEY', 
 						{expiresIn: '24h'}
 					
@@ -58,8 +59,9 @@ exports.login = (req, res, next) => {
 					}
 					res.status(200).json({
 						userId: data.id, 
+						isAdmin: data.is_admin, 
 						token: jwt.sign(
-							{ userId: data.id, isAdmin: data.is_admin }, 
+							{ userId: data.id }, 
 							'TOKEN_RANDOM_KEY', 
 							{expiresIn: '24h'}
 						)
@@ -87,7 +89,7 @@ exports.findOne = (req, res, next) => {
 }; 
 
 exports.updateOne = (req, res, next) => {
-	const updatedUser = {};
+	let updatedUser = {};
 	User.findById(req.params.id, (err, data) => {
 		if (err) {
 			if (err.kind === "not_found") {

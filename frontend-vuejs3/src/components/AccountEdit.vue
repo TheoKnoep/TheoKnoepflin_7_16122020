@@ -1,28 +1,26 @@
 <template>
-		<div class="form-container">
-			<pre>{{ userInfos }}</pre>
+	<div class="form-container">
 		<h2>Mettre à jour les informations de votre compte : USERID = {{ userId }}</h2>
-		<form id="form-signup" method="post" enctype="multipart/form-data" @submit="editUser" >
+		<form id="form-edit" method="post" enctype="multipart/form-data" @submit="editUser" >
 			<p><label for="name">Nom</label> : 
-				<input type="text" name="name" autofocus required v-model="name"/></p>
+				<input type="text" name="name" autofocus v-model="userInfos.name" /></p>
 			<p><label for="email">Email</label> : 
-				<input type="email" name="email" required v-model="email" /></p>
-			<p><label for="password">Mot de passe</label> : 
-				<input type="password" name="password" required v-model="password" /></p>
+				<input type="email" name="email" v-model="userInfos.email" /></p>
 			<p><label for="position">Poste occupé</label> : 
-				<input type="text" name="position" v-model="position"/></p>
-			<p><label for="image">Choisissez une photo de profil</label> : 
+				<input type="text" name="position" v-model="userInfos.position"/></p>
+			<p><label for="image">Choisissez une nouvelle photo de profil</label> : 
 				<input type="file" name="image" /></p>
 			<p>
 				<input type="submit" value="Valider les changements" id="confirm-edit"/></p>
 		</form>
-		<p class="feedback-message">{{ feedbackMessage }}</p>
+		<p class="feedback-message" v-if="feedbackMessage">{{ feedbackMessage }}</p>
 	</div>
 </template>
 
 <script>
 import axios from 'axios'
 import store from '../store'
+import router from '../router/index.js'
 
 export default {
 	name: 'AccountEdit', 
@@ -35,7 +33,8 @@ export default {
 					profile_picture: '', 
 					position: ''
 				}, 
-			userId: store.state.userId
+			userId: store.state.userId, 
+			feedbackMessage: ''
 		}
 	}, 
 	mounted() {
@@ -49,6 +48,30 @@ export default {
 				this.userInfos.name = response.data.name;
 				this.userInfos.email = response.data.email;
 			})
+	}, 
+	methods: {
+		editUser(e) {
+			e.preventDefault(); 
+
+			let editedUser = new FormData(document.getElementById("form-edit"));
+			console.log(...editedUser); 
+			const userToken = localStorage.getItem('token');
+
+			const options = {
+				"method": 'PUT', 
+				"body": editedUser, 
+				"headers": {
+					"Authorization": `Bearer ${userToken}`
+				}
+			}
+
+			fetch("http://localhost:3000/users/" + this.userId, options) 
+				.then(() => {
+						this.feedbackMessage = 'Votre compte a été modifié avec succès !'; 
+						setTimeout(router.push({ path: '../account' }), 3000);
+					})
+				.catch(error => console.log(error)); 
+		}
 	}
 }
 </script>

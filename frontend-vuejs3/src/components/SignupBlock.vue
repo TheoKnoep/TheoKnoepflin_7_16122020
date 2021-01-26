@@ -48,7 +48,8 @@ export default {
 				.then(response => response.json())
 					.then(response => {
 							localStorage.setItem('token', response.token); 
-							this.$store.dispatch('get_user_data', response.userId, response.isAdmin);
+							this.$store.dispatch('get_user_id', response.userId); 
+							this.$store.dispatch('get_user_role', response.isAdmin); 
 							this.feedbackMessage = 'Votre compte est créé !'; 
 							setTimeout(router.push({ path: 'account' }), 3000);
 					})
