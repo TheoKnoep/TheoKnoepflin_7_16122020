@@ -17,6 +17,7 @@
 
 <script>
 import router from '@/router/index.js'
+import store from '../store'
 
 export default {
 	name: "CreatePostBlock",
@@ -24,7 +25,9 @@ export default {
 		return {
 			title:'', 
 			content: '', 
-			feedbackMessage: ''
+			feedbackMessage: '', 
+			userId: store.state.userId, 
+			token: store.state.token
 		}
 	},
 	methods: {
@@ -33,11 +36,10 @@ export default {
 			let formContent = document.getElementById("form-create-post"); 
 			let newPost = new FormData(formContent);
 			
-			const userId = localStorage.getItem('userId'); 
-			if (!userId) {
+			if (!this.userId) {
 				console.error("L'utilisateur n'est pas reconnu"); 
 			} else {
-				newPost.append('author_id', userId); 
+				newPost.append('author_id', this.userId); 
 
 				const options = {
 					method: 'POST', 

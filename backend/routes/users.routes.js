@@ -8,4 +8,5 @@ module.exports = app => {
 	app.get("/users/:id", /* auth, */ users.findOne); 
 	app.put("/users/:id", multer, users.updateOne); 
 	app.delete("/users/:id", auth, users.deleteOne); 
+	app.get("/user/current", auth, users.getUser); 
 }; 

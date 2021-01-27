@@ -34,6 +34,7 @@ export default {
 					position: ''
 				}, 
 			userId: store.state.userId, 
+			token: store.state.token,
 			feedbackMessage: ''
 		}
 	}, 
@@ -54,14 +55,12 @@ export default {
 			e.preventDefault(); 
 
 			let editedUser = new FormData(document.getElementById("form-edit"));
-			console.log(...editedUser); 
-			const userToken = localStorage.getItem('token');
 
 			const options = {
 				"method": 'PUT', 
 				"body": editedUser, 
 				"headers": {
-					"Authorization": `Bearer ${userToken}`
+					"Authorization": `Bearer ${this.token}`
 				}
 			}
 

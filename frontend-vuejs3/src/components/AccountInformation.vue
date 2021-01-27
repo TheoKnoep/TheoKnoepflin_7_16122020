@@ -2,6 +2,7 @@
 	<div>
 		<div class="account-info" v-if="userId != '' && name != ''">
 			<div class="account-data" id="account-data" >
+				<pre>{{ token }}</pre>
 				<div class="profile-picture-container">
 					<img v-if="has_profile_picture" v-bind:src="profile_picture_url" v-bind:alt="alt_text" />
 				</div>
@@ -37,6 +38,7 @@ export default {
 		return{
 			userId : store.state.userId,
 			isAdmin : store.state.isAdmin,
+			token: store.state.token,
 			name: '', 
 			email: '', 
 			position: 'Pas de poste renseigné', 
@@ -61,13 +63,10 @@ export default {
 	},
 	methods: {
 		deleteAccount() {
-			alert("Êtes-vous sûr de vouloir supprimer le compte utilisateur : " + this.name + " // userId = " + this.userId);
-			const userToken = localStorage.getItem('token'); 
 			const options = {
 				"method": 'DELETE', 
 				"headers": {
-					"Content-Type": "multipart/form-data",
-					"Authorization": `Bearer ${userToken}`
+					"Authorization": `Bearer ${this.token}`
 				}
 			}
 			fetch("http://localhost:3000/users/" + this.userId, options) 

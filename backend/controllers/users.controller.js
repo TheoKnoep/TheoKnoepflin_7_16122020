@@ -37,7 +37,10 @@ exports.create = (req, res, next) => {
 					userId: data.id, 
 					isAdmin: data.is_admin, 
 					token: jwt.sign(
-						{ userId: data.id }, 
+						{
+							userId: data.id,
+							isAdmin: data.is_admin
+						}, 
 						'TOKEN_RANDOM_KEY', 
 						{expiresIn: '24h'}
 					
@@ -61,7 +64,10 @@ exports.login = (req, res, next) => {
 						userId: data.id, 
 						isAdmin: data.is_admin, 
 						token: jwt.sign(
-							{ userId: data.id }, 
+							{
+								userId: data.id,
+								isAdmin: data.is_admin
+							}, 
 							'TOKEN_RANDOM_KEY', 
 							{expiresIn: '24h'}
 						)
@@ -82,6 +88,22 @@ exports.findOne = (req, res, next) => {
 			} else {
 				res.status(500).send({
 					message: "Error retrieving Customer with id " + req.params.customerId
+				});
+			}
+		} else res.status(200).send(data);
+	}); 
+}; 
+
+exports.getUser = (req, res, next) => {
+	User.findById(req.userId, (err, data) => {
+		if (err) {
+			if (err.kind === "not_found") {
+				res.status(404).send({
+					message: `Not found user with id ${req.userId}.`
+				});
+			} else {
+				res.status(500).send({
+					message: "Error retrieving user with id " + req.userId
 				});
 			}
 		} else res.status(200).send(data);
@@ -145,7 +167,9 @@ exports.deleteOne = (req, res, next) => {
 			}
 		} else {
 			const imageToDelete = data.profile_picture.split("/images/")[1]; 
-			fs.unlink(`images/${imageToDelete}`, () => {}); 
+			if (imageToDelete != 'default_profil.jpg') {
+				fs.unlink(`images/${imageToDelete}`, () => {}); 
+			}
 
 			User.deleteOne(req.params.id, (err, data) => { 
 				if (err) {

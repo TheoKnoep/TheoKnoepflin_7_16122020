@@ -49,8 +49,7 @@ export default {
 			.then(response => response.json())
 				.then(response => {
 					console.log(response); 
-					localStorage.setItem('token', response.token); 
-					console.log(response.isAdmin === 1); 
+					this.$store.dispatch('get_user_token', response.token); 
 					this.$store.dispatch('get_user_id', response.userId); 
 					this.$store.dispatch('get_user_role', response.isAdmin); 
 					router.push({ path: 'account' }); 

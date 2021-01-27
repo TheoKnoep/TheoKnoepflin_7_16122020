@@ -1,12 +1,14 @@
 <template>
 	<div class="posts-list">
-		<pre>{{ postsData }}</pre>
+	<!-- 	<pre>{{ postsData }}</pre> -->
 		<p>User ID : {{ userId }} </p>
 		<p>isAdmin : {{ isAdmin }}</p>
 		<div class="articles-cards">
 
-			<SinglePost v-for="post in postsData" :key="post.id" 
-				title="post.title" /> 
+			<SinglePost v-for="(post, index) in postsData" 
+				:key="post.id" 
+				:post="post"
+				:index="index" /> 
 
 			<div class="post-card" v-for="(item, index) in postsData" v-bind:key="item.id">
 				<pre>Index de la table des posts : {{ index }} </pre>
