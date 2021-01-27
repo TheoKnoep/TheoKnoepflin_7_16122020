@@ -34,7 +34,6 @@ export default {
 					position: ''
 				}, 
 			userId: store.state.userId, 
-			token: store.state.token,
 			feedbackMessage: ''
 		}
 	}, 
@@ -60,7 +59,7 @@ export default {
 				"method": 'PUT', 
 				"body": editedUser, 
 				"headers": {
-					"Authorization": `Bearer ${this.token}`
+					"Authorization": `Bearer ${localStorage.getItem('token')}`
 				}
 			}
 

@@ -27,7 +27,7 @@ export default {
 			content: '', 
 			feedbackMessage: '', 
 			userId: store.state.userId, 
-			token: store.state.token
+			token: localStorage.getItem('token')
 		}
 	},
 	methods: {

@@ -8,7 +8,8 @@
 				:key="post.id" 
 				:post="post"
 				:index="index" /> 
-
+			
+			<!-- Ancien code de l'affichage des posts :
 			<div class="post-card" v-for="(item, index) in postsData" v-bind:key="item.id">
 				<pre>Index de la table des posts : {{ index }} </pre>
 				<h2>{{ item.title }}</h2>
@@ -41,6 +42,8 @@
 				</div>	
 				
 			</div>
+			-->
+
 		</div>
 		<router-link to="/posts/new" class="add-publication" title="Ajouter une nouvelle publication">
 			<span class="wrapper">

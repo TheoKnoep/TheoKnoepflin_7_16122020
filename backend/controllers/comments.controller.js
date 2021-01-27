@@ -7,10 +7,6 @@ exports.createOne = (req, res, next) => {
 		comment_author_id: req.body.author_id
 	}); 
 
-	console.log(comment); 
-
-	//comment.comment_date = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');     // delete the dot and everything after
-
 	Comment.createComment(comment, (err, data) => {
 		if (err) {
 			res.status(400).json({ error: err})

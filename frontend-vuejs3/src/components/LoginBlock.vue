@@ -48,7 +48,7 @@ export default {
 		fetch("http://localhost:3000/users/login", options) 
 			.then(response => response.json())
 				.then(response => {
-					this.$store.dispatch('get_user_token', response.token); 
+					localStorage.setItem('token', response.token); 
 					this.$store.dispatch('get_user_id', response.userId); 
 					this.$store.dispatch('get_user_role', response.isAdmin); 
 					router.push({ path: 'account' }); 

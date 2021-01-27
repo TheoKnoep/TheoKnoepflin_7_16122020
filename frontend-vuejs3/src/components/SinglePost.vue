@@ -1,6 +1,6 @@
 <template>
 	<article class="single-post-content">
-		<pre>Index = {{ index }}</pre>
+		<pre>Index = {{ index }} // Post id  == {{ post.id }}</pre>
 		<h2>{{ post.title }}</h2>
 		<p class="post-card__data">
 			<img class="author-picture" v-bind:src="post.profile_picture" width="40" height="40" />

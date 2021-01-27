@@ -38,13 +38,13 @@ export default {
 		return{
 			userId : store.state.userId,
 			isAdmin : store.state.isAdmin,
-			token: store.state.token,
 			name: '', 
 			email: '', 
 			position: 'Pas de poste renseigné', 
 			has_profile_picture: false,
 			profile_picture_url: '', 
-			alt_text: ''
+			alt_text: '', 
+			token: localStorage.getItem('token')
 		}
 	},
 	mounted() {
@@ -66,7 +66,7 @@ export default {
 			const options = {
 				"method": 'DELETE', 
 				"headers": {
-					"Authorization": `Bearer ${this.token}`
+					"Authorization": `Bearer ${localStorage.getItem('token')}`
 				}
 			}
 			fetch("http://localhost:3000/users/" + this.userId, options) 
