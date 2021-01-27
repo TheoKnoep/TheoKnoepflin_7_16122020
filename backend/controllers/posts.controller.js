@@ -56,8 +56,6 @@ exports.createOne = (req, res, next) => {
 		author_id: req.body.author_id
 	}); 
 
-	//post.publication_date = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, ''); // delete the dot and everything after
-
 	Post.createPost(post, (err, data) => {
 		res.status(200).json({ response: { ...data }}); 
 	}); 

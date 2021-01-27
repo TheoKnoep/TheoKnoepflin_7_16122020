@@ -18,16 +18,31 @@
 				:comment="comment" />
 		</div>
 
+		<button @click="togglCommentForm" >{{ buttonCommentWording }}</button> 
+		<AddCommentBlock v-if="displayCommentForm"
+			:userId="userId"
+			:postId="post.id" />
+
 	</article>
 </template>
 
 <script>
 import CommentsBlock from '@/components/CommentsBlock.vue' 
+import AddCommentBlock from '@/components/AddCommentBlock.vue'
+import store from '../store'
 
 export default {
 	name: 'SinglePost', 
 	components: {
-		CommentsBlock
+		CommentsBlock, 
+		AddCommentBlock
+	},
+	data() {
+		return {
+			userId: store.state.userId, 
+			displayCommentForm: false, 
+			buttonCommentWording: "Ajouter un commentaire"
+		}
 	},
 	props: {
 		post: {
@@ -36,12 +51,34 @@ export default {
 		index: {
 			type: Number
 		}
+	}, 
+	methods: {
+		togglCommentForm() {
+			if (this.displayCommentForm === false) {
+				this.displayCommentForm = true, 
+				this.buttonCommentWording = "Masquer"
+			} else {
+				this.displayCommentForm = false, 
+				this.buttonCommentWording = "Ajouter un commentaire"
+			}
+		}
 	}
 }
 </script>
 
 <style lang="scss">
 	.single-post-content {
-		border: solid red 1px; 
-	}
+		background-color: #eee; 
+		margin: 2em; padding: 2em; 
+		border-radius: 12px; 
+		box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+		&__data {
+			font-style: italic;
+			font-size: 16px;
+			padding: 1em 0; 
+		}
+		img {
+			max-width: 800px; 
+		}
+	} 
 </style>

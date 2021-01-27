@@ -9,7 +9,7 @@ exports.createOne = (req, res, next) => {
 
 	console.log(comment); 
 
-	comment.comment_date = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');     // delete the dot and everything after
+	//comment.comment_date = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');     // delete the dot and everything after
 
 	Comment.createComment(comment, (err, data) => {
 		if (err) {

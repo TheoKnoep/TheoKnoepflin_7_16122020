@@ -4,7 +4,6 @@
 		<p>User ID : {{ userId }} </p>
 		<p>isAdmin : {{ isAdmin }}</p>
 		<div class="articles-cards">
-
 			<SinglePost v-for="(post, index) in postsData" 
 				:key="post.id" 
 				:post="post"
@@ -104,21 +103,6 @@ export default {
 		text-align: left;
 		width: 80%; 
 		margin: auto; 
-	}
-
-	.post-card {
-		background-color: #eee; 
-		margin: 2em; padding: 2em; 
-		border-radius: 12px; 
-		box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-		&__data {
-			font-style: italic;
-			font-size: 16px;
-			padding: 1em 0; 
-		}
-		img {
-			max-width: 800px; 
-		}
 	}
 
 	.comments-section {
