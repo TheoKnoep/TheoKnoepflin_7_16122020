@@ -8,14 +8,27 @@
 		</p>
 		<img v-bind:src="post.media" />
 		<p>{{ post.content }}</p>
-		<pre v-for="item in post.comments" :key="item.index">{{ item.content }}</pre>
+
+		<div class="comments-wrapper" v-if="post.comments.length" >
+			<hr />
+			<h3>Commentaires</h3>
+			<CommentsBlock 
+				v-for="comment in post.comments" 
+				:key="comment.index"
+				:comment="comment" />
+		</div>
 
 	</article>
 </template>
 
 <script>
+import CommentsBlock from '@/components/CommentsBlock.vue' 
+
 export default {
 	name: 'SinglePost', 
+	components: {
+		CommentsBlock
+	},
 	props: {
 		post: {
 			type: Object
