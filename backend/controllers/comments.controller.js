@@ -11,7 +11,12 @@ exports.createOne = (req, res, next) => {
 		if (err) {
 			res.status(400).json({ error: err})
 		} else {
-			res.status(200).json({ response: { ...data }}); 
+			Comment.getOneCommentById(data.id, (err, data) => {
+				if (err) {
+					res.status(400).json({ error: err})
+				} else 
+				res.status(200).json({ response: { ...data }}); 
+			})
 		}
 	});
 }

@@ -4,9 +4,10 @@
 			<input type="hidden" name="user_id" :value="userId" />
 			<input type="hidden" name="post_id" :value="postId" />
 			<label for="content">Ajouter un commentaire : </label>
-				<textarea name="content" ></textarea>
+				<textarea name="content" placeholder="Tapez votre commentaire" ></textarea>
 			<input type="submit" value="Envoyer" />
 		</form>
+		
 	</div>	
 </template>
 
@@ -25,18 +26,12 @@ export default {
 		addComment(e) {
 			e.preventDefault(); 
 			let commentForm = document.getElementById('comment_form_' + this.postId); 
-			console.log(commentForm); 
-			for (let i = 0; i < commentForm.length ; i++) {
-				console.log(i); 
-				console.log(commentForm[i].value);
-			}
+
 			let requestBody = JSON.stringify({
 				"author_id": commentForm[0].value, 
 				"post_id": commentForm[1].value, 
 				"content": commentForm[2].value
 			}); 
-
-			console.log(requestBody); 
 			
 			const options = {
 				"method": 'POST', 
@@ -50,8 +45,18 @@ export default {
 			fetch("http://localhost:3000/comments", options)
 				.then(response => {
 					response.json()
-						.then(res => console.log(res))})
+						.then(res => { 
+							console.log(res[0]); 
+							this.addImmediatlyNewComment(); 
+							this.hideCommentForm(); 
+						})})
 				.catch(err => { console.error(err); }); 
+		}, 
+		hideCommentForm() {
+			this.$emit('hide-comment-form')
+		}, 
+		addImmediatlyNewComment() {
+			console.log("coucou"); 
 		}
 	}
 }
@@ -61,6 +66,13 @@ export default {
 
 	textarea {
 		width: 100%; 
+		font-family: 'Trebuchet', sans-serif; 
+		border-radius: 4px; 
+		border: none;
+		padding: .4em 1em;
+		&:focus {
+			outline: none; 
+		}
 	}
 
 </style>

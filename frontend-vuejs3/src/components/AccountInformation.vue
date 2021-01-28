@@ -40,7 +40,7 @@ export default {
 			isAdmin : store.state.isAdmin,
 			name: '', 
 			email: '', 
-			position: 'Pas de poste renseigné', 
+			position: 'pas de poste renseigné', 
 			has_profile_picture: false,
 			profile_picture_url: '', 
 			alt_text: '', 
