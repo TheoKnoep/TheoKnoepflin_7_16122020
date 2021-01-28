@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="comments-section" >
+		<div class="single-comment" >
 			<img v-bind:src="comment.profile_picture" width="25" height="25" />
 			<p>{{ comment.comment_date }}</p>
 			<p><strong>{{ comment.name }}</strong></p>
@@ -22,7 +22,7 @@ export default {
 </script>
 
 <style lang="scss">
-	.comments-section {
+	.single-comment {
 		margin-left: 4em; 
 		padding: 1em; 
 	}

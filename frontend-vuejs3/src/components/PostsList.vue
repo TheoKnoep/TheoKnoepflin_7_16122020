@@ -8,42 +8,6 @@
 				:key="post.id" 
 				:post="post"
 				:index="index" /> 
-			
-			<!-- Ancien code de l'affichage des posts :
-			<div class="post-card" v-for="(item, index) in postsData" v-bind:key="item.id">
-				<pre>Index de la table des posts : {{ index }} </pre>
-				<h2>{{ item.title }}</h2>
-				<p class="post-card__data">
-					<img class="author-picture" v-bind:src="item.profile_picture" width="40" height="40" />
-					Publié par <strong>{{ item.name}}</strong>, le {{ item.publication_local_date }} : 
-				</p>
-				<img v-bind:src="item.media" />
-				<p>{{ item.content }}</p>
-
-				<div class="comments-section" v-if="item.comments.length">
-					<hr />
-					<h3>Commentaires :</h3>
-					<div class="single-comment" v-for="comment in item.comments" v-bind:key="comment.index"> 
-						<img v-bind:src="comment.profile_picture" width="25" height="25" />
-						<p>{{ comment.comment_date }}</p>
-						<p><strong>{{ comment.name }}</strong></p>
-						<p class="single-comment__content">{{ comment.content }}</p>
-					</div> 
-				</div>
-				<div class="add-comment" > 
-					<button >Ajouter un commentaire</button> 
-					<form method="post" @submit="addComment" v-bind:id="index">
-						<input type="hidden" v-model="userId" />
-						<input type="hidden" name="post_id" v-model="item.id" />
-						<label for="content">Ajouter un commentaire : </label>
-							<textarea name="content" v-model="content"></textarea>
-						<input type="submit" value="Envoyer" />
-					</form>
-				</div>	
-				
-			</div>
-			-->
-
 		</div>
 		<router-link to="/posts/new" class="add-publication" title="Ajouter une nouvelle publication">
 			<span class="wrapper">

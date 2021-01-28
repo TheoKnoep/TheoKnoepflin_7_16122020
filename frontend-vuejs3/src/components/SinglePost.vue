@@ -8,7 +8,7 @@
 		<img v-bind:src="post.media" />
 		<p>{{ post.content }}</p>
 
-		<div class="comments-wrapper" v-if="post.comments.length" >
+		<div class="comments-wrapper" v-if="numberOfComments" :id="'comments-wrapper#' + post.id" >
 			<hr />
 			<h3>Commentaires</h3>
 			<CommentsBlock 
@@ -21,7 +21,8 @@
 		<AddCommentBlock v-if="displayCommentForm"
 			:userId="userId"
 			:postId="post.id" 
-			@hide-comment-form="togglCommentForm" />
+			@hide-comment-form="togglCommentForm" 
+			@increment-number-of-comments="incrementNumberOfComments"/>
 
 	</article>
 </template>
@@ -41,7 +42,8 @@ export default {
 		return {
 			userId: store.state.userId, 
 			displayCommentForm: false, 
-			buttonCommentWording: "Ajouter un commentaire"
+			buttonCommentWording: "Ajouter un commentaire", 
+			numberOfComments: this.post.comments.length
 		}
 	},
 	props: {
@@ -61,6 +63,9 @@ export default {
 				this.displayCommentForm = false, 
 				this.buttonCommentWording = "Ajouter un commentaire"
 			}
+		}, 
+		incrementNumberOfComments() {
+			this.numberOfComments ++ ; 
 		}
 	}
 }

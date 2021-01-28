@@ -63,19 +63,21 @@ export default {
 	},
 	methods: {
 		deleteAccount() {
-			const options = {
-				"method": 'DELETE', 
-				"headers": {
-					"Authorization": `Bearer ${localStorage.getItem('token')}`
+			if (window.confirm("Êtes vous sûr de vouloir supprimer le compte ?")) { 
+				const options = {
+					"method": 'DELETE', 
+					"headers": {
+						"Authorization": `Bearer ${localStorage.getItem('token')}`
+					}
 				}
+				fetch("http://localhost:3000/users/" + this.userId, options) 
+					.then(response => response.json())
+						.then(response => {
+							console.log(response); 
+							router.push({ path: '/' });
+						})
+					.catch(error => console.log(error)); 
 			}
-			fetch("http://localhost:3000/users/" + this.userId, options) 
-				.then(response => response.json())
-					.then(response => {
-						console.log(response); 
-						router.push({ path: '/' });
-					})
-				.catch(error => console.log(error)); 
 		}
 	}
 }
