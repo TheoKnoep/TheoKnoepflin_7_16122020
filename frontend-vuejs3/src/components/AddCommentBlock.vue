@@ -43,20 +43,20 @@ export default {
 			}
  
 			fetch("http://localhost:3000/comments", options)
-				.then(response => {
+				.then(response => { 
 					response.json()
-						.then(res => { 
-							console.log(res[0]); 
-							this.addImmediatlyNewComment(); 
-							this.hideCommentForm(); 
-						})})
+						.then(message => {
+							this.addImmediatlyNewComment(message); 
+							this.hideCommentForm();
+						})
+				})
 				.catch(err => { console.error(err); }); 
 		}, 
+		addImmediatlyNewComment(newComment) {
+			console.log(newComment); 
+		},
 		hideCommentForm() {
 			this.$emit('hide-comment-form')
-		}, 
-		addImmediatlyNewComment() {
-			console.log("coucou"); 
 		}
 	}
 }
