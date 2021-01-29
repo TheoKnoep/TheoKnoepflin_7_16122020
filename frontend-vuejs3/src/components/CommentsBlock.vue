@@ -1,13 +1,10 @@
 <template>
-	<div>
 		<div class="single-comment" >
 			<img v-bind:src="comment.profile_picture" width="25" height="25" />
 			<p>{{ comment.comment_date }}</p>
 			<p><strong>{{ comment.name }}</strong></p>
 			<p class="single-comment__content">{{ comment.content }}</p>
 	</div> 
-
-	</div>
 </template>
 
 <script>

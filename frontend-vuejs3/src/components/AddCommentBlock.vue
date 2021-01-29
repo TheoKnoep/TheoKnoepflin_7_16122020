@@ -56,13 +56,11 @@ export default {
 			this.$emit('increment-number-of-comments'); 
 			let newCommentHtml = document.createElement("div"); 
 			let cleanDate = new Date(newComment.comment_date); 
-			newCommentHtml.innerHTML = `<div>
-											<div class="single-comment">
-												<img src="${newComment.profile_picture}" width="25" height="25">
-												<p>${cleanDate.toLocaleString()}</p>
-												<p><strong>${newComment.name}</strong></p>
-												<p class="single-comment__content">${newComment.content}</p>
-											</div>
+			newCommentHtml.innerHTML = `<div class="single-comment">
+											<img src="${newComment.profile_picture}" width="25" height="25">
+											<p>${cleanDate.toLocaleString()}</p>
+											<p><strong>${newComment.name}</strong></p>
+											<p class="single-comment__content">${newComment.content}</p>
 										</div>`
 			console.log(newCommentHtml); 
 			let commentsSection = document.getElementById('comments-wrapper#' + this.postId); 
