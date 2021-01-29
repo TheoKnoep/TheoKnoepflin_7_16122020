@@ -55,13 +55,12 @@ export default {
 		addImmediatlyNewComment(newComment) {
 			this.$emit('increment-number-of-comments'); 
 			let newCommentHtml = document.createElement("div"); 
+			newCommentHtml.setAttribute('class', 'single-comment')
 			let cleanDate = new Date(newComment.comment_date); 
-			newCommentHtml.innerHTML = `<div class="single-comment">
-											<img src="${newComment.profile_picture}" width="25" height="25">
-											<p>${cleanDate.toLocaleString()}</p>
-											<p><strong>${newComment.name}</strong></p>
-											<p class="single-comment__content">${newComment.content}</p>
-										</div>`
+			newCommentHtml.innerHTML = `<img src="${newComment.profile_picture}" width="25" height="25">
+										<p>${cleanDate.toLocaleString()}</p>
+										<p><strong>${newComment.name}</strong></p>
+										<p class="single-comment__content">${newComment.content}</p>`
 			console.log(newCommentHtml); 
 			let commentsSection = document.getElementById('comments-wrapper#' + this.postId); 
 			commentsSection.appendChild(newCommentHtml); 
