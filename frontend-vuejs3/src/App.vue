@@ -1,9 +1,4 @@
 <template>
-  <pre v-if="token">
-    {{ token }}
-    {{ userId }}
-    {{ isAdmin }}
-  </pre>
   <router-view />
 </template>
 
