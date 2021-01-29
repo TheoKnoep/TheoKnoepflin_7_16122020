@@ -39,9 +39,9 @@ export default {
 		} 
 
 		const options = {
-			method: 'POST', 
-			body: JSON.stringify(loginRequest),
-			headers: {
+			"method": 'POST', 
+			"body": JSON.stringify(loginRequest),
+			"headers": {
 				"Content-type": "application/json; charset=UTF-8"
 			}
 		}
