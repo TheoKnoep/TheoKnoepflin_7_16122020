@@ -1,9 +1,10 @@
 <template>
 	<article class="single-post-content">
+		<pre>{{ post }}</pre>
 		<h2>{{ post.title }}</h2>
 		<p class="post-card__data">
 			<img class="author-picture" v-bind:src="post.profile_picture" width="40" height="40" />
-			Publié par <strong>{{ post.name}}</strong>, le {{ post.publication_local_date }} : 
+			Publié par <strong><router-link :to="'/user/' + post.author_id" >{{ post.name}}</router-link></strong>, le {{ post.publication_local_date }} : 
 		</p>
 		<img v-bind:src="post.media" />
 		<p>{{ post.content }}</p>
