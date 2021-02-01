@@ -31,6 +31,11 @@ const routes = [
     path: '/posts/new', 
     name: 'Créer une nouvelle publication', 
     component: () => import('../views/Createpost.vue')
+  }, 
+  {
+    path:'/user/:id', 
+    name: 'Infos utilisateur', 
+    component: () => import('../views/UserInfos.vue')
   }
 ]
 

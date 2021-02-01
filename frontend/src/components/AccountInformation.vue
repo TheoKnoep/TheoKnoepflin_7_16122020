@@ -10,10 +10,10 @@
 					<li>Nom : {{ name }}</li>
 					<li>Adresse email : {{ email }}</li>
 					<li>Poste : {{ position }}</li>
-					<li v-if="isAdmin">ADMINISTRATEUR</li>
+					<li v-if="currentUserIsAdmin">ADMINISTRATEUR</li>
 				</ul>
 			</div>
-			<div class="edit-account-button"> <!-- à n'afficher que si le compte consulté est celui de l'utilisateur ou un admin -->
+			<div class="edit-account-button" v-if="has_buttons_access"> <!-- à n'afficher que si le compte consulté est celui de l'utilisateur ou un admin -->
 				<router-link to="/account/edit">Modifier les informations du compte</router-link>
 				<button @click="deleteAccount">Supprimer le compte</button>
 			</div>
@@ -34,6 +34,11 @@ import store from '../store'
 
 export default {
 	name: "AccountInformation", 
+	props: {
+		id: {
+			type: Number
+		}
+	},
 	data ()  {
 		return{
 			userId : store.state.userId,
@@ -44,21 +49,35 @@ export default {
 			has_profile_picture: false,
 			profile_picture_url: '', 
 			alt_text: '', 
-			token: localStorage.getItem('token')
+			token: localStorage.getItem('token'), 
+			has_buttons_access: false, 
+			currentUserIsAdmin: false
 		}
 	},
 	mounted() {
 		axios
-			.get("http://localhost:3000/users/" + this.userId)
+			.get("http://localhost:3000/users/" + this.id)
 			.then(response => {
 				if (response.data.profile_picture != '') {
 					this.has_profile_picture = true; 
 					this.profile_picture_url = response.data.profile_picture;
 				}
+				console.log(response.data); 
 				if (response.data.position != '' && response.data.position != null) { this.position = response.data.position}
 				this.name = response.data.name;
 				this.email = response.data.email;
 				this.alt_text = 'Photo de profil de ' + response.data.name;
+				if (this.isAdmin === true || response.data.id === this.userId) {
+					console.log("Oui, les droits !"); 
+					this.has_buttons_access = true
+				} else {
+					console.log("Non, pas le droit de voir les boutons :("); 
+				}
+				console.log(response.data.is_admin);
+				if (response.data.is_admin) {
+					console.log(response.data.is_admin);
+					this.currentUserIsAdmin = true
+				}
 			})
 	},
 	methods: {
