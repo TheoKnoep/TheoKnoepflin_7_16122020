@@ -1,18 +1,18 @@
 <template>
-  <section>
+  <section class="login-section card-style">
     <div class="form-container">
-      <h2>Connexion :</h2>
-      <form method="post" id="form-login" @submit="loginUser" >
+		<h2>Connexion :</h2> 
+		<form method="post" id="form-login" @submit="loginUser" >
         <p>
-			<label for="email">Email</label> : <input type="email" name="email" v-model="email" />
+			<label for="email">Email</label> : <br/> <input class="input-txt" type="email" name="email" v-model="email" />
         </p>
         <p>
-			<label for="password">Mot de passe</label> : <input type="password" name="password" v-model="password" />
+			<label for="password">Mot de passe</label> : <br/> <input class="input-txt" type="password" name="password" v-model="password" />
         </p>
-        <p><input type="submit" value="Connexion" /></p>
+        <p class="submit-login"><input type="submit" value="Connexion" class="submit-login__btn"/></p>
       </form>
     </div>
-    <p>
+    <p class="signup-link">
       Vous ne disposez pas encore de compte ?<br /><router-link to="/signup">Créer un compte</router-link
       >
     </p>
@@ -58,3 +58,70 @@ export default {
 	},
 };
 </script>
+
+
+<style scoped lang="scss">
+
+	.login-section {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		input {
+			margin: 12px 0; 
+		}
+	}
+
+.form-container {
+		text-align: left; 
+		display: flex; 
+		flex-direction: column;
+		justify-content: center;
+		label {
+			font-variant: small-caps; 
+		}
+		input {
+			width: 100%;
+			margin: 12px 0; 
+		}
+		.input-txt {
+			border-radius: 50px;
+			border: none;
+			background-color: rgba(0,0,0,0.05);
+			height: 32px;
+			width: 85%; 
+			margin-left: 5%; 
+			margin-bottom: 24px; 
+			padding-left: 1em; 
+		}
+		textarea {
+			width: 100%; 
+			height: 132px; 
+			border-radius: 32px;
+			border: none;
+			background-color: rgba(0,0,0,0.05);
+			box-sizing: border-box; 
+		}
+		.submit-login {
+			display: flex;
+			justify-content: center;
+			.submit-login__btn {
+			width: 180px;
+			height: 38px;
+			border-radius: 50px;
+			border: none;
+			font-size: 20px;
+			margin-top: 12px;
+			cursor: pointer;
+			background-color: teal; 
+			color: white; 
+			}
+		}
+	}
+
+	.signup-link {
+		font-style: italic; 
+		font-size: 0.9em; 
+		margin-top: 2em; 
+	}
+
+</style>

@@ -1,19 +1,18 @@
 <template>
-	<div class="form-container">
-		<h2>Créer un compte :</h2>
+	<div class="form-container card-style">
 		<form id="form-signup" method="post" enctype="multipart/form-data" @submit="signupUser" >
-			<p><label for="name">Nom</label> : 
-				<input type="text" name="name" autofocus required v-model="name"/></p>
-			<p><label for="email">Email</label> : 
-				<input type="email" name="email" required v-model="email" /></p>
-			<p><label for="password">Mot de passe</label> : 
-				<input type="password" name="password" required v-model="password" /></p>
-			<p><label for="position">Poste occupé</label> : 
-				<input type="text" name="position" v-model="position"/></p>
+			<p><label for="name">Nom</label> : <br/>
+				<input class="input-txt" type="text" name="name" autofocus required v-model="name"/></p>
+			<p><label for="email">Email</label> : <br/>
+				<input class="input-txt" type="email" name="email" required v-model="email" /></p>
+			<p><label for="password">Mot de passe</label> : <br/>
+				<input class="input-txt" type="password" name="password" required v-model="password" /></p>
+			<p><label for="position">Poste occupé</label> : <br/>
+				<input class="input-txt" type="text" name="position" v-model="position"/></p>
 			<p><label for="image">Choisissez une photo de profil</label> : 
 				<input type="file" name="image" /></p>
 			<p>
-				<input type="submit" value="Création du compte" id="confirm-signup"/></p>
+				<input type="submit" value="Création du compte" id="confirm-signup" class="confirm-signup-btn" /></p>
 		</form>
 		<p class="feedback-message">{{ feedbackMessage }}</p>
 	</div>
@@ -61,4 +60,46 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.form-container {
+		text-align: left; 
+		display: flex; 
+		flex-direction: column;
+		justify-content: center;
+		label {
+			font-variant: small-caps; 
+		}
+		input {
+			width: 100%;
+			margin: 12px 0; 
+		}
+		.input-txt {
+			border-radius: 50px;
+			border: none;
+			background-color: rgba(0,0,0,0.05);
+			height: 32px;
+			width: 85%; 
+			margin-left: 5%; 
+			margin-bottom: 24px; 
+			padding-left: 1em; 
+		}
+		textarea {
+			width: 100%; 
+			height: 132px; 
+			border-radius: 32px;
+			border: none;
+			background-color: rgba(0,0,0,0.05);
+			box-sizing: border-box; 
+		}
+		.confirm-signup-btn {
+			width: 100%;
+			height: 38px;
+			border-radius: 50px;
+			border: none;
+			font-size: 20px;
+			margin-top: 12px;
+			cursor: pointer;
+			background-color: teal; 
+			color: white; 
+		}
+	}
 </style>

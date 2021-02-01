@@ -1,8 +1,5 @@
 <template>
 	<div class="posts-list">
-	<!-- 	<pre>{{ postsData }}</pre> -->
-		<p>User ID : {{ userId }} </p>
-		<p>isAdmin : {{ isAdmin }}</p>
 		<div class="articles-cards">
 			<SinglePost v-for="(post, index) in postsData" 
 				:key="post.id" 

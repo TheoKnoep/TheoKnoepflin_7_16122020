@@ -1,21 +1,20 @@
 <template>
 	<div>
-		<div class="account-info" v-if="userId != '' && name != ''">
+		<div class="account-info card-style" v-if="userId != '' && name != ''">
 			<div class="account-data" id="account-data" >
-				<pre>{{ token }}</pre>
 				<div class="profile-picture-container">
 					<img v-if="has_profile_picture" v-bind:src="profile_picture_url" v-bind:alt="alt_text" />
 				</div>
-				<ul>
-					<li>Nom : {{ name }}</li>
-					<li>Adresse email : {{ email }}</li>
-					<li>Poste : {{ position }}</li>
+				<ul class="account-data__text">
+					<li>Nom : <strong>{{ name }}</strong></li>
+					<li>Adresse email : <strong><a :href="'mailto:' + email" >{{ email }}</a></strong></li>
+					<li>Poste : <strong>{{ position }}</strong></li>
 					<li v-if="currentUserIsAdmin">ADMINISTRATEUR</li>
 				</ul>
 			</div>
 			<div class="edit-account-button" v-if="has_buttons_access"> <!-- à n'afficher que si le compte consulté est celui de l'utilisateur ou un admin -->
-				<router-link to="/account/edit">Modifier les informations du compte</router-link>
-				<button @click="deleteAccount">Supprimer le compte</button>
+				<router-link to="/account/edit" class="edit-account-button__btn edit-account-button__btn--main">Modifier les informations du compte</router-link>
+				<button @click="deleteAccount" class="edit-account-button__btn edit-account-button__btn--second">Supprimer le compte</button>
 			</div>
 		</div>
 		<div v-else>
@@ -62,20 +61,14 @@ export default {
 					this.has_profile_picture = true; 
 					this.profile_picture_url = response.data.profile_picture;
 				}
-				console.log(response.data); 
 				if (response.data.position != '' && response.data.position != null) { this.position = response.data.position}
 				this.name = response.data.name;
 				this.email = response.data.email;
 				this.alt_text = 'Photo de profil de ' + response.data.name;
 				if (this.isAdmin === true || response.data.id === this.userId) {
-					console.log("Oui, les droits !"); 
 					this.has_buttons_access = true
-				} else {
-					console.log("Non, pas le droit de voir les boutons :("); 
-				}
-				console.log(response.data.is_admin);
+				} 
 				if (response.data.is_admin) {
-					console.log(response.data.is_admin);
 					this.currentUserIsAdmin = true
 				}
 			})
@@ -101,3 +94,72 @@ export default {
 	}
 }
 </script>
+
+<style scoped lang="scss">
+
+	.account-info {
+		display: flex; 
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	.account-data {
+		display: flex; 
+		justify-content: center;
+		align-items: center;
+		.profile-picture-container {
+			width: 200px; 
+			height: 200px;
+			border-radius: 1000px;
+			overflow: hidden;
+			display: flex; 
+			justify-content: center;
+			align-content: center;
+			img {
+				height: 100%;
+			}
+		}
+		&__text {
+			text-align: left;
+			margin-left: 1em; 
+			li {
+				list-style: none; 
+				margin: 1em 0; 
+			}
+		} 
+	}
+
+	.edit-account-button {
+		display: flex; 
+		align-items: center;
+		flex-direction: column;
+		margin-top: 48px; 
+		&__btn {
+			width: 100%;
+			height: 38px;
+			border-radius: 50px;
+			border: none;
+			font-size: 18px;
+			margin-top: 12px;
+			cursor: pointer;
+			&:hover {
+				box-shadow: 2px 2px 2px rgba(0,0,0,0.25); 
+			}
+			&--main {
+				background-color: teal; 
+				color: white; 
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			&--second {
+				font-style: italic; 
+				color: #b5b5b5; 
+			}
+		}
+	}
+
+	
+
+
+</style>

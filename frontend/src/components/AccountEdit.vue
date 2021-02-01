@@ -1,17 +1,16 @@
 <template>
-	<div class="form-container">
-		<h2>Mettre à jour les informations de votre compte : USERID = {{ userId }}</h2>
+	<div class="form-container card-style">
 		<form id="form-edit" method="post" enctype="multipart/form-data" @submit="editUser" >
-			<p><label for="name">Nom</label> : 
-				<input type="text" name="name" autofocus v-model="userInfos.name" /></p>
-			<p><label for="email">Email</label> : 
-				<input type="email" name="email" v-model="userInfos.email" /></p>
-			<p><label for="position">Poste occupé</label> : 
-				<input type="text" name="position" v-model="userInfos.position"/></p>
+			<p><label for="name">Nom</label> : <br/>
+				<input class="input-txt" type="text" name="name" autofocus v-model="userInfos.name" /></p>
+			<p><label for="email">Email</label> : <br/>
+				<input class="input-txt" type="email" name="email" v-model="userInfos.email" /></p>
+			<p><label for="position">Poste occupé</label> : <br/>
+				<input class="input-txt" type="text" name="position" v-model="userInfos.position"/></p>
 			<p><label for="image">Choisissez une nouvelle photo de profil</label> : 
 				<input type="file" name="image" /></p>
 			<p>
-				<input type="submit" value="Valider les changements" id="confirm-edit"/></p>
+				<input type="submit" value="Valider les changements" id="confirm-edit" class="submit-form-edit-btn"/></p>
 		</form>
 		<p class="feedback-message" v-if="feedbackMessage">{{ feedbackMessage }}</p>
 	</div>
@@ -75,7 +74,46 @@ export default {
 </script>
 
 <style lang="scss">
-	pre {
+	.form-container {
 		text-align: left; 
+		display: flex; 
+		flex-direction: column;
+		justify-content: center;
+		label {
+			font-variant: small-caps; 
+		}
+		input {
+			width: 100%;
+			margin: 12px 0; 
+		}
+		.input-txt {
+			border-radius: 50px;
+			border: none;
+			background-color: rgba(0,0,0,0.05);
+			height: 32px;
+			width: 85%; 
+			margin-left: 5%; 
+			margin-bottom: 24px; 
+			padding-left: 1em; 
+		}
+		textarea {
+			width: 100%; 
+			height: 132px; 
+			border-radius: 32px;
+			border: none;
+			background-color: rgba(0,0,0,0.05);
+			box-sizing: border-box; 
+		}
+		.submit-form-edit-btn {
+			width: 100%;
+			height: 38px;
+			border-radius: 50px;
+			border: none;
+			font-size: 20px;
+			margin-top: 12px;
+			cursor: pointer;
+			background-color: teal; 
+			color: white; 
+		}
 	}
 </style>

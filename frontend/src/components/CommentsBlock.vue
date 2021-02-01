@@ -1,9 +1,10 @@
 <template>
 		<div class="single-comment" >
-			<pre>{{ comment }}</pre>
-			<img v-bind:src="comment.profile_picture" width="25" height="25" />
-			<p>{{ comment.comment_date }}</p>
-			<p><strong><router-link :to="'/user/' + comment.comment_author_id" >{{ comment.name }}</router-link></strong></p>
+			<div class="identity-block">
+				<img v-bind:src="comment.profile_picture" width="25" height="25" />
+				<p><strong><router-link :to="'/user/' + comment.comment_author_id" >{{ comment.name }}</router-link></strong></p>
+			</div>
+			<p class="comment-date">{{ comment.comment_date }}</p>
 			<p class="single-comment__content">{{ comment.content }}</p>
 	</div> 
 </template>
@@ -22,6 +23,21 @@ export default {
 <style lang="scss">
 	.single-comment {
 		margin-left: 4em; 
-		padding: 1em; 
+		margin-bottom: 24px; 
+		padding-left: 12px; 
+		border-left: solid 2px rgba(0,0,0,0.1); 
+		.identity-block {
+			display: flex; 
+			align-items: flex-end;
+			p {
+				margin-left: 8px; 
+			}
+		}
+		.comment-date {
+			font-style: italic; 
+			font-size: 0.9em; 
+			margin-top: 4px; 
+			margin-bottom: 8px; 
+		}
 	}
 </style>

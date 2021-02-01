@@ -5,7 +5,7 @@
 			<input type="hidden" name="post_id" :value="postId" />
 			<label for="content">Ajouter un commentaire : </label>
 				<textarea name="content" placeholder="Tapez votre commentaire" ></textarea>
-			<input type="submit" value="Envoyer" />
+			<input type="submit" value="Envoyer" class="add-comment-submit" />
 		</form>
 		
 	</div>	
@@ -57,9 +57,10 @@ export default {
 			let newCommentHtml = document.createElement("div"); 
 			newCommentHtml.setAttribute('class', 'single-comment')
 			let cleanDate = new Date(newComment.comment_date); 
+			console.log(newComment); 
 			newCommentHtml.innerHTML = `<img src="${newComment.profile_picture}" width="25" height="25">
 										<p>${cleanDate.toLocaleString()}</p>
-										<p><strong>${newComment.name}</strong></p>
+										<p><strong><a href="./#/user/${newComment.comment_author_id}">${newComment.name}</a></strong></p>
 										<p class="single-comment__content">${newComment.content}</p>`
 			console.log(newCommentHtml); 
 			let commentsSection = document.getElementById('comments-wrapper#' + this.postId); 
@@ -72,16 +73,36 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 
 	textarea {
 		width: 100%; 
-		font-family: 'Trebuchet', sans-serif; 
-		border-radius: 4px; 
+		border-radius: 32px;
 		border: none;
-		padding: .4em 1em;
+		background-color: rgba(0,0,0,0.05);
+		box-sizing: border-box; 
+		font-family: 'Trebuchet', sans-serif; 
+		padding: 1em; 
+		margin: 2px; 
 		&:focus {
 			outline: none; 
+			border: solid 2px teal; 
+			margin: 0; 
+		}
+	}
+
+	.add-comment-submit {
+		width: 180px; 
+		height: 38px;
+		border-radius: 50px;
+		border: none;
+		font-weight: bold;
+		color: white; 
+		background-color: teal; 
+		margin-top: 12px;
+		cursor: pointer;
+		&:hover {
+			box-shadow: 2px 2px 2px rgba(0,0,0,0.25); 
 		}
 	}
 

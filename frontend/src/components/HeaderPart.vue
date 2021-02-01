@@ -27,7 +27,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #eee; 
+  box-shadow: 1px 1px 16px rgba(0, 0, 0, 0.1);
 }
 img {
   width: 200px;

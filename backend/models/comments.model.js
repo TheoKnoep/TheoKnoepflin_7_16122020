@@ -19,7 +19,7 @@ Comment.createComment = (newComment, result) => {
 }; 
 
 Comment.getOneCommentById = (commentId, result) => {
-	sql.query(`SELECT comments.content, comments.comment_date, users.name, users.profile_picture
+	sql.query(`SELECT comments.content, comments.comment_date, comments.comment_author_id, users.name, users.profile_picture
 					FROM comments
 					INNER JOIN users ON users.id = comments.comment_author_id
 					WHERE comments.id = ${commentId}`, 

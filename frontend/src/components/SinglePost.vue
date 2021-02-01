@@ -1,24 +1,23 @@
 <template>
-	<article class="single-post-content">
-		<pre>{{ post }}</pre>
+	<article class="single-post-content card-style">
 		<h2>{{ post.title }}</h2>
 		<p class="post-card__data">
 			<img class="author-picture" v-bind:src="post.profile_picture" width="40" height="40" />
 			Publié par <strong><router-link :to="'/user/' + post.author_id" >{{ post.name}}</router-link></strong>, le {{ post.publication_local_date }} : 
 		</p>
-		<img v-bind:src="post.media" />
-		<p>{{ post.content }}</p>
+		<img v-bind:src="post.media" class="post-image" />
+		<p class="text-content">{{ post.content }}</p>
 
 		<div class="comments-wrapper" v-if="numberOfComments" :id="'comments-wrapper#' + post.id" >
 			<hr />
-			<h3>Commentaires</h3>
+			<h3>Commentaires : </h3>
 			<CommentsBlock 
 				v-for="comment in post.comments" 
 				:key="comment.index"
 				:comment="comment" />
 		</div>
 
-		<button @click="togglCommentForm" >{{ buttonCommentWording }}</button> 
+		<button @click="togglCommentForm" class="add-comment-btn">{{ buttonCommentWording }}</button> 
 		<AddCommentBlock v-if="displayCommentForm"
 			:userId="userId"
 			:postId="post.id" 
@@ -74,17 +73,40 @@ export default {
 
 <style lang="scss">
 	.single-post-content {
-		background-color: #eee; 
 		margin: 2em; padding: 2em; 
 		border-radius: 12px; 
-		box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
 		&__data {
 			font-style: italic;
 			font-size: 16px;
 			padding: 1em 0; 
 		}
-		img {
+		.post-image {
+			width: 100%; 
 			max-width: 800px; 
+			border-radius: 32px; 
+			box-shadow: 0 2px 2px rgba(0,0,0,0.25); 
+		}
+		.text-content {
+			border-radius: 32px;
+			background-color: rgba(0, 0, 0, 0.05);
+			padding: 90px 1em 1em 1em;
+			position: relative;
+			top: -70px;
+			z-index: -1;
+			margin-bottom: -32px; 
 		}
 	} 
+	.comments-wrapper {
+		margin-top: 32px;
+	}
+	.add-comment-btn {
+		border-radius: 50px;
+		padding: 1em 2em;
+		border: solid 1px rgba(0,0,0,0.1);
+		color: gray; 
+		background-color: white;
+		cursor: pointer;
+		font-style: italic;
+		margin-top: 32px; 
+	}
 </style>
