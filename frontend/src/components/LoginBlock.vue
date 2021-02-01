@@ -38,6 +38,8 @@ export default {
 			"password": this.password
 		} 
 
+		console.log(loginRequest); 
+
 		const options = {
 			"method": 'POST', 
 			"body": JSON.stringify(loginRequest),
@@ -48,6 +50,7 @@ export default {
 		fetch("http://localhost:3000/users/login", options) 
 			.then(response => response.json())
 				.then(response => {
+					console.log(response);
 					localStorage.setItem('token', response.token); 
 					this.$store.dispatch('get_user_id', response.userId); 
 					this.$store.dispatch('get_user_role', response.isAdmin); 
@@ -105,15 +108,15 @@ export default {
 			display: flex;
 			justify-content: center;
 			.submit-login__btn {
-			width: 180px;
-			height: 38px;
-			border-radius: 50px;
-			border: none;
-			font-size: 20px;
-			margin-top: 12px;
-			cursor: pointer;
-			background-color: teal; 
-			color: white; 
+				width: 180px;
+				height: 38px;
+				border-radius: 50px;
+				border: none;
+				font-size: 20px;
+				margin-top: 12px;
+				cursor: pointer;
+				background-color: teal; 
+				color: white; 
 			}
 		}
 	}
@@ -123,5 +126,10 @@ export default {
 		font-size: 0.9em; 
 		margin-top: 2em; 
 	}
+
+
+@media screen and (max-width: 860px) {
+	
+}
 
 </style>

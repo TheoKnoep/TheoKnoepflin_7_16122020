@@ -4,11 +4,11 @@
       <img src="../assets/logo.png" />
     </div>
     <h1>{{ pageTitle }}</h1>
-    <div id="nav">
-		<router-link to="/">Accueil</router-link> | 
-		<router-link to="/account">Compte</router-link> | 
-    <router-link to="/posts">Publications</router-link>
-    </div>
+    <nav id="nav" class="nav">
+      <router-link to="/" class="nav__item" >Accueil</router-link><span class="nav__item--sep"> | </span>
+      <router-link to="/account" class="nav__item" >Compte</router-link><span class="nav__item--sep"> | </span>
+      <router-link to="/posts" class="nav__item" >Publications</router-link>
+    </nav>
   </header>
 </template>
 
@@ -36,5 +36,16 @@ img {
 h1 {
   font-style: italic;
   font-size: 1.4em;
+}
+
+
+@media screen and (max-width: 860px) {
+  .nav { 
+    display: flex;
+    flex-direction: column;  
+    &__item--sep {
+      display: none;
+    }
+  }
 }
 </style>

@@ -9,7 +9,7 @@
 					<li>Nom : <strong>{{ name }}</strong></li>
 					<li>Adresse email : <strong><a :href="'mailto:' + email" >{{ email }}</a></strong></li>
 					<li>Poste : <strong>{{ position }}</strong></li>
-					<li v-if="currentUserIsAdmin">ADMINISTRATEUR</li>
+					<li v-if="currentUserIsAdmin" class="user-is-admin">ADMINISTRATEUR</li>
 				</ul>
 			</div>
 			<div class="edit-account-button" v-if="has_buttons_access"> <!-- à n'afficher que si le compte consulté est celui de l'utilisateur ou un admin -->
@@ -127,6 +127,14 @@ export default {
 				margin: 1em 0; 
 			}
 		} 
+	}
+	.user-is-admin {
+		border: solid 1px gray; 
+		color: gray; 
+		background-color: rgba(0,0,0,0.05);
+		border-radius: 2px; 
+		width: 100%; 
+		text-align: center;
 	}
 
 	.edit-account-button {
