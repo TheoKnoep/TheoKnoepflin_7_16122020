@@ -1,10 +1,10 @@
 <template>
 	<article class="single-post-content card-style">
 		<h2>{{ post.title }}</h2>
-		<p class="post-card__data">
+		<div class="post-card__data">
 			<img class="author-picture" v-bind:src="post.profile_picture" width="40" height="40" />
-			Publié par <strong><router-link :to="'/user/' + post.author_id" >{{ post.name}}</router-link></strong>, le {{ post.publication_local_date }} : 
-		</p>
+			<p>Publié par <strong><router-link :to="'/user/' + post.author_id" >{{ post.name}}</router-link></strong>, le {{ post.publication_local_date }}&nbsp;:</p> 
+		</div>
 		<img v-bind:src="post.media" class="post-image" />
 		<p class="text-content">{{ post.content }}</p>
 
@@ -73,12 +73,15 @@ export default {
 
 <style lang="scss">
 	.single-post-content {
-		margin: 2em; padding: 2em; 
 		border-radius: 12px; 
 		&__data {
 			font-style: italic;
 			font-size: 16px;
 			padding: 1em 0; 
+		}
+		.post-card__data {
+			display: flex;
+			align-items: flex-end;
 		}
 		.post-image {
 			width: 100%; 
@@ -111,4 +114,31 @@ export default {
 		font-style: italic;
 		margin-top: 32px; 
 	}
+
+
+/* desktop only */ 
+@media screen and (min-width: 860px) {
+	.single-post-content {
+		margin: 2em auto; 
+		padding: 2em; 
+	}
+}
+
+/* mobile only */
+@media screen and (max-width: 860px) {
+	.articles-card {
+		width: 95%; 
+	}
+	.single-post-content {
+		.post-card__data {
+			font-size: .8em;
+		}
+		.post-image {
+			border-radius: 12px; 
+		}
+		.text-content {
+			border-radius: 12px;
+		}
+	}
+}
 </style>

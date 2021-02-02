@@ -60,13 +60,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-	pre {
-		text-align: left; 
-	}
-
 	.articles-cards {
 		text-align: left;
-		width: 80%; 
+		width: 90%; 
 		margin: auto; 
 	}
 

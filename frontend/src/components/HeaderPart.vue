@@ -94,7 +94,7 @@ export default {
   .burger-menu {
     margin-left: auto; 
     margin-right: 1em; 
-		width: 42px; height: 42px; 
+		width: 38px; height: 38px; 
 		border: solid 1px #d1515a; 
 		cursor: pointer; 
 		border-radius: 2px;
@@ -167,6 +167,7 @@ export default {
         display: block; 
     h1 {
       font-size: 1.15em; 
+      text-align: left; 
     }
   }
   .main-line {
@@ -178,7 +179,7 @@ export default {
   }
   .img-container {
     img {
-      width: 60px; 
+      width: 42px; 
       height: auto; 
     }
     .default-logo {
@@ -193,11 +194,19 @@ export default {
       display: none;
     }
     a {
-      margin: 0 2em;
+      margin: 0 .6em;
     }
   }
   .nav--closed {
     display: none; 
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .header {
+    h1 {
+      max-width: 160px; 
+    }
   }
 }
 </style>
