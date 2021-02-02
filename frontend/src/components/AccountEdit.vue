@@ -38,7 +38,7 @@ export default {
 	}, 
 	mounted() {
 		axios
-			.get("http://localhost:3000/users/" + this.userId)
+			.get(process.env.VUE_APP_API_URL + "/users/" + this.userId)
 			.then(response => {
 				if (response.data.profile_picture != '') {
 					this.userInfos.profile_picture = response.data.profile_picture;
@@ -62,7 +62,7 @@ export default {
 				}
 			}
 
-			fetch("http://localhost:3000/users/" + this.userId, options) 
+			fetch(process.env.VUE_APP_API_URL + "/users/" + this.userId, options) 
 				.then(() => {
 						this.feedbackMessage = 'Votre compte a été modifié avec succès !'; 
 						setTimeout(router.push({ path: '../account' }), 3000);

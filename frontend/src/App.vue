@@ -17,6 +17,7 @@ export default {
     };
   },
   mounted() {
+    console.log(process.env.VUE_APP_API_URL); 
       const options = {
         "method": 'GET', 
         "headers": {
@@ -24,7 +25,7 @@ export default {
         }
       }
       axios
-        .get("http://localhost:3000/user/current", options)
+        .get(process.env.VUE_APP_API_URL + "/user/current", options)
           .then((response) => {
             this.$store.dispatch("get_user_id", response.data.id);
             this.$store.dispatch("get_user_role", response.data.is_admin);

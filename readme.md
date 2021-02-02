@@ -43,8 +43,14 @@ You should get as response :
 
 
 ### Frontend
+Define environments variables with the URL of the API in file : 
 
-Run : 
+`./frontend/.env`
+
+VUE_APP_API_URL=
+
+
+Then run : 
 
 ```
 cd ./frontend/

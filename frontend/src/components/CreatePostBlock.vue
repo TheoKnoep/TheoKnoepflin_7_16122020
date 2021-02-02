@@ -45,7 +45,7 @@ export default {
 					body: newPost
 				}
 
-				fetch("http://localhost:3000/posts/", options) 
+				fetch(process.env.VUE_APP_API_URL + "/posts/", options) 
 					.then(response => response.json())
 						.then(response => {
 							console.log(response); 

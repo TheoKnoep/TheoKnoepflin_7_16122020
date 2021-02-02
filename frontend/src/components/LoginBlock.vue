@@ -38,8 +38,6 @@ export default {
 			"password": this.password
 		} 
 
-		console.log(loginRequest); 
-
 		const options = {
 			"method": 'POST', 
 			"body": JSON.stringify(loginRequest),
@@ -47,10 +45,9 @@ export default {
 				"Content-type": "application/json; charset=UTF-8"
 			}
 		}
-		fetch("http://localhost:3000/users/login", options) 
+		fetch(process.env.VUE_APP_API_URL + "/users/login", options) 
 			.then(response => response.json())
 				.then(response => {
-					console.log(response);
 					localStorage.setItem('token', response.token); 
 					this.$store.dispatch('get_user_id', response.userId); 
 					this.$store.dispatch('get_user_role', response.isAdmin); 

@@ -55,7 +55,7 @@ export default {
 	},
 	mounted() {
 		axios
-			.get("http://localhost:3000/users/" + this.id)
+			.get(process.env.VUE_APP_API_URL + "/users/" + this.id)
 			.then(response => {
 				if (response.data.profile_picture != '') {
 					this.has_profile_picture = true; 
@@ -82,7 +82,7 @@ export default {
 						"Authorization": `Bearer ${localStorage.getItem('token')}`
 					}
 				}
-				fetch("http://localhost:3000/users/" + this.userId, options) 
+				fetch(process.env.VUE_APP_API_URL + "/users/" + this.userId, options) 
 					.then(response => response.json())
 						.then(response => {
 							console.log(response); 

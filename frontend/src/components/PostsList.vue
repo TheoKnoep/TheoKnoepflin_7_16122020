@@ -42,7 +42,7 @@ export default {
 	},
 	mounted() {
 		axios
-			.get("http://localhost:3000/posts/")
+			.get(process.env.VUE_APP_API_URL + "/posts/")
 			.then(response => {
 				this.postsData = response.data; 
 				for (let i in response.data) {

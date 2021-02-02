@@ -42,7 +42,7 @@ export default {
 				"body": requestBody
 			}
  
-			fetch("http://localhost:3000/comments", options)
+			fetch(process.env.VUE_APP_API_URL + "/comments", options)
 				.then(response => { 
 					response.json()
 						.then(message => {

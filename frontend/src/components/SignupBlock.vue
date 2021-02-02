@@ -43,7 +43,7 @@ export default {
 				body: newUser
 			}
 
-			fetch("http://localhost:3000/users/signup", options) 
+			fetch(process.env.VUE_APP_API_URL + "/users/signup", options) 
 				.then(response => response.json())
 					.then(response => {
 							localStorage.setItem('token', response.token); 
