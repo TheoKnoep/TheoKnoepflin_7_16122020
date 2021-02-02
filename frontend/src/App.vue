@@ -60,25 +60,10 @@ export default {
     }
   }
 
-  #nav {
-    padding: 30px;
-
-    a {
-      font-weight: bold;
-      color: #2c3e50;
-      border-bottom: solid #2c3e50 1px;
-
-      &.router-link-exact-active {
-        color: teal;
-        border-bottom: solid teal 1px;
-      }
-    }
-  }
-
   a {
-    color: teal; 
+    color: #d1515a; 
     text-decoration: none; 
-    border-bottom: solid teal 1px; 
+    border-bottom: solid #d1515a 1px; 
   }
 
   .card-style {
@@ -91,9 +76,15 @@ export default {
     padding: 1em; 
   }
 
+  .btn {
+    &:hover {
+      box-shadow: 1px 1px 2px rgba(0,0,0,0.45); 
+    }
+  }
+
 @media screen and (max-width: 860px) {
   .card-style {
-    margin: auto; 
+    margin: 2em auto; 
     width: 90%; 
   }
 }

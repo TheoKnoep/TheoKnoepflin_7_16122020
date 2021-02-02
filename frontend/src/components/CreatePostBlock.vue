@@ -8,7 +8,7 @@
 			<p><label for="image">Choisissez une image pour accompagner votre publication</label> : 
 				<input type="file" name="image" /></p>
 			<p>
-				<input type="submit" value="Publier" class="submit-post-btn"/></p>
+				<input type="submit" value="Publier" class="btn submit-post-btn"/></p>
 		</form>
 		<p class="feedback-message">{{ feedbackMessage }}</p>
 	</div>
@@ -75,8 +75,9 @@ export default {
 		.input-title {
 			border-radius: 50px;
 			border: none;
-			background-color: rgba(0,0,0,0.05);
+			background-color: rgba(20, 14, 14, 0.05);
 			height: 32px;
+			padding-left: 1em; 
 		}
 		textarea {
 			width: 100%; 
@@ -85,6 +86,8 @@ export default {
 			border: none;
 			background-color: rgba(0,0,0,0.05);
 			box-sizing: border-box; 
+			padding: 1em; 
+			font-family: 'Trebuchet', sans-serif; 
 		}
 		.submit-post-btn {
 			width: 100%;
@@ -94,7 +97,7 @@ export default {
 			font-size: 20px;
 			margin-top: 12px;
 			cursor: pointer;
-			background-color: teal; 
+			background-color: #d1515a; 
 			color: white; 
 		}
 	}

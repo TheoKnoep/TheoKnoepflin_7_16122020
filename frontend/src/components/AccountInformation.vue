@@ -13,8 +13,8 @@
 				</ul>
 			</div>
 			<div class="edit-account-button" v-if="has_buttons_access"> <!-- à n'afficher que si le compte consulté est celui de l'utilisateur ou un admin -->
-				<router-link to="/account/edit" class="edit-account-button__btn edit-account-button__btn--main">Modifier les informations du compte</router-link>
-				<button @click="deleteAccount" class="edit-account-button__btn edit-account-button__btn--second">Supprimer le compte</button>
+				<router-link to="/account/edit" class="btn edit-account-button__btn edit-account-button__btn--main">Modifier les informations du compte</router-link>
+				<button @click="deleteAccount" class="btn edit-account-button__btn edit-account-button__btn--second">Supprimer le compte</button>
 			</div>
 		</div>
 		<div v-else>
@@ -150,11 +150,8 @@ export default {
 			font-size: 18px;
 			margin-top: 12px;
 			cursor: pointer;
-			&:hover {
-				box-shadow: 2px 2px 2px rgba(0,0,0,0.25); 
-			}
 			&--main {
-				background-color: teal; 
+				background-color: #d1515a; 
 				color: white; 
 				display: flex;
 				justify-content: center;

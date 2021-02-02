@@ -12,7 +12,7 @@
 			<p><label for="image">Choisissez une photo de profil</label> : 
 				<input type="file" name="image" /></p>
 			<p>
-				<input type="submit" value="Création du compte" id="confirm-signup" class="confirm-signup-btn" /></p>
+				<input type="submit" value="Création du compte" id="confirm-signup" class="btn confirm-signup-btn" /></p>
 		</form>
 		<p class="feedback-message">{{ feedbackMessage }}</p>
 	</div>
@@ -98,7 +98,7 @@ export default {
 			font-size: 20px;
 			margin-top: 12px;
 			cursor: pointer;
-			background-color: teal; 
+			background-color: #d1515a; 
 			color: white; 
 		}
 	}

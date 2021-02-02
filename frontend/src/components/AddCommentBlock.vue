@@ -5,7 +5,7 @@
 			<input type="hidden" name="post_id" :value="postId" />
 			<label for="content">Ajouter un commentaire : </label>
 				<textarea name="content" placeholder="Tapez votre commentaire" ></textarea>
-			<input type="submit" value="Envoyer" class="add-comment-submit" />
+			<input type="submit" value="Envoyer" class="btn add-comment-submit" />
 		</form>
 		
 	</div>	
@@ -86,7 +86,7 @@ export default {
 		margin: 2px; 
 		&:focus {
 			outline: none; 
-			border: solid 2px teal; 
+			border: solid 2px #d1515a; 
 			margin: 0; 
 		}
 	}
@@ -98,7 +98,7 @@ export default {
 		border: none;
 		font-weight: bold;
 		color: white; 
-		background-color: teal; 
+		background-color: #d1515a; 
 		margin-top: 12px;
 		cursor: pointer;
 		&:hover {

@@ -42,7 +42,7 @@ exports.create = (req, res, next) => {
 							isAdmin: data.is_admin
 						}, 
 						'TOKEN_RANDOM_KEY', 
-						{expiresIn: '24h'}
+						{expiresIn: '24h' }
 					
 				)})
 			}); 
@@ -69,7 +69,7 @@ exports.login = (req, res, next) => {
 								isAdmin: data.is_admin
 							}, 
 							'TOKEN_RANDOM_KEY', 
-							{expiresIn: '24h'}
+							{expiresIn: '24h' }
 						)
 					}); 
 				})

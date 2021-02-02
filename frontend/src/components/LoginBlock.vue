@@ -9,7 +9,7 @@
         <p>
 			<label for="password">Mot de passe</label> : <br/> <input class="input-txt" type="password" name="password" v-model="password" />
         </p>
-        <p class="submit-login"><input type="submit" value="Connexion" class="submit-login__btn"/></p>
+        <p class="submit-login"><input type="submit" value="Connexion" class="btn submit-login__btn"/></p>
       </form>
     </div>
     <p class="signup-link">
@@ -115,7 +115,7 @@ export default {
 				font-size: 20px;
 				margin-top: 12px;
 				cursor: pointer;
-				background-color: teal; 
+				background-color: #d1515a; 
 				color: white; 
 			}
 		}

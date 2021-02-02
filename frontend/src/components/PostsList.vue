@@ -79,7 +79,7 @@ export default {
 	}
 
 	.add-publication {
-		background-color: teal; 
+		background-color: #d1515a; 
 		width: 80px; 
 		height: 80px; 
 		border-radius: 80px; 

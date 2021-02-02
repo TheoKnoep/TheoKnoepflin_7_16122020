@@ -10,7 +10,7 @@
 			<p><label for="image">Choisissez une nouvelle photo de profil</label> : 
 				<input type="file" name="image" /></p>
 			<p>
-				<input type="submit" value="Valider les changements" id="confirm-edit" class="submit-form-edit-btn"/></p>
+				<input type="submit" value="Valider les changements" id="confirm-edit" class="btn submit-form-edit-btn"/></p>
 		</form>
 		<p class="feedback-message" v-if="feedbackMessage">{{ feedbackMessage }}</p>
 	</div>
@@ -112,7 +112,7 @@ export default {
 			font-size: 20px;
 			margin-top: 12px;
 			cursor: pointer;
-			background-color: teal; 
+			background-color: #d1515a; 
 			color: white; 
 		}
 	}

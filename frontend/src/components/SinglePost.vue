@@ -10,14 +10,14 @@
 
 		<div class="comments-wrapper" v-if="numberOfComments" :id="'comments-wrapper#' + post.id" >
 			<hr />
-			<h3>Commentaires : </h3>
+			<h3 class="comment-heading">Commentaires : </h3>
 			<CommentsBlock 
 				v-for="comment in post.comments" 
 				:key="comment.index"
 				:comment="comment" />
 		</div>
 
-		<button @click="togglCommentForm" class="add-comment-btn">{{ buttonCommentWording }}</button> 
+		<button @click="togglCommentForm" class="btn add-comment-btn">{{ buttonCommentWording }}</button> 
 		<AddCommentBlock v-if="displayCommentForm"
 			:userId="userId"
 			:postId="post.id" 
@@ -95,10 +95,12 @@ export default {
 			z-index: -1;
 			margin-bottom: -32px; 
 		}
+		.comments-wrapper {
+			.comment-heading {
+				margin-bottom: 1em; 
+			}
+		}
 	} 
-	.comments-wrapper {
-		margin-top: 32px;
-	}
 	.add-comment-btn {
 		border-radius: 50px;
 		padding: 1em 2em;
