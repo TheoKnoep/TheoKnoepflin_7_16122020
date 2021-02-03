@@ -36,7 +36,6 @@
 <script>
 import CommentsBlock from '@/components/CommentsBlock.vue' 
 import AddCommentBlock from '@/components/AddCommentBlock.vue'
-import router from '@/router'
 import store from '../store'
 
 export default {
@@ -63,6 +62,9 @@ export default {
 			type: Number
 		},
 		publishComment: {
+			type: Function
+		}, 
+		updatePostList: {
 			type: Function
 		}
 	}, 
@@ -99,7 +101,7 @@ export default {
 					.then(response => response.json())
 						.then(response => {
 							console.log(response); 
-							router.push({ path: '/posts' });
+							this.updatePostList(id); 
 						})
 					.catch(error => console.log(error)); 
 			}

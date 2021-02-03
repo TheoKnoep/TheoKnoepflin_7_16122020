@@ -1,12 +1,14 @@
 <template>
 	<div class="posts-list">
+		<pre style="text-align: left; ">{{ postsData }}</pre>
 		<div class="articles-cards">
 			<SinglePost v-for="(post, index) in postsData" 
 				:key="post.id" 
 				:post="post"
 				:index="index"
 				:nbOfComment="numberOfComments"
-				:publishComment="publishComment" /> 
+				:publishComment="publishComment"
+				:updatePostList="updatePostList" /> 
 		</div>
 		<router-link to="/posts/new" class="add-publication" title="Ajouter une nouvelle publication">
 			<span class="wrapper">
@@ -44,6 +46,11 @@ export default {
 		publishComment(comment) {
 			let postIndex = this.postsData.findIndex(elt => elt.id === comment.post_id); 
 			this.postsData[postIndex].comments.push(comment.newComment); 
+		}, 
+		updatePostList(postId) {
+			let postIndex = this.postsData.findIndex(elt => elt.id === postId); 
+			console.log(postIndex); 
+			this.postsData.splice(postIndex, 1); 
 		}
 	},
 	mounted() {
