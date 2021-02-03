@@ -21,6 +21,7 @@
 		<AddCommentBlock v-if="displayCommentForm"
 			:userId="userId"
 			:postId="post.id" 
+			:publishComment="publishComment"
 			@hide-comment-form="togglCommentForm" 
 			@increment-number-of-comments="incrementNumberOfComments"/>
 
@@ -52,6 +53,9 @@ export default {
 		}, 
 		index: {
 			type: Number
+		},
+		publishComment: {
+			type: Function
 		}
 	}, 
 	methods: {

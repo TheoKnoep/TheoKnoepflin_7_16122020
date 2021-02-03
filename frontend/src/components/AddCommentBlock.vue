@@ -20,6 +20,9 @@ export default {
 		}, 
 		postId: {
 			type: Number
+		},
+		publishComment: {
+			type: Function
 		}
 	}, 
 	methods: {
@@ -53,18 +56,7 @@ export default {
 				.catch(err => { console.error(err); }); 
 		}, 
 		addImmediatlyNewComment(newComment) {
-			this.$emit('increment-number-of-comments'); 
-			let newCommentHtml = document.createElement("div"); 
-			newCommentHtml.setAttribute('class', 'single-comment')
-			let cleanDate = new Date(newComment.comment_date); 
-			console.log(newComment); 
-			newCommentHtml.innerHTML = `<img src="${newComment.profile_picture}" width="25" height="25">
-										<p>${cleanDate.toLocaleString()}</p>
-										<p><strong><a href="./#/user/${newComment.comment_author_id}">${newComment.name}</a></strong></p>
-										<p class="single-comment__content">${newComment.content}</p>`
-			console.log(newCommentHtml); 
-			let commentsSection = document.getElementById('comments-wrapper#' + this.postId); 
-			commentsSection.appendChild(newCommentHtml); 
+			this.publishComment({"newComment":newComment, "post_id": this.postId} );
 		},
 		hideCommentForm() {
 			this.$emit('hide-comment-form')

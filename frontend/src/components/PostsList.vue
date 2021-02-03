@@ -4,7 +4,8 @@
 			<SinglePost v-for="(post, index) in postsData" 
 				:key="post.id" 
 				:post="post"
-				:index="index" /> 
+				:index="index"
+				:publishComment="publishComment" /> 
 		</div>
 		<router-link to="/posts/new" class="add-publication" title="Ajouter une nouvelle publication">
 			<span class="wrapper">
@@ -38,6 +39,11 @@ export default {
 			e.preventDefault(); 
 			let commentFormContent = document.querySelectorAll('form'); 
 			console.log(commentFormContent);
+		},
+		publishComment(comment) {
+			console.log("publish", comment); 
+			let postIndex = this.postsData.findIndex(elt => elt.id === comment.post_id); 
+			this.postsData[postIndex].comments.push(comment.newComment); 
 		}
 	},
 	mounted() {
@@ -49,10 +55,6 @@ export default {
 					this.postsData[i].add_comment_section = false; 
 					let datePost = new Date(response.data[i].publication_date); 
 					this.postsData[i].publication_local_date = datePost.toLocaleString(); 
-					for (let y in response.data[i].comments) {
-						let commentDate = new Date(response.data[i].comments[y].comment_date); 
-						this.postsData[i].comments[y].comment_date = commentDate.toLocaleString(); 
-					}
 				}
 			})
 	}

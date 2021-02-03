@@ -40,6 +40,12 @@ export default {
     margin: 0;
     padding: 0;
   }
+
+  ::selection {
+    background-color: #d1515a; 
+    color: white; 
+  }
+
   #app {
     font-family: 'Trebuchet', Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
