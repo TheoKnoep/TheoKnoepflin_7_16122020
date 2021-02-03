@@ -51,8 +51,8 @@ export default {
 			isAdmin: store.state.isAdmin,
 			displayCommentForm: false, 
 			buttonCommentWording: "Ajouter un commentaire", 
-			numberOfComments: this.post.comments.length, 
-			has_rights_to_delete_post: false
+			has_rights_to_delete_post: false, 
+			numberOfComments: this.post.comments.length
 		}
 	},
 	props: {
@@ -66,7 +66,7 @@ export default {
 			type: Function
 		}
 	}, 
-	created() {
+	mounted() {
 		this.checkIfHasRightsToDelete()
 	},
 	methods: {

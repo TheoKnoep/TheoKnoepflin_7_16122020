@@ -1,11 +1,11 @@
 <template>
 	<div class="form-container card-style">
 		<form id="form-signup" method="post" enctype="multipart/form-data" @submit="signupUser" >
-			<p><label for="name">Nom</label> : <br/>
+			<p><label for="name">Nom</label><span class="required-item">*</span> : <br/>
 				<input class="input-txt" type="text" name="name" autofocus required v-model="name"/></p>
-			<p><label for="email">Email</label> : <br/>
+			<p><label for="email">Email</label><span class="required-item">*</span> : <br/>
 				<input class="input-txt" type="email" name="email" required v-model="email" /></p>
-			<p><label for="password">Mot de passe</label> : <br/>
+			<p><label for="password">Mot de passe</label><span class="required-item">*</span> : <br/>
 				<input class="input-txt" type="password" name="password" required v-model="password" /></p>
 			<p><label for="position">Poste occupé</label> : <br/>
 				<input class="input-txt" type="text" name="position" v-model="position"/></p>
@@ -13,6 +13,7 @@
 				<input type="file" name="image" /></p>
 			<p>
 				<input type="submit" value="Création du compte" id="confirm-signup" class="btn confirm-signup-btn" /></p>
+			<p class="required-item required_item_text">* élément requis</p>
 		</form>
 		<p class="feedback-message">{{ feedbackMessage }}</p>
 	</div>
@@ -71,6 +72,13 @@ export default {
 		input {
 			width: 100%;
 			margin: 12px 0; 
+		}
+		.required-item {
+			color: red; 
+		}
+		.required_item_text {
+			font-style: italic; 
+			font-size: .7em; 
 		}
 		.input-txt {
 			border-radius: 50px;

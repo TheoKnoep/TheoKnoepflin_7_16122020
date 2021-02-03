@@ -5,6 +5,7 @@
 				:key="post.id" 
 				:post="post"
 				:index="index"
+				:nbOfComment="numberOfComments"
 				:publishComment="publishComment" /> 
 		</div>
 		<router-link to="/posts/new" class="add-publication" title="Ajouter une nouvelle publication">

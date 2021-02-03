@@ -50,16 +50,14 @@ export default {
 					response.json()
 						.then(message => {
 							this.addImmediatlyNewComment(message); 
-							this.hideCommentForm();
+							this.$emit('increment-number-of-comments'); 
+							this.$emit('hide-comment-form'); 
 						})
 				})
 				.catch(err => { console.error(err); }); 
 		}, 
 		addImmediatlyNewComment(newComment) {
 			this.publishComment({"newComment":newComment, "post_id": this.postId} );
-		},
-		hideCommentForm() {
-			this.$emit('hide-comment-form')
 		}
 	}
 }
