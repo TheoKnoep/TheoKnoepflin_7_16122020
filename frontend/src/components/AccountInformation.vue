@@ -1,8 +1,5 @@
 <template>
 	<div>
-		<pre>
-			id = {{ id }}
-			userId = {{ userId }}</pre>
 		<div class="account-info card-style" v-if="userId != '' && name != ''">
 			<div class="account-data" id="account-data" >
 				<div class="profile-picture-container">

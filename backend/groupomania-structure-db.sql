@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  mer. 03 fév. 2021 à 17:52
+-- Généré le :  mer. 03 fév. 2021 à 21:39
 -- Version du serveur :  8.0.22
 -- Version de PHP :  7.3.2
 
@@ -31,10 +31,12 @@ SET time_zone = "+00:00";
 CREATE TABLE `comments` (
   `id` int NOT NULL,
   `comment_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `content` text,
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `post_id` int NOT NULL,
   `comment_author_id` int UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
 
 -- --------------------------------------------------------
 
@@ -45,11 +47,13 @@ CREATE TABLE `comments` (
 CREATE TABLE `posts` (
   `id` int NOT NULL,
   `publication_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `title` varchar(255) NOT NULL,
-  `content` text,
-  `media` tinytext,
+  `title` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `media` text COLLATE utf8mb4_unicode_ci,
   `author_id` int UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
 
 -- --------------------------------------------------------
 
@@ -67,9 +71,8 @@ CREATE TABLE `users` (
   `is_admin` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Index pour les tables déchargées
---
+
+
 
 --
 -- Index pour la table `comments`
@@ -103,19 +106,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT pour la table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- Contraintes pour les tables déchargées

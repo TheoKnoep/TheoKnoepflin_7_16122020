@@ -36,7 +36,7 @@ Comment.getOneCommentById = (commentId, result) => {
 }
 
 Comment.getAllComments = (result) => {
-	sql.query(`SELECT comments.comment_date, comments.content, comments.post_id, comments.comment_author_id, users.name, users.profile_picture
+	sql.query(`SELECT comments.id, comments.comment_date, comments.content, comments.post_id, comments.comment_author_id, users.name, users.profile_picture
 				FROM comments 
 				INNER JOIN users ON users.id = comments.comment_author_id
 				`, (err, res) => {

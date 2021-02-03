@@ -1,21 +1,21 @@
 <template>
 	<div class="posts-list">
-		<pre style="text-align: left; ">{{ postsData }}</pre>
+		<pre style="text-align: left; ">{{ postsData }}</pre> 
 		<div class="articles-cards">
 			<SinglePost v-for="(post, index) in postsData" 
 				:key="post.id" 
 				:post="post"
 				:index="index"
-				:nbOfComment="numberOfComments"
 				:publishComment="publishComment"
-				:updatePostList="updatePostList" /> 
+				:updatePostList="updatePostList"
+				:updateCommentsList="updateCommentsList" /> 
 		</div>
 		<router-link to="/posts/new" class="add-publication" title="Ajouter une nouvelle publication">
 			<span class="wrapper">
 				<span class="add-publication__ico">✒</span><span class="add-publication__text-line">Ajouter une nouvelle publication</span>
 			</span>
 		</router-link>
-		<p><em>Fin des articles</em></p>
+		<p class="bottom-articles-list" v-if="postsData.length"><em>Fin des articles</em></p>
 	</div>
 </template>
 
@@ -51,6 +51,12 @@ export default {
 			let postIndex = this.postsData.findIndex(elt => elt.id === postId); 
 			console.log(postIndex); 
 			this.postsData.splice(postIndex, 1); 
+		}, 
+		updateCommentsList(postId, commentId) {
+			let postIndex = this.postsData.findIndex(elt => elt.id === postId); 
+			let commentIndex = this.postsData[postIndex].comments.findIndex(elt => elt.id === commentId); 
+			console.log(this.postsData[postIndex].comments[commentIndex]); 
+			this.postsData[postIndex].comments.splice(commentIndex, 1); 
 		}
 	},
 	mounted() {
@@ -119,6 +125,14 @@ export default {
 			width: 260px;  
 			font-size: 16px; 
 		}
+	}
+
+	.bottom-articles-list {
+		color: #80808087;
+		background-color: #FFD7D7;
+		padding: 1em;
+		margin: 1em;
+		border-radius: 3px;
 	}
 
 </style>

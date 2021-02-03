@@ -4,7 +4,6 @@ const fs = require('fs');
 
 exports.findAll = (req, res, next) => {
 	Post.getAll( (err, postsData) => {
-		
 		if(err) {
 			res.status(400).json({ "error": err }); 
 		} else {
@@ -45,9 +44,8 @@ exports.findOne = (req, res, next) => {
 
 exports.createOne = (req, res, next) => { 
 	if (!req.file) {
-		console.log("La requête n'a pas d'image"); 
+		imageUrl = null; 
 	} else {
-		console.log(req.file); 
 		imageUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`; 
 	}
 	const post = new Post({
@@ -75,10 +73,7 @@ exports.updateOne = (req, res, next) => {
 					message: "Error retrieving Post with id " + req.params.customerId
 				});
 			}
-		} else {
-			console.log(data); 
-			console.log(updatedPost); 
-		}
+		} 
 
 		if (req.file) {
 			const oldImageUrl = data.media; 
@@ -111,11 +106,8 @@ exports.deleteOne = (req, res, next) => {
 			}
 		} else {
 			const imageToDelete = data.media.split("/images/")[1]; 
-			console.log(imageToDelete); 
 			fs.unlink(`images/${imageToDelete}`, () => {}); 
-
-			console.log("coucou"); 
-			
+		
 			Post.deleteOne(req.params.id, (err, data) => { 
 				if (err) {
 					if (err.kind === "not_found") {

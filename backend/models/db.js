@@ -6,7 +6,8 @@ const connection = mysql.createConnection({
 	host: dbConfig.HOST, 
 	user: dbConfig.USER, 
 	password: dbConfig.PASSWORD, 
-	database: dbConfig.DB
+	database: dbConfig.DB,
+	charset: 'utf8mb4'
 }); 
 
 //Ouverture de la connexion à MySQL : 
@@ -15,4 +16,4 @@ connection.connect(error => {
 	console.log("Successful connection to the database")
 }); 
 
-module.exports = connection; 
+module.exports = connection;  

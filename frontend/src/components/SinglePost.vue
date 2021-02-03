@@ -19,7 +19,10 @@
 			<CommentsBlock 
 				v-for="comment in post.comments" 
 				:key="comment.index"
-				:comment="comment" />
+				:postId="post.id"
+				:comment="comment"
+				:updateCommentsList="updateCommentsList" 
+				@decreament-number-of-comments="decreamentNumberOfComments" />
 		</div>
 
 		<button @click="togglCommentForm" class="btn add-comment-btn">{{ buttonCommentWording }}</button> 
@@ -28,7 +31,7 @@
 			:postId="post.id" 
 			:publishComment="publishComment"
 			@hide-comment-form="togglCommentForm" 
-			@increment-number-of-comments="incrementNumberOfComments"/>
+			@increment-number-of-comments="incrementNumberOfComments" />
 
 	</article>
 </template>
@@ -50,7 +53,7 @@ export default {
 			isAdmin: store.state.isAdmin,
 			displayCommentForm: false, 
 			buttonCommentWording: "Ajouter un commentaire", 
-			has_rights_to_delete_post: false, 
+			has_rights_to_delete_post: false,  
 			numberOfComments: this.post.comments.length
 		}
 	},
@@ -65,6 +68,9 @@ export default {
 			type: Function
 		}, 
 		updatePostList: {
+			type: Function
+		}, 
+		updateCommentsList: {
 			type: Function
 		}
 	}, 
@@ -84,10 +90,14 @@ export default {
 		incrementNumberOfComments() {
 			this.numberOfComments ++ ; 
 		}, 
+		decreamentNumberOfComments() {
+			this.numberOfComments -- ;
+		}, 
 		checkIfHasRightsToDelete() {
 			if (this.isAdmin === true || this.post.author_id === this.userId) {
 						this.has_rights_to_delete_post = true
 					} 
+			
 		}, 
 		deletePost(id) {
 			if (window.confirm("Voulez-vous vraiment supprimer la publication id = " + id + " ?")) { 

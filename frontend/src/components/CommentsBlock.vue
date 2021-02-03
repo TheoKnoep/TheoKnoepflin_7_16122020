@@ -6,21 +6,63 @@
 		</div>
 		<p class="comment-date">{{ cleanCommentDate }}</p>
 		<p class="single-comment__content">{{ comment.content }}</p>
+		<div class="delete-comment-btn" v-if="has_rights_to_delete_comment">
+			<button @click="deleteComment(comment.id)" class="btn "><i class="far fa-trash-alt"></i>&nbsp;Supprimer</button>
+		</div>
 	</div> 
 </template>
 
 <script>
+import store from '@/store'
+
 export default {
 	name: 'CommentsBlock', 
 	data() {
 		return {
-			cleanCommentDate: new Date(this.comment.comment_date).toLocaleString()
+			userId: store.state.userId, 
+			isAdmin: store.state.isAdmin,
+			cleanCommentDate: new Date(this.comment.comment_date).toLocaleString(), 
+			has_rights_to_delete_comment: false
 		}
 	},
 	props: {
 		comment: {
 			type: Object
+		}, 
+		postId: {
+			type: Number
+		},  
+		updateCommentsList: {
+			type: Function
 		}
+	}, 
+	methods: {
+		checkHasRightToDeleteComment () {
+			if (this.isAdmin === true || this.comment.comment_author_id === this.userId) {
+				this.has_rights_to_delete_comment = true
+			} 
+		},
+		deleteComment (id) {
+			if (window.confirm("Voulez-vous vraiment supprimer le commentaire id = " + id + " ?")) { 
+				const options = {
+					"method": 'DELETE', 
+					"headers": {
+						"Authorization": `Bearer ${localStorage.getItem('token')}`
+					}
+				}
+				fetch(process.env.VUE_APP_API_URL + "/comments/" + id, options) 
+					.then(response => response.json())
+						.then(response => {
+							console.log(response); 
+							this.$emit('decreament-number-of-comments'); 
+							this.updateCommentsList(this.postId, id);
+						})
+					.catch(error => console.log(error)); 
+			} 
+		}
+	}, 
+	created () {
+		this.checkHasRightToDeleteComment(); 
 	}
 }
 </script>
@@ -44,6 +86,17 @@ export default {
 			margin-top: 4px; 
 			margin-bottom: 8px; 
 		}
+	}
+
+	.delete-comment-btn {
+		margin-top: .6em; 
+		.btn {
+			border-radius: 50px; 
+			padding: .4em .8em;
+			border: none;
+			cursor: pointer;
+		}
+
 	}
 
 	@media screen and (max-width: 860px) {
