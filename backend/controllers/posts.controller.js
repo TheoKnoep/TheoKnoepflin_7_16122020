@@ -105,8 +105,10 @@ exports.deleteOne = (req, res, next) => {
 				res.status(500).send({ message: "Error retrieving Post with id " + req.params.customerId });
 			}
 		} else {
-			const imageToDelete = data.media.split("/images/")[1]; 
-			fs.unlink(`images/${imageToDelete}`, () => {}); 
+			if (data.media) {
+				const imageToDelete = data.media.split("/images/")[1]; 
+				fs.unlink(`images/${imageToDelete}`, () => {}); 
+			}
 		
 			Post.deleteOne(req.params.id, (err, data) => { 
 				if (err) {

@@ -1,6 +1,6 @@
 <template>
 	<div class="posts-list">
-		<pre style="text-align: left; ">{{ postsData }}</pre> 
+		<!-- <pre style="text-align: left; ">{{ postsData }}</pre> -->
 		<div class="articles-cards">
 			<SinglePost v-for="(post, index) in postsData" 
 				:key="post.id" 
