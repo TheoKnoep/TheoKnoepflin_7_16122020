@@ -86,6 +86,7 @@ export default {
 		.post-card__data {
 			display: flex;
 			align-items: flex-end;
+			margin-bottom: 1em; 
 		}
 		.post-image {
 			width: 100%; 
@@ -95,7 +96,8 @@ export default {
 		}
 		.text-content {
 			border-radius: 32px;
-			background-color: rgba(0, 0, 0, 0.05);
+			background: rgb(2,0,36);
+			background: linear-gradient(138deg, rgba(2,0,36,1) 0%, rgba(255,215,215,1) 0%, rgba(255,215,215,0.2147233893557423) 100%);
 			padding: 90px 1em 1em 1em;
 			position: relative;
 			top: -70px;
@@ -125,6 +127,11 @@ export default {
 	.single-post-content {
 		margin: 2em auto; 
 		padding: 2em; 
+	}
+	.add-comment-btn {
+		margin-left: 420px;
+		width: 180px;
+		height: 60px;
 	}
 }
 

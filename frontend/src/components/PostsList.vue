@@ -41,7 +41,6 @@ export default {
 			console.log(commentFormContent);
 		},
 		publishComment(comment) {
-			console.log("publish", comment); 
 			let postIndex = this.postsData.findIndex(elt => elt.id === comment.post_id); 
 			this.postsData[postIndex].comments.push(comment.newComment); 
 		}

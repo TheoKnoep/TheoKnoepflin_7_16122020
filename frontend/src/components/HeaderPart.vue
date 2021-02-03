@@ -186,15 +186,19 @@ export default {
       display: none; 
     }
   }
+  .nav__item--sep {
+    display: none;
+  }
   .nav--opened { 
-
+    display: flex;
     flex-direction: column;  
     background-color: #FFD7D7; 
-    &__item--sep {
-      display: none;
-    }
     a {
-      margin: 0 .6em;
+      margin: .4em 0;
+      border: none; 
+      background-color: darken(#FFD7D7, 3%); 
+      border-radius: 2px; 
+      padding: 0.4em; 
     }
   }
   .nav--closed {
