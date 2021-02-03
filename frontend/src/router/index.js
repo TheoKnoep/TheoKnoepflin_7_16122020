@@ -13,7 +13,7 @@ const routes = [
     component: () => import('../views/Account.vue')
   }, 
   {
-    path: '/account/edit', 
+    path: '/account/edit/:id', 
     name: 'Modifier les informations du compte', 
     component: () => import('../views/Editaccount.vue')
   },

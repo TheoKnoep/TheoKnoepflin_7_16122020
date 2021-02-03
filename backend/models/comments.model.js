@@ -44,12 +44,10 @@ Comment.getAllComments = (result) => {
 						console.log("error: ", err); 
 						result(err, null); 
 						return; 
-					}
-					if (res.length) {
+					} else {
 						result(null, res); 
 						return; 
 					}
-					result({ kind: "not_found" }, null); 
 				})
 }; 
 

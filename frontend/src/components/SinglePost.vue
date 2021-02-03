@@ -1,6 +1,11 @@
 <template>
 	<article class="single-post-content card-style">
-		<h2>{{ post.title }}</h2>
+		<div class="heading-post">
+			<h2>{{ post.title }}</h2>
+			<div class="delete-post-btn" v-if="has_rights_to_delete_post">
+				<button @click="deletePost(post.id)" class="btn "><i class="far fa-trash-alt"></i>&nbsp;Supprimer</button>
+			</div>
+		</div>
 		<div class="post-card__data">
 			<img class="author-picture" v-bind:src="post.profile_picture" width="40" height="40" />
 			<p>Publié par <strong><router-link :to="'/user/' + post.author_id" >{{ post.name}}</router-link></strong>, le {{ post.publication_local_date }}&nbsp;:</p> 
@@ -31,6 +36,7 @@
 <script>
 import CommentsBlock from '@/components/CommentsBlock.vue' 
 import AddCommentBlock from '@/components/AddCommentBlock.vue'
+import router from '@/router'
 import store from '../store'
 
 export default {
@@ -42,9 +48,11 @@ export default {
 	data() {
 		return {
 			userId: store.state.userId, 
+			isAdmin: store.state.isAdmin,
 			displayCommentForm: false, 
 			buttonCommentWording: "Ajouter un commentaire", 
-			numberOfComments: this.post.comments.length
+			numberOfComments: this.post.comments.length, 
+			has_rights_to_delete_post: false
 		}
 	},
 	props: {
@@ -58,6 +66,9 @@ export default {
 			type: Function
 		}
 	}, 
+	created() {
+		this.checkIfHasRightsToDelete()
+	},
 	methods: {
 		togglCommentForm() {
 			if (this.displayCommentForm === false) {
@@ -70,13 +81,49 @@ export default {
 		}, 
 		incrementNumberOfComments() {
 			this.numberOfComments ++ ; 
+		}, 
+		checkIfHasRightsToDelete() {
+			if (this.isAdmin === true || this.post.author_id === this.userId) {
+						this.has_rights_to_delete_post = true
+					} 
+		}, 
+		deletePost(id) {
+			if (window.confirm("Voulez-vous vraiment supprimer la publication id = " + id + " ?")) { 
+				const options = {
+					"method": 'DELETE', 
+					"headers": {
+						"Authorization": `Bearer ${localStorage.getItem('token')}`
+					}
+				}
+				fetch(process.env.VUE_APP_API_URL + "/posts/" + id, options) 
+					.then(response => response.json())
+						.then(response => {
+							console.log(response); 
+							router.push({ path: '/posts' });
+						})
+					.catch(error => console.log(error)); 
+			}
 		}
 	}
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 	.single-post-content {
+		.heading-post{
+			display: flex; 
+			align-items: flex-end;
+			.delete-post-btn {
+				margin-left: auto; 
+				.btn {
+					border-radius: 50px; 
+					padding: .4em .8em;
+					border: none;
+					cursor: pointer;
+				}
+
+			}
+		}
 		border-radius: 12px; 
 		&__data {
 			font-style: italic;

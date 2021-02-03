@@ -11,10 +11,10 @@ import HeaderPart from '@/components/HeaderPart.vue'
 import AccountInformation from '@/components/AccountInformation.vue'
 
 export default {
-  name: "UserInfos", 
-  components: {
-	HeaderPart, 
-	AccountInformation
+    name: "UserInfos", 
+    components: {
+    HeaderPart, 
+    AccountInformation
   }
 }
 </script>

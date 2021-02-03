@@ -1,5 +1,6 @@
 <template>
 	<div class="form-container card-style">
+		<pre>id = {{ id }} </pre>
 		<form id="form-edit" method="post" enctype="multipart/form-data" @submit="editUser" >
 			<p><label for="name">Nom</label> : <br/>
 				<input class="input-txt" type="text" name="name" autofocus v-model="userInfos.name" /></p>
@@ -33,12 +34,12 @@ export default {
 					position: ''
 				}, 
 			userId: store.state.userId, 
-			feedbackMessage: ''
+			id: this.$route.params.id
 		}
 	}, 
 	mounted() {
 		axios
-			.get(process.env.VUE_APP_API_URL + "/users/" + this.userId)
+			.get(process.env.VUE_APP_API_URL + "/users/" + this.id)
 			.then(response => {
 				if (response.data.profile_picture != '') {
 					this.userInfos.profile_picture = response.data.profile_picture;
@@ -62,10 +63,9 @@ export default {
 				}
 			}
 
-			fetch(process.env.VUE_APP_API_URL + "/users/" + this.userId, options) 
+			fetch(process.env.VUE_APP_API_URL + "/users/" + this.id, options) 
 				.then(() => {
-						this.feedbackMessage = 'Votre compte a été modifié avec succès !'; 
-						setTimeout(router.push({ path: '../account' }), 3000);
+						router.push({ path: '/user/' + this.id });
 					})
 				.catch(error => console.log(error)); 
 		}

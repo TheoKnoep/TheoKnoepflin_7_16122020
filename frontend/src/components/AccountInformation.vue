@@ -1,5 +1,8 @@
 <template>
 	<div>
+		<pre>
+			id = {{ id }}
+			userId = {{ userId }}</pre>
 		<div class="account-info card-style" v-if="userId != '' && name != ''">
 			<div class="account-data" id="account-data" >
 				<div class="profile-picture-container">
@@ -13,8 +16,8 @@
 				</ul>
 			</div>
 			<div class="edit-account-button" v-if="has_buttons_access"> <!-- à n'afficher que si le compte consulté est celui de l'utilisateur ou un admin -->
-				<router-link to="/account/edit" class="btn edit-account-button__btn edit-account-button__btn--main">Modifier les informations du compte</router-link>
-				<button @click="deleteAccount" class="btn edit-account-button__btn edit-account-button__btn--second">Supprimer le compte</button>
+				<router-link :to=" '/account/edit/' + id" class="btn edit-account-button__btn edit-account-button__btn--main">Modifier les informations du compte</router-link>
+				<button @click="deleteAccount(id)" class="btn edit-account-button__btn edit-account-button__btn--second">Supprimer le compte</button>
 			</div>
 		</div>
 		<div v-else>
@@ -74,15 +77,15 @@ export default {
 			})
 	},
 	methods: {
-		deleteAccount() {
-			if (window.confirm("Êtes vous sûr de vouloir supprimer le compte ?")) { 
+		deleteAccount(id) {
+			if (window.confirm("Êtes vous sûr de vouloir supprimer le compte " + id + " ?")) { 
 				const options = {
 					"method": 'DELETE', 
 					"headers": {
 						"Authorization": `Bearer ${localStorage.getItem('token')}`
 					}
 				}
-				fetch(process.env.VUE_APP_API_URL + "/users/" + this.userId, options) 
+				fetch(process.env.VUE_APP_API_URL + "/users/" + id, options) 
 					.then(response => response.json())
 						.then(response => {
 							console.log(response); 
