@@ -7,10 +7,10 @@
 			</div>
 		</div>
 		<div class="post-card__data">
-			<img class="author-picture" v-bind:src="post.profile_picture" width="40" height="40" />
+			<img class="author-picture" v-bind:src="post.profile_picture" width="40" height="40" :alt=" 'Photo de profil de ' + post.name"/>
 			<p>Publié par <strong><router-link :to="'/user/' + post.author_id" >{{ post.name}}</router-link></strong>, le {{ post.publication_local_date }}&nbsp;:</p> 
 		</div>
-		<img v-bind:src="post.media" class="post-image" />
+		<img v-bind:src="post.media" class="post-image" alt="Image de la publication" />
 		<p class="text-content">{{ post.content }}</p>
 
 		<div class="comments-wrapper" v-if="numberOfComments" :id="'comments-wrapper#' + post.id" >
