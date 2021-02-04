@@ -1,5 +1,5 @@
 <template>
-	<div class="posts-list">
+	<div class="posts-list" v-if="userId">
 		<!-- <pre style="text-align: left; ">{{ postsData }}</pre> -->
 		<div class="articles-cards">
 			<SinglePost v-for="(post, index) in postsData" 
@@ -17,6 +17,7 @@
 		</router-link>
 		<p class="bottom-articles-list" v-if="postsData.length"><em>Fin des articles</em></p>
 	</div>
+	<DefaultMessage v-else />
 </template>
 
 <script>
@@ -24,6 +25,7 @@
 import axios from 'axios'
 import store from '../store'
 import SinglePost from '@/components/SinglePost.vue'
+import DefaultMessage from '@/components/DefaultMessage'
 
 export default {
 	name: 'PostsList', 
@@ -35,7 +37,8 @@ export default {
 		}
 	},
 	components: {
-		SinglePost
+		SinglePost, 
+		DefaultMessage
 	},
 	methods: {
 		addComment(e) {
@@ -61,7 +64,7 @@ export default {
 	},
 	mounted() {
 		axios
-			.get(process.env.VUE_APP_API_URL + "/posts/")
+			.get(process.env.VUE_APP_API_URL + "/posts/", {"headers" : {"Authorization": "Bearer " + localStorage.getItem('token')}})
 			.then(response => {
 				this.postsData = response.data; 
 				for (let i in response.data) {

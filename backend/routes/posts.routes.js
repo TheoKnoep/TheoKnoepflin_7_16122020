@@ -3,9 +3,9 @@ module.exports = app => {
 	const multer = require("../middlewares/multer-config"); 
 	const auth = require("../middlewares/auth"); 
 
-	app.get("/posts", posts.findAll);
-	app.get("/posts/:id", posts.findOne); 
-	app.post("/posts/", multer, posts.createOne);  
+	app.get("/posts", auth, posts.findAll);
+	app.get("/posts/:id", auth, posts.findOne); 
+	app.post("/posts/", auth, multer, posts.createOne);  
 	app.put("/posts/:id", multer, posts.updateOne); 
-	app.delete("/posts/:id", posts.deleteOne); 
+	app.delete("/posts/:id", auth, posts.deleteOne); 
 }; 

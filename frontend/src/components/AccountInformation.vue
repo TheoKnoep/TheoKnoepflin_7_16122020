@@ -17,10 +17,8 @@
 				<button @click="deleteAccount(id)" class="btn edit-account-button__btn edit-account-button__btn--second">Supprimer le compte</button>
 			</div>
 		</main>
-		<div v-else class="feedback">
-			<p class="feedback__message"><i class="fas fa-times"></i> Vous devez être connecté pour afficher ce contenu</p>
-			<router-link to="/">Retour à l'accueil</router-link>
-		</div>
+
+		<DefaultMessage v-else />
 	</div>
 </template>
 
@@ -28,9 +26,13 @@
 import axios from 'axios' 
 import router from '../router/index'
 import store from '../store'
+import DefaultMessage from '@/components/DefaultMessage.vue'
 
 export default {
 	name: "AccountInformation", 
+	components: {
+		DefaultMessage
+	}, 
 	props: {
 		id: {
 			type: Number
@@ -160,23 +162,4 @@ export default {
 			}
 		}
 	}
-
-	.feedback {
-		display: flex; 
-		justify-content: center; 
-		align-items: center;
-		height: 50vh; 
-		margin: 10% 15%; 
-		flex-direction: column;
-		font-style: italic;
-		background-color: #FFD7D7; 
-		border-radius: 3px; 
-		p {
-			margin-bottom: 1em; 
-		}
-	}
-
-	
-
-
 </style>

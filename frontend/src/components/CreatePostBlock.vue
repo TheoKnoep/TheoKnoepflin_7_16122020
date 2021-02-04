@@ -41,8 +41,11 @@ export default {
 				newPost.append('author_id', this.userId); 
 
 				const options = {
-					method: 'POST', 
-					body: newPost
+					"method": 'POST', 
+					"body": newPost, 
+					"headers" : {
+						"authorization" : "Bearer " + localStorage.getItem('token') 
+					}
 				}
 
 				fetch(process.env.VUE_APP_API_URL + "/posts/", options) 
