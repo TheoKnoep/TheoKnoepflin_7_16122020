@@ -1,5 +1,10 @@
 <template>
 	<div class="posts-list" v-if="userId">
+		<router-link to="/posts/new" class="add-publication" title="Ajouter une nouvelle publication">
+			<span class="wrapper">
+				<span class="add-publication__ico">✒</span><span class="add-publication__text-line">Ajouter une nouvelle publication</span>
+			</span>
+		</router-link>
 		<!-- <pre style="text-align: left; ">{{ postsData }}</pre> -->
 		<div class="articles-cards">
 			<SinglePost v-for="(post, index) in postsData" 
@@ -10,11 +15,7 @@
 				:updatePostList="updatePostList"
 				:updateCommentsList="updateCommentsList" /> 
 		</div>
-		<router-link to="/posts/new" class="add-publication" title="Ajouter une nouvelle publication">
-			<span class="wrapper">
-				<span class="add-publication__ico">✒</span><span class="add-publication__text-line">Ajouter une nouvelle publication</span>
-			</span>
-		</router-link>
+		
 		<p class="bottom-articles-list" v-if="postsData.length"><em>Fin des articles</em></p>
 	</div>
 	<DefaultMessage v-else />
@@ -111,7 +112,7 @@ export default {
 		overflow: hidden;
 		text-align: left;
 		color: white; 
-		&:hover {
+		&:hover, &:focus {
 			width: 340px; 
 		}
 		.wrapper {

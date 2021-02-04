@@ -56,6 +56,7 @@ exports.createOne = (req, res, next) => {
 			title: req.body.title, 
 			content: req.body.content, 
 			media: imageUrl, 
+			alt_tag: req.body.alt_tag, 
 			author_id: req.body.author_id
 		}); 
 

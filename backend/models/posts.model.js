@@ -5,6 +5,7 @@ const Post = function(post) {
 	this.title = post.title;
 	this.content = post.content; 
 	this.media = post.media; 
+	this.alt_tag = post.alt_tag;
 	this.author_id = post.author_id; 
 }; 
 
@@ -23,7 +24,7 @@ Post.createPost = (newPost, result) => {
 Post.getAll = (result) => {
 	sql.query(`
 			SELECT 
-				posts.id, posts.title, posts.publication_date, posts.content, posts.media, posts.author_id, users.name, users.profile_picture 
+				posts.id, posts.title, posts.publication_date, posts.content, posts.media, posts.alt_tag, posts.author_id, users.name, users.profile_picture 
 			FROM 
 				posts 
 			INNER JOIN 
