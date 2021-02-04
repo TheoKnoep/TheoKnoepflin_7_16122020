@@ -82,8 +82,8 @@ export default {
       border-bottom: solid #a4afb9 1px;
 
       &.router-link-exact-active {
-        color: #d1515a;
-        border-bottom: solid #d1515a 1px;
+        color: #A12B33;
+        border-bottom: solid #A12B33 1px;
       }
     }
   }
@@ -95,7 +95,7 @@ export default {
     margin-left: auto; 
     margin-right: 1em; 
 		width: 38px; height: 38px; 
-		border: solid 1px #d1515a; 
+		border: solid 1px #A12B33; 
 		cursor: pointer; 
 		border-radius: 2px;
 		display: flex; 
@@ -104,11 +104,11 @@ export default {
 		&__inside--closed {
 			width: 24px; 
 			height: 3px; 
-			background-color: #d1515a;
+			background-color: #A12B33;
 			&::before {
 				content: ''; 
 				display: block;
-				background-color: #d1515a; 
+				background-color: #A12B33; 
 				width: 24px; 
 				height: 3px;
 				position: relative;
@@ -117,7 +117,7 @@ export default {
 			&::after {
 				content: ''; 
 				display: block;
-				background-color: #d1515a; 
+				background-color: #A12B33; 
 				width: 24px; 
 				height: 3px;
 				position: relative;
@@ -131,7 +131,7 @@ export default {
 			&::before {
 				content: ''; 
 				display: block;
-				background-color: #d1515a; 
+				background-color: #A12B33; 
 				width: 24px; 
 				height: 3px;
 				position: relative;
@@ -141,7 +141,7 @@ export default {
 			&::after {
 				content: ''; 
 				display: block;
-				background-color: #d1515a; 
+				background-color: #A12B33; 
 				width: 24px; 
 				height: 3px;
 				position: relative;

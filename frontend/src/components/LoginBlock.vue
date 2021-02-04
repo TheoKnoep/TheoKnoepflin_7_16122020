@@ -116,7 +116,7 @@ export default {
 				font-size: 20px;
 				margin-top: 12px;
 				cursor: pointer;
-				background-color: #d1515a; 
+				background-color: #A12B33; 
 				color: white; 
 			}
 		}

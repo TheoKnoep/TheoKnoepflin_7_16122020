@@ -1,5 +1,5 @@
 <template>
-	<div class="form-container card-style">
+	<main class="form-container card-style">
 		<form id="form-create-post" method="post" enctype="multipart/form-data" @submit="createPost" >
 			<p><label for="title">Titre</label> : 
 				<input type="text" name="title" autofocus required v-model="title" class="input-title"/></p>
@@ -11,7 +11,7 @@
 				<input type="submit" value="Publier" class="btn submit-post-btn"/></p>
 		</form>
 		<p class="feedback-message">{{ feedbackMessage }}</p>
-	</div>
+	</main>
 </template>
 
 <script>
@@ -97,7 +97,7 @@ export default {
 			font-size: 20px;
 			margin-top: 12px;
 			cursor: pointer;
-			background-color: #d1515a; 
+			background-color: #A12B33; 
 			color: white; 
 		}
 	}

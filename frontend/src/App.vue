@@ -42,7 +42,7 @@ export default {
   }
 
   ::selection {
-    background-color: #d1515a; 
+    background-color: #A12B33; 
     color: white; 
   }
 
@@ -68,9 +68,9 @@ export default {
   }
 
   a {
-    color: #d1515a; 
+    color: #A12B33; 
     text-decoration: none; 
-    border-bottom: solid #d1515a 1px; 
+    border-bottom: solid #A12B33 1px; 
   }
 
   .card-style {

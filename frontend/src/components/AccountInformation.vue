@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="account-info card-style" v-if="userId != '' && name != ''">
+		<main class="account-info card-style" v-if="userId != '' && name != ''">
 			<div class="account-data" id="account-data" >
 				<div class="profile-picture-container">
 					<img v-if="has_profile_picture" v-bind:src="profile_picture_url" v-bind:alt=" 'Photo de profil de ' + name" />
@@ -16,11 +16,9 @@
 				<router-link :to=" '/account/edit/' + id" class="btn edit-account-button__btn edit-account-button__btn--main">Modifier les informations du compte</router-link>
 				<button @click="deleteAccount(id)" class="btn edit-account-button__btn edit-account-button__btn--second">Supprimer le compte</button>
 			</div>
-		</div>
-		<div v-else>
-			<p>Vous devez être connecté pour afficher ce contenu</p>
-			<p> UserId = {{ $store.state.userId }}</p>
-			<p> Ou userId = {{ userId }}</p>
+		</main>
+		<div v-else class="feedback">
+			<p class="feedback__message"><i class="fas fa-times"></i> Vous devez être connecté pour afficher ce contenu</p>
 			<router-link to="/">Retour à l'accueil</router-link>
 		</div>
 	</div>
@@ -150,7 +148,7 @@ export default {
 			margin-top: 12px;
 			cursor: pointer;
 			&--main {
-				background-color: #d1515a; 
+				background-color: #A12B33; 
 				color: white; 
 				display: flex;
 				justify-content: center;
@@ -160,6 +158,21 @@ export default {
 				font-style: italic; 
 				color: #b5b5b5; 
 			}
+		}
+	}
+
+	.feedback {
+		display: flex; 
+		justify-content: center; 
+		align-items: center;
+		height: 50vh; 
+		margin: 10% 15%; 
+		flex-direction: column;
+		font-style: italic;
+		background-color: #FFD7D7; 
+		border-radius: 3px; 
+		p {
+			margin-bottom: 1em; 
 		}
 	}
 

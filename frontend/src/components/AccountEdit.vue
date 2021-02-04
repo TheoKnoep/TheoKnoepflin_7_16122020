@@ -1,5 +1,5 @@
 <template>
-	<div class="form-container card-style">
+	<main class="form-container card-style">
 		<form id="form-edit" method="post" enctype="multipart/form-data" @submit="editUser" >
 			<p><label for="name">Nom</label> : <br/>
 				<input class="input-txt" type="text" name="name" autofocus v-model="userInfos.name" /></p>
@@ -13,7 +13,7 @@
 				<input type="submit" value="Valider les changements" id="confirm-edit" class="btn submit-form-edit-btn"/></p>
 		</form>
 		<p class="feedback-message" v-if="feedbackMessage">{{ feedbackMessage }}</p>
-	</div>
+	</main>
 </template>
 
 <script>
@@ -111,7 +111,7 @@ export default {
 			font-size: 20px;
 			margin-top: 12px;
 			cursor: pointer;
-			background-color: #d1515a; 
+			background-color: #A12B33; 
 			color: white; 
 		}
 	}

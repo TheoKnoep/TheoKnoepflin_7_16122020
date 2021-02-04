@@ -76,7 +76,7 @@ export default {
 		margin: 2px; 
 		&:focus {
 			outline: none; 
-			border: solid 2px #d1515a; 
+			border: solid 2px #A12B33; 
 			margin: 0; 
 		}
 	}
@@ -88,7 +88,7 @@ export default {
 		border: none;
 		font-weight: bold;
 		color: white; 
-		background-color: #d1515a; 
+		background-color: #A12B33; 
 		margin-top: 12px;
 		cursor: pointer;
 		&:hover {
