@@ -1,6 +1,5 @@
 <template>
 	<div class="form-container card-style">
-		<pre>id = {{ id }} </pre>
 		<form id="form-edit" method="post" enctype="multipart/form-data" @submit="editUser" >
 			<p><label for="name">Nom</label> : <br/>
 				<input class="input-txt" type="text" name="name" autofocus v-model="userInfos.name" /></p>

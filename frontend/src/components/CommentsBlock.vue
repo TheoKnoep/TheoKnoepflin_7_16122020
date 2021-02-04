@@ -1,7 +1,7 @@
 <template>
 	<div class="single-comment" >
 		<div class="identity-block">
-			<img v-bind:src="comment.profile_picture" width="25" height="25" />
+			<img v-bind:src="comment.profile_picture" width="25" height="25" :alt=" 'Photo de profil de ' + comment.name" />
 			<p><strong><router-link :to="'/user/' + comment.comment_author_id" >{{ comment.name }}</router-link></strong></p>
 		</div>
 		<p class="comment-date">{{ cleanCommentDate }}</p>

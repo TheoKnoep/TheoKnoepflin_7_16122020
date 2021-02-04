@@ -3,7 +3,7 @@
 		<div class="account-info card-style" v-if="userId != '' && name != ''">
 			<div class="account-data" id="account-data" >
 				<div class="profile-picture-container">
-					<img v-if="has_profile_picture" v-bind:src="profile_picture_url" v-bind:alt="alt_text" />
+					<img v-if="has_profile_picture" v-bind:src="profile_picture_url" v-bind:alt=" 'Photo de profil de ' + name" />
 				</div>
 				<ul class="account-data__text">
 					<li>Nom : <strong>{{ name }}</strong></li>
@@ -47,7 +47,6 @@ export default {
 			position: 'pas de poste renseigné', 
 			has_profile_picture: false,
 			profile_picture_url: '', 
-			alt_text: '', 
 			token: localStorage.getItem('token'), 
 			has_buttons_access: false, 
 			currentUserIsAdmin: false

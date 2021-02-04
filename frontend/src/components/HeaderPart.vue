@@ -2,8 +2,8 @@
   <header class="header">
       <div class="main-line">
         <div class="img-container">
-          <img class="default-logo" src="../assets/logo-color.png" />
-          <img class="responsive-logo" src="../assets/logo-mobile-color.png" />
+          <img class="default-logo" src="../assets/logo-color.png" alt="Logo de Groupomania" />
+          <img class="responsive-logo" src="../assets/logo-mobile-color.png" alt="Logo de Groupomania" />
         </div>
         <h1>{{ pageTitle }}</h1>
         <div class="burger-menu" @click="togglBurgerMenu">
