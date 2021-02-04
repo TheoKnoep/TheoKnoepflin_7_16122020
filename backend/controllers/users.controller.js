@@ -4,50 +4,55 @@ const jwt = require("jsonwebtoken");
 const fs = require("fs"); 
 
 exports.create = (req, res, next) => {
-	if (!req.body) {
-		res.status(400).send({
-			message: "Le contenu ne peut pas être vide"
-		}); 
-	} 
-	let profilePictureUrl = ""; 
-	if (req.file) {
-		profilePictureUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`; 
-	} else {
-		profilePictureUrl = `${req.protocol}://${req.get('host')}/images/default_profil.jpg`;
+	let regex = /^(.+)@(\S+)$/ ; 
+	let emailIsValid = regex.test(req.body.email); 
+	if (emailIsValid === false) {
+		res.status(400).json({ error: "l'adresse email n'est pas au bon format "}); 
+	} else { 
+		if (req.body.name === '' || req.body.password === '') {
+			res.status(400).json({ error: "impossible de créer un utilisateur sans adresse email ou mot de passe"}); 
+		} else {
+			let profilePictureUrl = ""; 
+			if (req.file) {
+				profilePictureUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`; 
+			} else {
+				profilePictureUrl = `${req.protocol}://${req.get('host')}/images/default_profil.jpg`;
+			}
+			//hashage du mot de passe + enregistrement utilisadeur dans la DB : 
+			bcrypt.hash(req.body.password, 10)
+				.then(hash => {
+					const user = new User({
+						name: req.body.name, 
+						email: req.body.email, 
+						password: hash, 
+						position: req.body.position ? req.body.position : "", 
+						profile_picture: profilePictureUrl, 
+						is_admin: req.body.is_admin ? req.body.is_admin : 0
+					}); 
+					User.create(user, (err, data) => {
+						if (err)
+						res.status(500).send({ 
+							message: 
+							err.message || "Some error occured while creating the user"
+						}); 
+						else res.status(201).json({
+							...data, 
+							userId: data.id, 
+							isAdmin: data.is_admin, 
+							token: jwt.sign(
+								{
+									userId: data.id,
+									isAdmin: data.is_admin
+								}, 
+								'TOKEN_RANDOM_KEY', 
+								{expiresIn: '24h' }
+							
+						)})
+					}); 
+				})
+				.catch(error => res.status(502).json({ "error : ": error }));
+		}
 	}
-	//hashage du mot de passe + enregistrement utilisadeur dans la DB : 
-	bcrypt.hash(req.body.password, 10)
-		.then(hash => {
-			const user = new User({
-				name: req.body.name, 
-				email: req.body.email, 
-				password: hash, 
-				position: req.body.position ? req.body.position : "", 
-				profile_picture: profilePictureUrl, 
-				is_admin: req.body.is_admin ? req.body.is_admin : 0
-			}); 
-			User.create(user, (err, data) => {
-				if (err)
-				res.status(500).send({ 
-					message: 
-					err.message || "Some error occured while creating the user"
-				}); 
-				else res.status(201).json({
-					...data, 
-					userId: data.id, 
-					isAdmin: data.is_admin, 
-					token: jwt.sign(
-						{
-							userId: data.id,
-							isAdmin: data.is_admin
-						}, 
-						'TOKEN_RANDOM_KEY', 
-						{expiresIn: '24h' }
-					
-				)})
-			}); 
-		})
-		.catch(error => res.status(502).json({ "error : ": error }));  
 }; 
 
 exports.login = (req, res, next) => {

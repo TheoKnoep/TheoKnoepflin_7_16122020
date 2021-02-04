@@ -47,11 +47,16 @@ export default {
 			fetch(process.env.VUE_APP_API_URL + "/users/signup", options) 
 				.then(response => response.json())
 					.then(response => {
+						console.log(response); 
+						if (response.error) {
+							alert('Une erreur est survenue lors de la création du compte. Merci de rééssayer : ' + response.error); 
+						} else {
 							localStorage.setItem('token', response.token); 
 							this.$store.dispatch('get_user_id', response.userId); 
 							this.$store.dispatch('get_user_role', response.isAdmin); 
 							this.feedbackMessage = 'Votre compte est créé !'; 
 							setTimeout(router.push({ path: 'account' }), 3000);
+						}
 					})
 				.catch(error => console.log(error)); 
 		}

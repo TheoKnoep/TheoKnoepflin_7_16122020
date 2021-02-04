@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<main class="account-info card-style" v-if="userId != '' && name != ''">
+		<main class="account-info card-style" v-if="userId">
 			<div class="account-data" id="account-data" >
 				<div class="profile-picture-container">
 					<img v-if="has_profile_picture" v-bind:src="profile_picture_url" v-bind:alt=" 'Photo de profil de ' + name" />
