@@ -48,10 +48,14 @@ export default {
 		fetch(process.env.VUE_APP_API_URL + "/users/login", options) 
 			.then(response => response.json())
 				.then(response => {
-					localStorage.setItem('token', response.token); 
-					this.$store.dispatch('get_user_id', response.userId); 
-					this.$store.dispatch('get_user_role', response.isAdmin); 
-					router.push({ path: 'account' }); 
+					if (response.error) {
+						alert("Les informations de connexion sont incorrectes"); 
+					} else {
+						localStorage.setItem('token', response.token); 
+						this.$store.dispatch('get_user_id', response.userId); 
+						this.$store.dispatch('get_user_role', response.isAdmin); 
+						router.push({ path: 'account' }); 
+					}
 				})
 			.catch(error => console.log(error)); 
 		}

@@ -53,12 +53,12 @@ exports.create = (req, res, next) => {
 exports.login = (req, res, next) => {
 	User.findOne(req.body.email, (err, data) => {
 		if (!data) {
-			res.status(404).json({ message: "L'utilisateur n'existe pas" }); 
+			res.status(404).json({ error: "failedLogin" }); 
 		} else {
 			bcrypt.compare(req.body.password, data.password)
 				.then(valid => {
 					if (!valid) {
-						return res.status(401).json({error: "Mot de passe incorrect" }); 
+						return res.status(401).json({error: "failedLogin" }); 
 					}
 					res.status(200).json({
 						userId: data.id, 
