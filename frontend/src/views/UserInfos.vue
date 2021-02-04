@@ -15,6 +15,9 @@ export default {
     components: {
     HeaderPart, 
     AccountInformation
+  }, 
+  created: function() {
+    document.title = "Informations de compte"; 
   }
 }
 </script>

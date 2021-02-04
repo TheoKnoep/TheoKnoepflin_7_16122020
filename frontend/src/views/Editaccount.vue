@@ -15,6 +15,9 @@ export default {
   components: {
     HeaderPart,
     AccountEdit
+  }, 
+  created: function() {
+    document.title = "Modifier les informations de l'utilisateur"; 
   }
 };
 </script>

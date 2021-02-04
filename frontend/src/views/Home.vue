@@ -21,6 +21,9 @@ export default {
       showLogin: true, 
       showSignup: false
     }
+  }, 
+  created: function() {
+    document.title = "Groupomania | Le réseau social des collaborateurs du groupe"; 
   }
 
 }

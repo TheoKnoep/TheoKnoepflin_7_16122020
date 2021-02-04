@@ -14,6 +14,9 @@ export default {
   components: {
 	HeaderPart, 
 	CreatePostBlock
+  }, 
+  created: function() {
+    document.title = "Créer une publication"; 
   }
 }
 </script>

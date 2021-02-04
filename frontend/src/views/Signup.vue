@@ -14,6 +14,9 @@ export default {
   components: {
     HeaderPart, 
     SignupBlock
+  }, 
+  created: function() {
+    document.title = "Créer un compte"; 
   }
 }
 </script>

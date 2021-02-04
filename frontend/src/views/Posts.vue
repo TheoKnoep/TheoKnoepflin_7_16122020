@@ -14,6 +14,9 @@ export default {
   components: {
     HeaderPart, 
     PostsList
+  }, 
+  created: function() {
+    document.title = "Les dernières publications"; 
   }
 }
 </script>
