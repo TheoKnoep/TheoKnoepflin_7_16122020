@@ -43,21 +43,26 @@ exports.findOne = (req, res, next) => {
 }; 
 
 exports.createOne = (req, res, next) => { 
-	if (!req.file) {
-		imageUrl = null; 
+	if (!req.body.image)
+	if (req.body.title === '' || req.body.content === '' || req.body.author_id === '' ) {
+		res.status(400).json({error: "Erreur lors de la création de la publication" }); 
 	} else {
-		imageUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`; 
-	}
-	const post = new Post({
-		title: req.body.title, 
-		content: req.body.content, 
-		media: imageUrl, 
-		author_id: req.body.author_id
-	}); 
+		if (!req.file) {
+			imageUrl = null; 
+		} else {
+			imageUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`; 
+		}
+		const post = new Post({
+			title: req.body.title, 
+			content: req.body.content, 
+			media: imageUrl, 
+			author_id: req.body.author_id
+		}); 
 
-	Post.createPost(post, (err, data) => {
-		res.status(200).json({ response: { ...data }}); 
-	}); 
+		Post.createPost(post, (err, data) => {
+			res.status(200).json({ response: { ...data }}); 
+		}); 
+	}
 }; 
 
 exports.updateOne = (req, res, next) => {

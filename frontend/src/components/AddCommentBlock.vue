@@ -4,7 +4,7 @@
 			<input type="hidden" name="user_id" :value="userId" />
 			<input type="hidden" name="post_id" :value="postId" />
 			<label for="content">Ajouter un commentaire : </label>
-				<textarea name="content" placeholder="Tapez votre commentaire" ></textarea>
+				<textarea name="content" placeholder="Tapez votre commentaire" required ></textarea>
 			<input type="submit" value="Envoyer" class="btn add-comment-submit" />
 		</form>
 		
@@ -49,9 +49,13 @@ export default {
 				.then(response => { 
 					response.json()
 						.then(message => {
-							this.addImmediatlyNewComment(message); 
-							this.$emit('increment-number-of-comments'); 
-							this.$emit('hide-comment-form'); 
+							if (message.error) {
+								alert('Une erreur est survenue lors de la création du commentaire, merci de rééssayer'); 
+							} else {
+								this.addImmediatlyNewComment(message); 
+								this.$emit('increment-number-of-comments'); 
+								this.$emit('hide-comment-form'); 
+							}
 						})
 				})
 				.catch(err => { console.error(err); }); 

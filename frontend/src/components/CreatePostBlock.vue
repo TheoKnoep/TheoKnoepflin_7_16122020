@@ -1,14 +1,15 @@
 <template>
 	<main class="form-container card-style">
 		<form id="form-create-post" method="post" enctype="multipart/form-data" @submit="createPost" >
-			<p><label for="title">Titre</label> : 
+			<p><label for="title">Titre<span class="required-item">*</span></label> : 
 				<input type="text" name="title" autofocus required v-model="title" class="input-title"/></p>
-			<p><label for="content">Texte</label> : 
+			<p><label for="content">Texte</label><span class="required-item">*</span> : 
 				<textarea type="text" name="content" row="15" cols="80" required v-model="content" /></p>
 			<p><label for="image">Choisissez une image pour accompagner votre publication</label> : 
 				<input type="file" name="image" /></p>
 			<p>
 				<input type="submit" value="Publier" class="btn submit-post-btn"/></p>
+				<p class="required-item required_item_text">* élément requis</p>
 		</form>
 		<p class="feedback-message">{{ feedbackMessage }}</p>
 	</main>
@@ -51,9 +52,13 @@ export default {
 				fetch(process.env.VUE_APP_API_URL + "/posts/", options) 
 					.then(response => response.json())
 						.then(response => {
-							console.log(response); 
-							this.feedbackMessage = 'Votre compte est créé !'; 
-							setTimeout(router.push({ path: '../posts' }), 3000);
+							if (response.error) {
+								alert('Une erreur est survenue lors de la création de la publication'); 
+							} else {
+								console.log(response); 
+								this.feedbackMessage = 'Votre compte est créé !'; 
+								setTimeout(router.push({ path: '../posts' }), 3000);
+							}
 						})
 					.catch(error => console.log(error)); 
 			}
@@ -102,6 +107,13 @@ export default {
 			cursor: pointer;
 			background-color: #A12B33; 
 			color: white; 
+		}
+		.required-item {
+			color: red; 
+		}
+		.required_item_text {
+			font-style: italic; 
+			font-size: .7em; 
 		}
 	}
 </style>

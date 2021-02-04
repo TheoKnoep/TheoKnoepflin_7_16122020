@@ -43,7 +43,7 @@ export default {
 			} 
 		},
 		deleteComment (id) {
-			if (window.confirm("Voulez-vous vraiment supprimer le commentaire id = " + id + " ?")) { 
+			if (window.confirm("Voulez-vous vraiment supprimer ce commentaire ?")) { 
 				const options = {
 					"method": 'DELETE', 
 					"headers": {

@@ -1,25 +1,28 @@
 const Comment = require('../models/comments.model.js'); 
 
 exports.createOne = (req, res, next) => {
-	const comment = new Comment({
-		content: req.body.content, 
-		post_id: req.body.post_id,
-		comment_author_id: req.body.author_id
-	}); 
-
-	Comment.createComment(comment, (err, data) => {
-		if (err) {
-			res.status(400).json({ error: err})
-		} else {
-			Comment.getOneCommentById(data.id, (err, data) => {
-				if (err) {
-					res.status(400).json({ error: err})
-				} else {
-					res.status(200).json(data[0]); 
-				}
-			})
-		}
-	});
+	if (req.body.author_id === '' || req.body.post_id === '' || req.body.content === '') {
+		res.status(400).json({ error: "Erreur lors de la création du commentaire"}); 
+	} else {
+		const comment = new Comment({
+			content: req.body.content, 
+			post_id: req.body.post_id,
+			comment_author_id: req.body.author_id
+		}); 
+		Comment.createComment(comment, (err, data) => {
+			if (err) {
+				res.status(400).json({ error: err})
+			} else {
+				Comment.getOneCommentById(data.id, (err, data) => {
+					if (err) {
+						res.status(400).json({ error: err})
+					} else {
+						res.status(200).json(data[0]); 
+					}
+				})
+			}
+		});
+	}
 }
 
 exports.findOne = (req, res, next) => {

@@ -74,7 +74,7 @@ export default {
 	},
 	methods: {
 		deleteAccount(id) {
-			if (window.confirm("Êtes vous sûr de vouloir supprimer le compte " + id + " ?")) { 
+			if (window.confirm("Êtes vous sûr de vouloir supprimer ce compte utilisateur ?")) { 
 				const options = {
 					"method": 'DELETE', 
 					"headers": {
@@ -84,7 +84,7 @@ export default {
 				fetch(process.env.VUE_APP_API_URL + "/users/" + id, options) 
 					.then(response => response.json())
 						.then(response => {
-							console.log(response); 
+							console.log(response)
 							router.push({ path: '/' });
 						})
 					.catch(error => console.log(error)); 

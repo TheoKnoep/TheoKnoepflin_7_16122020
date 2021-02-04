@@ -17,7 +17,6 @@ export default {
     };
   },
   mounted() {
-    console.log(process.env.VUE_APP_API_URL); 
       const options = {
         "method": 'GET', 
         "headers": {
