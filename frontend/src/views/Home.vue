@@ -1,7 +1,8 @@
 <template>
   <div class="home">
     <HeaderPart pageTitle="Le réseau social de Groupomania" /> 
-    <LoginBlock v-show="showLogin" />
+    <PostsList v-if="userId" />
+    <LoginBlock v-else />
   </div>
 </template>
 
@@ -9,17 +10,21 @@
 // @ is an alias to /src
 import HeaderPart from '@/components/HeaderPart.vue'
 import LoginBlock from '@/components/LoginBlock.vue'
+import PostsList from '@/components/PostsList.vue'
+import store from '../store'
 
 export default {
   name: 'Home',
   components: {
     HeaderPart, 
     LoginBlock,
+    PostsList
   }, 
   data: function() {
     return {
       showLogin: true, 
-      showSignup: false
+      showSignup: false, 
+      userId: store.state.userId
     }
   }, 
   created: function() {

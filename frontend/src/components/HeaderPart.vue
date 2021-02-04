@@ -1,5 +1,6 @@
 <template>
   <header class="header">
+    
       <div class="main-line">
         <div class="img-container">
           <img class="default-logo" src="../assets/logo-color.png" alt="Logo de Groupomania" />
@@ -10,16 +11,20 @@
           <div :class="burgerMenuClass"></div>
           </div>
       </div>
-      
+      <pre>{{ userId }}</pre>
       <nav id="nav" class="nav" :class="mobileMenuNav" >
         <router-link to="/" class="nav__item" >Accueil</router-link><span class="nav__item--sep"> | </span>
         <router-link to="/account" class="nav__item" >Compte</router-link><span class="nav__item--sep"> | </span>
         <router-link to="/posts" class="nav__item" >Publications</router-link>
+        <button @click="logOut">Déconnexion</button>
       </nav>
   </header>
 </template>
 
 <script>
+import router from '@/router/index.js'
+import store from '@/store'
+
 export default {
   name: "HeaderPart",
   props: {
@@ -28,7 +33,8 @@ export default {
   data () {
     return {
       mobileMenuNav: 'nav--closed',
-      burgerMenuClass: 'burger-menu__inside--closed'
+      burgerMenuClass: 'burger-menu__inside--closed', 
+      userId: store.state.userId
     }
   },
   methods: {
@@ -40,6 +46,12 @@ export default {
         this.burgerMenuClass = 'burger-menu__inside--closed'; 
         this.mobileMenuNav = 'nav--closed';
       }
+    }, 
+    logOut () {
+      localStorage.clear(); 
+      document.location.reload(); 
+      router.push({ path: '/' }); 
+      
     }
   }
 };

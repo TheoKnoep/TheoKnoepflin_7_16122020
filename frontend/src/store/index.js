@@ -3,8 +3,7 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     userId: 0, 
-    isAdmin: false, 
-    token: ''
+    isAdmin: false
   },
   mutations: {
     GET_USER_ID(state, payload) {
@@ -16,9 +15,6 @@ export default createStore({
       } else {
         state.isAdmin = false
       }
-    }, 
-    GET_USER_TOKEN(state, payload) {
-      state.token = payload; 
     }
   },
   actions: {
