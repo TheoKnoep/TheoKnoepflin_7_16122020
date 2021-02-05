@@ -6,17 +6,21 @@
 			</span>
 		</router-link>
 		<!-- <pre style="text-align: left; ">{{ postsData }}</pre> -->
-		<div class="articles-cards">
-			<SinglePost v-for="(post, index) in postsData" 
-				:key="post.id" 
-				:post="post"
-				:index="index"
-				:publishComment="publishComment"
-				:updatePostList="updatePostList"
-				:updateCommentsList="updateCommentsList" /> 
+		<div v-if="postsData.length">
+			<div class="articles-cards">
+				<SinglePost v-for="(post, index) in postsData" 
+					:key="post.id" 
+					:post="post"
+					:index="index"
+					:publishComment="publishComment"
+					:updatePostList="updatePostList"
+					:updateCommentsList="updateCommentsList" /> 
+			</div>
+			<p class="bottom-articles-list" v-if="postsData.length"><em>Fin des articles</em></p>
 		</div>
-		
-		<p class="bottom-articles-list" v-if="postsData.length"><em>Fin des articles</em></p>
+		<div v-else class="empty-posts-list">
+			<p>Aucune publication à afficher</p>
+		</div>
 	</div>
 	<DefaultMessage v-else />
 </template>
@@ -137,6 +141,14 @@ export default {
 		padding: 1em;
 		margin: 1em;
 		border-radius: 3px;
+	}
+
+	.empty-posts-list {
+		height: 80vh; 
+		display: flex; 
+		align-items: center;
+		justify-content: center; 
+		font-style: italic; 
 	}
 
 </style>
