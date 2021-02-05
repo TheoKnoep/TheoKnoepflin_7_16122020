@@ -2,21 +2,22 @@
   <header class="header">
     
       <div class="main-line">
-        <div class="img-container">
-          <img class="default-logo" src="../assets/logo-color.png" alt="Logo de Groupomania" />
-          <img class="responsive-logo" src="../assets/logo-mobile-color.png" alt="Logo de Groupomania" />
-        </div>
+        <router-link to="/" class="logo-link">
+          <div class="img-container">
+            <img class="default-logo" src="../assets/logo-color.png" alt="Logo de Groupomania" />
+            <img class="responsive-logo" src="../assets/logo-mobile-color.png" alt="Logo de Groupomania" />
+          </div>
+        </router-link>
         <h1>{{ pageTitle }}</h1>
         <div class="burger-menu" @click="togglBurgerMenu">
           <div :class="burgerMenuClass"></div>
           </div>
       </div>
-      <pre>{{ userId }}</pre>
       <nav id="nav" class="nav" :class="mobileMenuNav" >
         <router-link to="/" class="nav__item" >Accueil</router-link><span class="nav__item--sep"> | </span>
         <router-link to="/account" class="nav__item" >Compte</router-link><span class="nav__item--sep"> | </span>
         <router-link to="/posts" class="nav__item" >Publications</router-link>
-        <button @click="logOut">Déconnexion</button>
+        <button @click="logOut" class="btn logout-btn"><i class="fas fa-sign-out-alt"></i> Déconnexion</button>
       </nav>
   </header>
 </template>
@@ -69,6 +70,9 @@ export default {
     display: flex;
     align-items: center;
   }
+  .logo-link {
+    border: none; 
+  }
   .img-container {
     margin-left: 1em; 
     img {
@@ -100,8 +104,14 @@ export default {
     }
   }
 
-
-
+  .logout-btn {
+    border: none;
+    padding: .6em;
+    margin: .4em;
+    background-color: white;
+    cursor: pointer;
+    border-radius: 3px;
+  }
 
   .burger-menu {
     margin-left: auto; 
@@ -198,6 +208,11 @@ export default {
       display: none; 
     }
   }
+
+  .logout-btn {
+    margin: .4em 0; 
+  }
+  
   .nav__item--sep {
     display: none;
   }

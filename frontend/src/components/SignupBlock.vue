@@ -55,7 +55,7 @@ export default {
 							this.$store.dispatch('get_user_id', response.userId); 
 							this.$store.dispatch('get_user_role', response.isAdmin); 
 							this.feedbackMessage = 'Votre compte est créé !'; 
-							setTimeout(router.push({ path: 'account' }), 3000);
+							router.push({ path: 'account' });
 						}
 					})
 				.catch(error => console.log(error)); 
