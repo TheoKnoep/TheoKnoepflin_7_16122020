@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  mer. 03 fév. 2021 à 21:39
+-- Généré le :  ven. 05 fév. 2021 à 12:18
 -- Version du serveur :  8.0.22
 -- Version de PHP :  7.3.2
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `groupomania`
+-- Base de données :  `groupomania2`
 --
 
 -- --------------------------------------------------------
@@ -50,9 +50,9 @@ CREATE TABLE `posts` (
   `title` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `media` text COLLATE utf8mb4_unicode_ci,
+  `alt_tag` text COLLATE utf8mb4_unicode_ci,
   `author_id` int UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 
 
 -- --------------------------------------------------------
@@ -72,7 +72,9 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-
+--
+-- Index pour les tables déchargées
+--
 
 --
 -- Index pour la table `comments`
@@ -106,19 +108,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
 
 --
 -- AUTO_INCREMENT pour la table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- Contraintes pour les tables déchargées

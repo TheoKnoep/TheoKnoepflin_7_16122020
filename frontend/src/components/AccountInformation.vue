@@ -162,4 +162,18 @@ export default {
 			}
 		}
 	}
+
+	@media screen and (max-width: 860px ) {
+		.account-data {
+			flex-direction: column;
+			&__text {
+				font-size: .8em; 
+			}
+		}
+		.edit-account-button {
+			&__btn {
+				font-size: 1em; 
+			}
+		}
+	}
 </style>

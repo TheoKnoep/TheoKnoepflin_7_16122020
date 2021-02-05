@@ -201,6 +201,10 @@ export default {
 		width: 95%; 
 	}
 	.single-post-content {
+		.heading-post {
+			flex-direction: column; 
+			align-items: flex-start; 
+		}
 		.post-card__data {
 			font-size: .8em;
 		}
