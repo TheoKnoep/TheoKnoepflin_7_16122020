@@ -1,6 +1,2 @@
 node_modules/
 
-db-config.js
-
-backend/images/*.*
-!backend/images/default_profil.jpg
