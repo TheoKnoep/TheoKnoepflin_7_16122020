@@ -13,8 +13,8 @@
 				</ul>
 			</div>
 			<div class="edit-account-button" v-if="has_buttons_access"> <!-- à n'afficher que si le compte consulté est celui de l'utilisateur ou un admin -->
-				<router-link :to=" '/account/edit/' + id" class="btn edit-account-button__btn edit-account-button__btn--main">Modifier les informations du compte</router-link>
-				<button @click="deleteAccount(id)" class="btn edit-account-button__btn edit-account-button__btn--second">Supprimer le compte</button>
+				<router-link :to=" '/account/edit/' + id" class="btn edit-account-button__btn edit-account-button__btn--main"><span><i class="fas fa-user-edit"></i>&nbsp;Modifier les informations du compte</span></router-link>
+				<button @click="deleteAccount(id)" class="btn edit-account-button__btn edit-account-button__btn--second"><i class="far fa-trash-alt"></i>&nbsp;Supprimer le compte</button>
 			</div>
 		</main>
 
