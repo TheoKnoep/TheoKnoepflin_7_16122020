@@ -4,7 +4,7 @@
 			<input type="hidden" name="user_id" :value="userId" />
 			<input type="hidden" name="post_id" :value="postId" />
 			<label for="content">Ajouter un commentaire : </label>
-				<textarea name="content" placeholder="Tapez votre commentaire" required ></textarea>
+				<textarea id="content" name="content" placeholder="Tapez votre commentaire" required ></textarea>
 			<input type="submit" value="Envoyer" class="btn add-comment-submit" />
 		</form>
 		

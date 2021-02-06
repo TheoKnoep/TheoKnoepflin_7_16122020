@@ -2,13 +2,13 @@
 	<main class="form-container card-style">
 		<form id="form-edit" method="post" enctype="multipart/form-data" @submit="editUser" >
 			<p><label for="name">Nom</label> : <br/>
-				<input class="input-txt" type="text" name="name" autofocus v-model="userInfos.name" /></p>
+				<input id="name" class="input-txt" type="text" name="name" autofocus v-model="userInfos.name" /></p>
 			<p><label for="email">Email</label> : <br/>
-				<input class="input-txt" type="email" name="email" v-model="userInfos.email" /></p>
+				<input id="email" class="input-txt" type="email" name="email" v-model="userInfos.email" /></p>
 			<p><label for="position">Poste occupé</label> : <br/>
-				<input class="input-txt" type="text" name="position" v-model="userInfos.position"/></p>
+				<input id="position" class="input-txt" type="text" name="position" v-model="userInfos.position"/></p>
 			<p><label for="image">Choisissez une nouvelle photo de profil</label> : 
-				<input type="file" name="image" /></p>
+				<input id="image" type="file" name="image" /></p>
 			<p>
 				<input type="submit" value="Valider les changements" id="confirm-edit" class="btn submit-form-edit-btn"/></p>
 		</form>

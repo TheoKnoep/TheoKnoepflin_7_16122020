@@ -2,15 +2,15 @@
 	<div class="form-container card-style">
 		<form id="form-signup" method="post" enctype="multipart/form-data" @submit="signupUser" >
 			<p><label for="name">Nom</label><span class="required-item">*</span> : <br/>
-				<input class="input-txt" type="text" name="name" autofocus required v-model="name"/></p>
+				<input id="name" class="input-txt" type="text" name="name" autofocus required v-model="name"/></p>
 			<p><label for="email">Email</label><span class="required-item">*</span> : <br/>
-				<input class="input-txt" type="email" name="email" required v-model="email" /></p>
+				<input id="email" class="input-txt" type="email" name="email" required v-model="email" /></p>
 			<p><label for="password">Mot de passe</label><span class="required-item">*</span> : <br/>
-				<input class="input-txt" type="password" name="password" required v-model="password" /></p>
+				<input id="password" class="input-txt" type="password" name="password" required v-model="password" /></p>
 			<p><label for="position">Poste occupé</label> : <br/>
-				<input class="input-txt" type="text" name="position" v-model="position"/></p>
+				<input id="position" class="input-txt" type="text" name="position" v-model="position"/></p>
 			<p><label for="image">Choisissez une photo de profil</label> : 
-				<input type="file" name="image" /></p>
+				<input id="image" type="file" name="image" /></p>
 			<p>
 				<input type="submit" value="Création du compte" id="confirm-signup" class="btn confirm-signup-btn" /></p>
 			<p class="required-item required_item_text">* élément requis</p>

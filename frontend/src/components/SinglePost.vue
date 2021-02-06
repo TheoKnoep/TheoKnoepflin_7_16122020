@@ -174,7 +174,7 @@ export default {
 		border-radius: 50px;
 		padding: 1em 2em;
 		border: solid 1px rgba(0,0,0,0.1);
-		color: gray; 
+		color: #091f43; 
 		background-color: white;
 		cursor: pointer;
 		font-style: italic;

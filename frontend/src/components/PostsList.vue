@@ -136,7 +136,7 @@ export default {
 	}
 
 	.bottom-articles-list {
-		color: #80808087;
+		color: #091f43;
 		background-color: #FFD7D7;
 		padding: 1em;
 		margin: 1em;

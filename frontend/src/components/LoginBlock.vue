@@ -4,10 +4,10 @@
 		<h2>Connexion :</h2> 
 		<form method="post" id="form-login" @submit="loginUser" >
         <p>
-			<label for="email">Email</label> : <br/> <input class="input-txt" type="email" name="email" v-model="email" />
+			<label for="email">Email</label> : <br/> <input id="email" class="input-txt" type="email" name="email" v-model="email" />
         </p>
         <p>
-			<label for="password">Mot de passe</label> : <br/> <input class="input-txt" type="password" name="password" v-model="password" />
+			<label for="password">Mot de passe</label> : <br/> <input id="password" class="input-txt" type="password" name="password" v-model="password" />
         </p>
         <p class="submit-login"><input type="submit" value="Connexion" class="btn submit-login__btn"/></p>
       </form>
