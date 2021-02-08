@@ -63,9 +63,15 @@ export default {
 			}
 
 			fetch(process.env.VUE_APP_API_URL + "/users/" + this.id, options) 
-				.then(() => {
-						router.push({ path: '/user/' + this.id });
-					})
+				.then((response) => response.json()
+					.then(res => { 
+						if (res.error) {
+							alert('Une erreur est survenue lors de la modification du compte. Merci de rééssayer : ' + res.error); 
+						} else {
+							router.push({ path: '/user/' + this.id });
+						}
+						})
+					)
 				.catch(error => console.log(error)); 
 		}
 	}

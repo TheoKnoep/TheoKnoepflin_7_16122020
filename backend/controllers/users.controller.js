@@ -31,8 +31,8 @@ exports.create = (req, res, next) => {
 					}); 
 					User.create(user, (err, data) => {
 						if (err)
-						res.status(500).send({ 
-							message: 
+						res.status(500).json({ 
+							error: 
 							err.message || "Some error occured while creating the user"
 						}); 
 						else res.status(201).json({
@@ -120,12 +120,12 @@ exports.updateOne = (req, res, next) => {
 	User.findById(req.params.id, (err, data) => {
 		if (err) {
 			if (err.kind === "not_found") {
-				res.status(404).send({
-					message: `Not found Customer with id ${req.params.id}.`
+				res.status(404).json({
+					error: `Not found Customer with id ${req.params.id}.`
 				});
 			} else {
-				res.status(500).send({
-					message: "Error retrieving Customer with id " + req.params.customerId
+				res.status(500).json({
+					error: "Error retrieving Customer with id " + req.params.customerId
 				});
 			}
 		} else {
@@ -147,8 +147,8 @@ exports.updateOne = (req, res, next) => {
 
 		User.update(req.params.id, updatedUser, (err, data) => { 
 			if (err) 
-			res.status(500).send({ 
-				message: 
+			res.status(500).json({ 
+				error: 
 				err.message || "Some error occured while updating the user"
 			}); 
 			else res.status(201).send(data); 
