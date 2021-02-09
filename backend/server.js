@@ -1,5 +1,6 @@
 const express = require("express"); 
 const bodyParser = require("body-parser"); 
+const helmet = require("helmet"); 
 
 const path = require('path'); 
 /* const { nextTick } = require("process"); */
@@ -13,6 +14,7 @@ app.use((req, res, next) => { //Déclaration des headers CORS
 	next();
 });
 
+app.use(helmet()); 
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({ extended: true })); 
 

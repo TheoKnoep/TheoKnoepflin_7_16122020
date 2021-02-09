@@ -27,7 +27,7 @@ exports.create = (req, res, next) => {
 						password: hash, 
 						position: req.body.position ? req.body.position : "", 
 						profile_picture: profilePictureUrl, 
-						is_admin: req.body.is_admin ? req.body.is_admin : 0
+						is_admin: 0
 					}); 
 					User.create(user, (err, data) => {
 						if (err)
